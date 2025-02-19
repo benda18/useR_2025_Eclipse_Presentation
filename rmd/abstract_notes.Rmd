@@ -1,0 +1,23 @@
+---
+title: "Abstract Submission Notes"
+author: "by Tim Bender"
+subtitle: "useR Conference 2025: Durham, NC"
+output: 
+  html_document:
+    code_download: TRUE
+    code_folding: "show"
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: "2"
+params: 
+date: "Updated: 2/19/25"
+---
+
+## Important Dates
+
+## Abstract Format
+
+## Sources / Reference
+
+- [LINK: All about the Abstract Submission](https://rconf.gitlab.io/userknowledgebase/main/tutorials-how-to.html)
+- [LINK: useR 2025 main webpage](https://user2025.r-project.org/)
