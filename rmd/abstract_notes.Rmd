@@ -15,7 +15,26 @@ date: "Updated: 2/19/25"
 
 ## Important Dates
 
-## Abstract Format
+## Submission Format
+
+- The title of the tutorial
+- Abstract
+- A brief outline
+- The broad topic it covers
+- The learning goals
+- Time zone preference and time slot (please mention at least three different time zones you are comfortable with) - this is only necessary for the online component of the conference.
+- Length of the tutorial (in minutes or hours)
+- Language in which the tutorial can be taught.
+- The intended audience (beginners, advances, etc.)
+- Pedagogical method of teaching
+- The maximum number of attendees
+- Motivation to teach this tutorial at useR!
+  - Links to the Tutorial materials and/or web page (If there exists).
+- Prerequisites / requirements
+- Material sharing (license), recording consent
+- A brief biography of the instructors
+
+
 
 ## Sources / Reference
 
