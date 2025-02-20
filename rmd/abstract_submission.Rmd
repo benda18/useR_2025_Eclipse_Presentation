@@ -1,0 +1,52 @@
+---
+title: "\\<Title Here\\>"
+author: "Tim Bender"
+date: "Submitted: `r Sys.Date()`"
+output: 
+  html_document:
+    code_download: TRUE
+    code_folding: "hide"
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Abstract
+
+## Outline
+
+## Broad Topic Covered
+
+## Learning Goals
+
+## Timezone Preference(s)
+
+## Duration
+
+## Language 
+
+## Intended Audience
+
+## Pedagogical Method of Teaching
+
+## Maximum Number of Attendees
+
+## Motivation to Teach this Tutorial at useR!
+
+## Supplemental Material Links
+
+#### Tutorial materials
+
+#### Web Page (if applicable)
+
+## Prerequisites / requirements
+
+## License, Material sharing, recording consent
+
+## Biography
+
+#### Tim Bender
