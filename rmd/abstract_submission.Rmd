@@ -1,8 +1,8 @@
 ---
-title: "\\<Title Here\\>"
+title: ""
 author: "Tim Bender"
 date: "Submitted: `r Sys.Date()`"
-output: 
+output:
   html_document:
     code_download: TRUE
     code_folding: "hide"
@@ -17,19 +17,33 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Abstract
 
+One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
+
 ## Outline
 
 ## Broad Topic Covered
 
 ## Learning Goals
 
+1.  
+
+2.  You don't have to know ~~everything~~ ~~anything~~ as much as you think you do.
+
+3.  Evolving your skills and knowledge throughout a project lifecycle: pros and cons.
+
 ## Timezone Preference(s)
 
 ## Duration
 
-## Language 
+## Language
 
 ## Intended Audience
+
+- Solar and lunar eclipse seekers
+- Beginners and hobbyists looking for:
+  -   project idea inspiration,
+  -   a better understanding on how to approach the project lifecycle, and
+  -   how to deal with the "too many ideas but not enough progress" monster.
 
 ## Pedagogical Method of Teaching
 
@@ -41,6 +55,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Tutorial materials
 
+-   Future Solar and Lunar Eclipses Visible from Your Current Location ([Shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/))
+
 #### Web Page (if applicable)
 
 ## Prerequisites / requirements
@@ -49,4 +65,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Biography
 
-#### Tim Bender
+#### Tim Bender, (title)
+
+-   [hold for bio]
+-   [LinkedIn](https://www.linkedin.com/in/tim-bender-238870171/)
+-   [github](https://github.com/benda18)
