@@ -21,37 +21,46 @@ library(ggplot2)
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
-## Dates
+## Important Dates
 
 ```{r include = T, results='hold'}
 knitr::opts_chunk$set(message = FALSE)
 # build dataset
-useR_dates <- data.frame(Date  = strftime(x = as_date(c(rep(ymd(20250303),2),
+useR_dates <- data.frame(Date  = as_date(c(rep(ymd(20250303),2),
                                            ymd(20250501),
                                            ymd(20250715),
-                                           ymd(20250808)
-                                           #ymd(20250810))
-                                           )), 
+                                           ymd(20250808),
+                                           ymd(20250810), 
+                                           Sys.Date()), 
                                   format = "%B %e, %Y", tz = Sys.timezone()), 
                          Event = c("Abstract Submission", 
                                   "Early Bird Registration",
                                   "Program Announcement",
                                   "Regular Registration",
-                                  "Event Begins"
-                                  #"Event Ends"
-                                  )) 
+                                  "Event Begins",
+                                  "Event Ends", 
+                                  "Today"
+                                  )) %>% 
+  .[order(.$Date, decreasing  = F),] %>%
+  mutate(Days_Until = Date - Sys.Date()) %>%
+  mutate(Date = strftime(Date, 
+                         format = "%B %e, %Y", tz = Sys.timezone()))
 
-ggplot(data = useR_dates, 
-            aes(x = mdy(Date), y = "Date")) + 
-  geom_line() +
-  geom_label(aes(label = Event), 
-             angle = 45, size = 4) +
-  geom_label(data = NULL,
-             aes(x = Sys.Date(), 
-             y = "Date"), 
-             label = "Today",
-             angle = 45,
-             size = 4) 
+row.names(useR_dates) <- NULL
+
+kable(x = useR_dates)
+
+# ggplot(data = useR_dates, 
+#             aes(x = mdy(Date), y = "Date")) + 
+#   geom_line() +
+#   geom_label(aes(label = Event), 
+#              angle = 45, size = 4) +
+#   geom_label(data = NULL,
+#              aes(x = Sys.Date(), 
+#              y = "Date"), 
+#              label = "Today",
+#              angle = 45,
+#              size = 4) 
 
 
 
