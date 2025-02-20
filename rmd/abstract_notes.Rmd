@@ -5,38 +5,85 @@ subtitle: "useR Conference 2025: Durham, NC"
 output: 
   html_document:
     code_download: TRUE
-    code_folding: "show"
+    code_folding: "hide"
     toc: TRUE
     toc_float: TRUE
     toc_depth: "2"
 params: 
 date: "Updated: 2/19/25"
 ---
+```{r include=FALSE}
+library(renv)
+library(lubridate)
+library(knitr)
+library(dplyr)
+library(ggplot2)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
 
-## Important Dates
+## Dates
+
+```{r include = T, results='hold'}
+knitr::opts_chunk$set(message = FALSE)
+# build dataset
+useR_dates <- data.frame(Date  = strftime(x = as_date(c(rep(ymd(20250303),2),
+                                           ymd(20250501),
+                                           ymd(20250715),
+                                           ymd(20250808)
+                                           #ymd(20250810))
+                                           )), 
+                                  format = "%B %e, %Y", tz = Sys.timezone()), 
+                         Event = c("Abstract Submission", 
+                                  "Early Bird Registration",
+                                  "Program Announcement",
+                                  "Regular Registration",
+                                  "Event Begins"
+                                  #"Event Ends"
+                                  )) 
+
+ggplot(data = useR_dates, 
+            aes(x = mdy(Date), y = "Date")) + 
+  geom_line() +
+  geom_label(aes(label = Event), 
+             angle = 45, size = 4) +
+  geom_label(data = NULL,
+             aes(x = Sys.Date(), 
+             y = "Date"), 
+             label = "Today",
+             angle = 45,
+             size = 4) 
+
+
+
+```
+
+
+
+```{r include=TRUE}
+knitr::opts_chunk$set(message = FALSE)
+```
+
 
 ## Submission Format
 
-- The title of the tutorial
-- Abstract
-- A brief outline
-- The broad topic it covers
-- The learning goals
-- Time zone preference and time slot (please mention at least three different time zones you are comfortable with) - this is only necessary for the online component of the conference.
-- Length of the tutorial (in minutes or hours)
-- Language in which the tutorial can be taught.
-- The intended audience (beginners, advances, etc.)
-- Pedagogical method of teaching
-- The maximum number of attendees
-- Motivation to teach this tutorial at useR!
-  - Links to the Tutorial materials and/or web page (If there exists).
-- Prerequisites / requirements
-- Material sharing (license), recording consent
-- A brief biography of the instructors
-
-
+-   The title of the tutorial
+-   Abstract
+-   A brief outline
+-   The broad topic it covers
+-   The learning goals
+-   Time zone preference and time slot (please mention at least three different time zones you are comfortable with) - this is only necessary for the online component of the conference.
+-   Length of the tutorial (in minutes or hours)
+-   Language in which the tutorial can be taught.
+-   The intended audience (beginners, advances, etc.)
+-   Pedagogical method of teaching
+-   The maximum number of attendees
+-   Motivation to teach this tutorial at useR!
+    -   Links to the Tutorial materials and/or web page (If there exists).
+-   Prerequisites / requirements
+-   Material sharing (license), recording consent
+-   A brief biography of the instructors
 
 ## Sources / Reference
 
-- [LINK: All about the Abstract Submission](https://rconf.gitlab.io/userknowledgebase/main/tutorials-how-to.html)
-- [LINK: useR 2025 main webpage](https://user2025.r-project.org/)
+-   [LINK: All about the Abstract Submission](https://rconf.gitlab.io/userknowledgebase/main/tutorials-how-to.html)
+-   [LINK: useR 2025 main webpage](https://user2025.r-project.org/)
