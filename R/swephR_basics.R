@@ -6,16 +6,16 @@ library(lubridate)
 
 rm(list=ls());cat('\f')
 
-# time_utc <- ymd_hms("2024-04-01 04:00:00 AM", 
-#                         tz = Sys.timezone()) |>  #Sys.time() |> 
-#   with_tz("UTC")
+# set date-time-UTC----
+time_utc <- ymd_hms("2024-04-01 04:00:00 AM",
+                    tz = Sys.timezone()) |>  
+  with_tz("UTC")
 
-time_utc <- Sys.time() |> with_tz("UTC")
-
+# set lon-lat----
 xy.here      <- c(x = -78.8986, y = 35.9940, z = 0)
 
-# utc time to julian time (et)----
-time.jd  <- swe_utc_to_jd(year     = year(time_utc), 
+# convert utc time to julian time (ut & et)----
+time.jul  <- swe_utc_to_jd(year     = year(time_utc), 
                           month    = month(time_utc), 
                           day      = mday(time_utc), 
                           houri    = hour(time_utc), 
@@ -23,22 +23,28 @@ time.jd  <- swe_utc_to_jd(year     = year(time_utc),
                           sec      = second(time_utc), 
                           gregflag = SE$GREG_CAL)$dret
 
-names(time.jd) <- c("UT", "ET")
+names(time.jul) <- c("UT", "ET")
 
-swephR::swe_utc_to_jd()
-
-# jd_et to jd_ut
-?swephR::swe_jdet_to_utc()
 
 # next eclipse (any type) for a given location----
-next_solar <- swe_sol_eclipse_when_loc(jd_start  = time.jd_et,
+next_solar <- swe_sol_eclipse_when_loc(jd_start  = time.jul["UT"],
                                        ephe_flag = SE$FLG_MOSEPH,
                                        geopos    = c(xy.here[1],xy.here[2],xy.here[3]), #lon,lat,h.meters
                                        backward  = FALSE)
 
-nextsol_dt <- next_solar$tret[1] |> 
-  time.jd_et |> 
-  swephR::swe_jdet_to_utc(gregflag = SE$GREG_CAL)
+next_lunar <- swe_lun_eclipse_when_loc(jd_start  = time.jul["UT"],
+                                       ephe_flag = SE$FLG_MOSEPH,
+                                       geopos    = c(xy.here[1],xy.here[2],xy.here[3]), #lon,lat,h.meters
+                                       backward  = FALSE)
+
+
+# jul date-time next solar eclipse: maximum eclipse
+nextsolmax_dt <- next_solar$tret[1] 
+# jul date-time next lunar eclipse: maximum eclipse
+nextlunmax_dt <- next_lunar$tret[1]
+
+swephR::swe_jdet_to_utc(jd_et = nextsol_dt, 
+                        gregflag = SE$GREG_CAL)
 
 # swephR::swe_revjul(jd = juliandt_ut, gregflag = SE$GREG_CAL) does not work
 

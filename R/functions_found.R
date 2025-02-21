@@ -5,8 +5,8 @@ library(swephR)
 rm(list=ls());cat('\f')
 # "The real treasure was the functions we made along the way" - Anon
 
-convertGeodedicLatLonToITRFXYZ <- function(lon = -78.9202362421599, 
-                                           lat = 36.04764254394491, 
+convertGeodedicLatLonToITRFXYZ <- function(lon      = -78.9202362421599, 
+                                           lat      = 36.04764254394491, 
                                            h.meters = 0){
   #Algorithm from Explanatory Supplement to the Astronomical Almanac 3rd ed. P294
   a    <- 6378136.6
