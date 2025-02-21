@@ -2,29 +2,79 @@
 title: "abstract_brainstorming"
 author: "Tim Bender"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    code_download: TRUE
+    code_folding: "hide"
+    toc: TRUE
+    toc_float: FALSE
+    toc_depth: "3"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE)
 ```
 
-## R Markdown
+## Presentation Concept
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Similar projects
+<!-- - Eclipse 2017 (via [github](https://github.com/RiRam/Eclipse2017))  -->
+- The Social Effects of an Awesome Solar Eclipse ([journal article](https://journals.sagepub.com/doi/full/10.1177/09567976221085501), [data hub](https://osf.io/qeku3/))
+- [Celestial Programming](https://www.celestialprogramming.com)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Possible Co-Presenters
 
-```{r cars}
-summary(cars)
+#### *The Social Effects of an Awesome Solar Eclipse*
+- Sean P. Goldy, University of California, Irvine, Department of Psychological Science
+- Paul K. Piff, University of California, Irvine, Department of Psychological Science
+
+#### *Celestial Programming Website*
+- Greg Miller: (via [celestialprogramming.com](https://www.celestialprogramming.com), [astronomy stackexchange](https://astronomy.stackexchange.com/users/25729/greg-miller), [asx post](https://astronomy.stackexchange.com/questions/59101/calculation-of-solar-eclipse-progress-based-on-time-and-location#comment137137_59101))
+
+#### *NASA Solar System Ambassadors*
+<!-- #### Sinead Borgersen -->
+<!-- -   title: Solar System Ambassador -->
+<!-- -   agency: NASA -->
+<!-- -   contact: [NASA web portal](https://solarsystem.nasa.gov/ambassadors/1574/contact/) -->
+<!-- -   website: [NASA Ambassador](https://solarsystem.nasa.gov/ambassadors/1574/) -->
+-   Sinead Borgersen: Apex, NC
+<!-- #### *Nick Eakes* -->
+<!-- -   title: Solar System Ambassador -->
+<!-- -   agency: NASA -->
+<!-- -   contact: [NASA web portal](https://solarsystem.nasa.gov/ambassadors/1023/contact/) -->
+<!-- -   website: [NASA Ambassador](https://solarsystem.nasa.gov/ambassadors/1023/) -->
+-   Nick Eakes: Durham, NC
+<!-- #### *Christopher Rowe* -->
+<!-- -   title: Solar System Ambassador -->
+<!-- -   agency: NASA -->
+<!-- -   contact: [NASA web portal](https://solarsystem.nasa.gov/ambassadors/2662/contact/) -->
+<!-- -   website: [NASA Ambassador](https://solarsystem.nasa.gov/ambassadors/2662/) -->
+-   Christopher Rowe: Greensboro, NC
+
+### Map of Speaker Locations
+
+```{r}
+library(leaflet)
+knitr::opts_chunk$set(warning = FALSE, echo = FALSE)
+
+leaflet(padding = 0, 
+        height = "300px", 
+        width = "auto") |> 
+  addTiles() |> 
+  addMarkers(label = c("Sinead Borgersen", "Nick Eakes, Tim Bender", 
+                       "Christopher Rowe", "Sean Goldy & Paul Piff"), 
+             lng          = c(-78.8508, -78.8986, 
+                              -79.7915, -117.8417),
+             lat          = c(35.7327,  35.9940, 
+                              36.0726, 33.6424)) |>
+  expandLimits(lng          = c(-78.8508, -78.8986, 
+                              -79.7915, -117.8417)*1.000,
+             lat          = c(35.7327,  35.9940, 
+                              36.0726, 33.6424)*1.000) |> 
+  addTerminator() |> 
+  leaflet::addScaleBar(position = "topright") |> 
+  leaflet::addSimpleGraticule(zoomIntervals = list(c(0,3,50), 
+                                                   c(4,5,5), 
+                                                   c(6,20,1)))
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
