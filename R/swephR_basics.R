@@ -6,31 +6,41 @@ library(lubridate)
 
 rm(list=ls());cat('\f')
 
-time.now_utc <- ymd_hms("2024-04-01 04:15:30 AM", 
-                        tz = Sys.timezone()) |>  #Sys.time() |> 
-  with_tz("UTC")
+# time_utc <- ymd_hms("2024-04-01 04:00:00 AM", 
+#                         tz = Sys.timezone()) |>  #Sys.time() |> 
+#   with_tz("UTC")
+
+time_utc <- Sys.time() |> with_tz("UTC")
 
 xy.here      <- c(x = -78.8986, y = 35.9940, z = 0)
 
+# utc time to julian time (et)----
+time.jd  <- swe_utc_to_jd(year     = year(time_utc), 
+                          month    = month(time_utc), 
+                          day      = mday(time_utc), 
+                          houri    = hour(time_utc), 
+                          min      = minute(time_utc), 
+                          sec      = second(time_utc), 
+                          gregflag = SE$GREG_CAL)$dret
 
-juliandt_ut  <- swe_utc_to_jd(year     = year(time.now_utc), 
-                              month    = month(time.now_utc), 
-                              day      = mday(time.now_utc), 
-                              houri    = hour(time.now_utc), 
-                              min      = minute(time.now_utc), 
-                              sec      = second(time.now_utc), 
-                              gregflag = SE$GREG_CAL)$dret[1]
+names(time.jd) <- c("UT", "ET")
 
+swephR::swe_utc_to_jd()
 
+# jd_et to jd_ut
+?swephR::swe_jdet_to_utc()
 
 # next eclipse (any type) for a given location----
-next_solar <- swe_sol_eclipse_when_loc(jd_start  = juliandt_ut,
+next_solar <- swe_sol_eclipse_when_loc(jd_start  = time.jd_et,
                                        ephe_flag = SE$FLG_MOSEPH,
                                        geopos    = c(xy.here[1],xy.here[2],xy.here[3]), #lon,lat,h.meters
                                        backward  = FALSE)
 
 nextsol_dt <- next_solar$tret[1] |> 
-  swephR::swe_jdut1_to_utc()
+  time.jd_et |> 
+  swephR::swe_jdet_to_utc(gregflag = SE$GREG_CAL)
+
+# swephR::swe_revjul(jd = juliandt_ut, gregflag = SE$GREG_CAL) does not work
 
 tret.swe_sol_eclipse_when_loc <- c("tret[1]   time of maximum eclipse
 tret[2]   time of first contact
