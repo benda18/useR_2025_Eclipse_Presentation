@@ -2,6 +2,7 @@
 library(renv)
 library(swephR)
 library(lubridate)
+library(leaflet)
 
 # setup----
 rm(list=ls());cat('\f')
@@ -12,8 +13,8 @@ rm(list=ls());cat('\f')
 
 # set clock time----
 
-se_total   <- ymd_hms("2078-05-11 12:30:00 AM", tz = "America/New_York")
-se_annular <- ymd_hms("2093-07-23 12:30:00 AM", tz = "America/New_York")
+se_total   <- ymd_hms("2024-04-08 12:30:00 AM", tz = "America/New_York")
+se_annular <- ymd_hms("2023-10-14 12:30:00 AM", tz = "America/New_York")
 
 var.nowutc <- Sys.time() |> with_tz("UTC")
 
@@ -54,6 +55,9 @@ names(solar_times) <- c("max_eclipse")
 soltype_media <-  swe_sol_eclipse_where(jd_ut = solar_times, 
                                         ephe_flag = SE$FLG_MOSEPH)
 
+soltype_media_xy   <- c(lon = soltype_media$pathpos[1], 
+                        lat = soltype_media$pathpos[2])
+
 soltype_media_attr <- soltype_media$attr[c(1,2,3,9)]
 
 names(soltype_media_attr) <- c("fraction of solar diameter covered by the moon", 
@@ -66,28 +70,23 @@ names(soltype_media_attr) <- c("fraction of solar diameter covered by the moon",
 se_type <- expand.grid(media = c("total", "annular"), 
                        local = c("totality", "partial"))
 
-# solar eclipse as seen at x/y
+# solar eclipse as seen locally
 
-type_solar <- swe_sol_eclipse_how(jd_ut = solar_times,
+soltype_local <- swe_sol_eclipse_how(jd_ut = solar_times,
                                   ephe_flag = SE$FLG_MOSEPH,
                                   geopos    = c(var_lon,var_lat,0))
 
-# partial eclipse
-if(type_solar$attr[9] == type_solar$attr[1]){sol_type <- "partial"}
+soltype_local_xy   <- c(lon = var_lon, 
+                        lat = var_lat)
 
-# annular or total
-if(type_solar$attr[9] == type_solar$attr[2]){
-  # annular
-  if(type_solar$attr[2] < 1){
-    sol_type <- "annular"
-  }
-  # total 
-  if(type_solar$attr[2] >= 1){
-    sol_type <- "total"
-  }
-}
+soltype_local_attr <-  soltype_local$attr[c(1,2,3,9)]
 
-# where is the eclipse maximal? 
+names(soltype_local_attr) <- c("fraction of solar diameter covered by the moon", 
+                               "ratio of lunar diameter to solar one", 
+                               "fraction of solar disc covered by moon (obscuration)", 
+                               "eclipse magnitude (= attr[0] or attr[1] depending on eclipse type)")
+
+
 
 
 # next lunar eclipse----
