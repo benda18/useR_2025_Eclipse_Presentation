@@ -1,5 +1,6 @@
 library(swephR)
 library(lubridate)
+library(ggplot2)
 
 rm(list=ls());cat('\f')
 
@@ -9,7 +10,7 @@ rm(list=ls());cat('\f')
 
 
 # vars----
-n_yrs <- 10
+n_yrs <- 250
 dt_g  <- Sys.time() |> with_tz("UTC")
 xyz_local <- c(-78.8986,35.9940)
 
@@ -92,7 +93,9 @@ while(dt_g < end.dt_g){
     sol_next.type <- c(sol_next.type, "annular and total eclipses")
   }
   
-  
+  #sol_next.type <- paste(sol_next.type, sep = ", ", collapse = ", ")
+  #print(length(sol_next.type))
+  stopifnot(exprs = length(sol_next.type) == 1)
   
   # obscuration 
   if(sol_max.attr$attr[3] > 1 & 
@@ -119,6 +122,13 @@ while(dt_g < end.dt_g){
   
   dt_g <- sol_next_glob.g %m+% days(1)
   
+  rm(sol_next.type)
 }
 
 log.global_se
+
+ggplot() + 
+  geom_point(data = log.global_se, 
+             aes(y = abs(lat), x = type))+
+  scale_y_continuous(limits = c(0,90), 
+                     breaks = seq(0,90, by = 15))
