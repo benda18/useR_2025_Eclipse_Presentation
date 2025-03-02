@@ -21,15 +21,32 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
 ## Outline
 
+-   Problem / Background
+    -   Like many people during the winter of 2023-2024 I was preparing travel plans for the upcoming [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) in April of 2024. In order to get the full solar eclipse experience you really need to view what's know as **totality**.[^1]
+    -   {insert image of totality vs. not totality}
+    -   While a partial eclipse was viewable across almost the entirety of North America, only a narrow path between Mexico and the United States from the southwest to the northeast allowed viewing of **totality.**
+    -   {map of path of eclipse}
+    -   Many online tools were available to help you determine the very best place to travel to see totality based on crowd size, anticipated traffic jams, cloud cover forecasts for the day and time of the eclipse and other factors. However, Almost all of these, while useful, felt cluttered, overly-complicated and didn't really provide the information I was looking for anyways.
+-   What Features Did I Want in an Eclipse Tool?
+    -   **Increased geographic accuracy**: The main problem I had was quickly and easily verifying how long totality would be visible from specific longitude / latitude coordinate locations. Eclipse Planning tools approached solving this problems in 1 of 2 ways:
+        -   *Easy to use but not accurate*: Commonly a list of major cities within totality would be [listed with general information as seen here](https://eclipse2024.org/somcow24.html). The problem being however, that depending on the size of the city there could be places partially outside of totality, with only a few seconds view of totality, and/or 4 or more minutes of view of totality (close to the max). An extreme example is Dallas, TX where parts of the city were both outside of the view of totality and almost at the maximum view.
+        -   *Accurate but not easy to use*: The other approach was providing an [interactive map like this one from the National Solar Observatory](https://nso.edu/for-public/eclipse-map-2024/) where you could click on your viewing location and be provided with information about whether it was within the path of totality, how long you could see it, and even what time totality would begin and end. However, I could not find a tool with an address search box that would allow for simple queries of locations that way.
+-   Broad Solution
+    -   some text
+-   Approach
+    -   some text
+
+[^1]: the moment or duration of total obscuration of the sun or moon during an eclipse.
+
 ## Broad Topic Covered
 
 ## Learning Goals
 
-1.  
+-   main goal
 
-2.  You don't have to know ~~everything~~ ~~anything~~ as much as you think you do.
+-   You don't have to know ~~everything~~ ~~anything~~ as much as you think you do.
 
-3.  Evolving your skills and knowledge throughout a project lifecycle: pros and cons.
+-   Evolving your skills and knowledge throughout a project lifecycle: pros and cons.
 
 ## Timezone Preference(s)
 
@@ -39,11 +56,11 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
 ## Intended Audience
 
-- Solar and lunar eclipse seekers
-- Beginners and hobbyists looking for:
-  -   project idea inspiration,
-  -   a better understanding on how to approach the project lifecycle, and
-  -   how to deal with the "too many ideas but not enough progress" monster.
+-   Solar and lunar eclipse seekers
+-   Beginners and hobbyists looking for:
+    -   project idea inspiration,
+    -   a better understanding on how to approach the project life cycle, and
+    -   managing project creep
 
 ## Pedagogical Method of Teaching
 
