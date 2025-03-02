@@ -10,7 +10,7 @@ rm(list=ls());cat('\f')
 
 
 # vars----
-n_yrs <- 250
+n_yrs <- 10
 dt_g  <- Sys.time() |> with_tz("UTC")
 xyz_local <- c(-78.8986,35.9940)
 
@@ -125,10 +125,21 @@ while(dt_g < end.dt_g){
   rm(sol_next.type)
 }
 
-log.global_se
+log.global_se$type_f <- factor(log.global_se$type, 
+                                  levels = c("Partial Eclipse", 
+                                             "Annular Eclipse", 
+                                             "Total Eclipse"))
 
-ggplot() + 
-  geom_point(data = log.global_se, 
-             aes(y = abs(lat), x = type))+
-  scale_y_continuous(limits = c(0,90), 
-                     breaks = seq(0,90, by = 15))
+# rando.lon <- runif(n = 100, min = -180, max = 180)
+# rando.lat <- runif(n = 100, min = -90, max = 90)
+# 
+# ggplot() + 
+#   geom_point(aes(x = rando.lon, y = rando.lat)) + 
+#   coord_quickmap(xlim = c(-180,180), 
+#                  ylim = c(-90,90))+
+#   scale_y_continuous(labels = seq(-90,90, by = 15), 
+#                      breaks = seq(-90,90, by = 15), 
+#                      limits = c(-90,90))+
+#   scale_x_continuous(labels = seq(-180,180,by = 30), 
+#                      breaks = seq(-180, 180, by = 30), 
+#                      limits = c(-180,180))
