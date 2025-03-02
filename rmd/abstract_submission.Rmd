@@ -4,8 +4,8 @@ author: "Tim Bender"
 date: "Submitted: `r Sys.Date()`"
 output:
   html_document:
-    code_download: TRUE
-    code_folding: "hide"
+    code_download: FALSE
+    code_folding: "show"
     toc: TRUE
     toc_float: TRUE
     toc_depth: 2
@@ -30,11 +30,41 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 -   What Features Did I Want in an Eclipse Tool?
     -   **Increased geographic accuracy**: The main problem I had was quickly and easily verifying how long totality would be visible from specific longitude / latitude coordinate locations. Eclipse Planning tools approached solving this problems in 1 of 2 ways:
         -   *Easy to use but not accurate*: Commonly a list of major cities within totality would be [listed with general information as seen here](https://eclipse2024.org/somcow24.html). The problem being however, that depending on the size of the city there could be places partially outside of totality, with only a few seconds view of totality, and/or 4 or more minutes of view of totality (close to the max). An extreme example is Dallas, TX where parts of the city were both outside of the view of totality and almost at the maximum view.
-        -   *Accurate but not easy to use*: The other approach was providing an [interactive map like this one from the National Solar Observatory](https://nso.edu/for-public/eclipse-map-2024/) where you could click on your viewing location and be provided with information about whether it was within the path of totality, how long you could see it, and even what time totality would begin and end. However, I could not find a tool with an address search box that would allow for simple queries of locations that way.
--   Broad Solution
-    -   some text
+        -   *Accurate but not easy to use*: The other approach was providing an [interactive map like this one from the National Solar Observatory](https://nso.edu/for-public/eclipse-map-2024/) where you could click on your viewing location and be provided with information about whether it was within the path of totality, how long you could see it, and even what time totality would begin and end. However, I could not find a tool with an address search box that would allow for simple queries of locations that way. <!-- -   Broad Solution --> <!--     -   some text -->
 -   Approach
-    -   some text
+    -   Using the [swephR](https://cran.r-project.org/package=swephR) High Precision Swiss Ephemeris package, one may:
+        -   find the next solar (or lunar) eclipse for a given geographic position,
+
+        -   find the next solar (or lunar) eclipse globally,
+
+        -   find the attributes of a solar (or lunar) eclipse for a given geographic position and time, and/or
+
+        -   plot the path of a total or annular solar eclipse on a map.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(swephR)
+library(lubridate)
+
+# Example Input Variables
+    input_lonlat   <- c(-78.9382, 36.0014) # Duke Univ
+    input_gregtime <- ymd_hms("2025-08-08 01:00:00", 
+                              tz = "America/New_York") |> with_tz("UTC") # Gregorian time
+
+# Example swephR functions
+    calc_jultime   <- swe_utc_to_jd(year  = year(input_gregtime), 
+                                    month = month(input_gregtime), 
+                                    day   = mday(input_gregtime),
+                                    houri = hour(input_gregtime), 
+                                    min   = minute(input_gregtime), 
+                                    sec   = second(input_gregtime), 
+                                    gregflag = SE$GREG_CAL)
+            
+
+# Example Returned Values
+    output_datetime <- NA
+
+
+```
 
 [^1]: the moment or duration of total obscuration of the sun or moon during an eclipse.
 

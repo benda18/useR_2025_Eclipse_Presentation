@@ -1353,19 +1353,6 @@ window.initializeCodeFolding = function(show) {
 
 }
 </script>
-<script>
-window.initializeSourceEmbed = function(filename) {
-  $("#rmd-download-source").click(function() {
-    var src = $("#rmd-source-code").html();
-    var a = document.createElement('a');
-    a.href = "data:text/x-r-markdown;base64," + src;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  });
-};
-</script>
 <style type="text/css">.hljs-literal {
 color: #990073;
 }
@@ -1409,11 +1396,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-#rmd-source-code {
-display: none;
-}
-</style>
 
 
 
@@ -1579,8 +1561,6 @@ border-radius: 0px;
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-<li role="separator" class="divider"></li>
-<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
 </ul>
 </div>
 
@@ -1623,7 +1603,8 @@ I was looking for anyways.</li>
 <li><strong>Increased geographic accuracy</strong>: The main problem I
 had was quickly and easily verifying how long totality would be visible
 from specific longitude / latitude coordinate locations. Eclipse
-Planning tools approached solving this problems in 1 of 2 ways:</li>
+Planning tools approached solving this problems in 1 of 2 ways:
+<ul>
 <li><em>Easy to use but not accurate</em>: Commonly a list of major
 cities within totality would be <a href="https://eclipse2024.org/somcow24.html">listed with general
 information as seen here</a>. The problem being however, that depending
@@ -1639,17 +1620,45 @@ on your viewing location and be provided with information about whether
 it was within the path of totality, how long you could see it, and even
 what time totality would begin and end. However, I could not find a tool
 with an address search box that would allow for simple queries of
-locations that way.</li>
+locations that way. <!-- -   Broad Solution -->
+<!--     -   some text --></li>
 </ul></li>
-<li>Broad Solution
-<ul>
-<li>some text</li>
 </ul></li>
 <li>Approach
 <ul>
-<li>some text</li>
+<li>Using the <a href="https://cran.r-project.org/package=swephR">swephR</a> High
+Precision Swiss Ephemeris package, one may:
+<ul>
+<li><p>find the next solar (or lunar) eclipse for a given geographic
+position,</p></li>
+<li><p>find the next solar (or lunar) eclipse globally,</p></li>
+<li><p>find the attributes of a solar (or lunar) eclipse for a given
+geographic position and time, and/or</p></li>
+<li><p>plot the path of a total or annular solar eclipse on a
+map.</p></li>
+</ul></li>
 </ul></li>
 </ul>
+<pre class="r"><code>library(swephR)
+library(lubridate)
+
+# Example Input Variables
+    input_lonlat   &lt;- c(-78.9382, 36.0014) # Duke Univ
+    input_gregtime &lt;- ymd_hms(&quot;2025-08-08 01:00:00&quot;, 
+                              tz = &quot;America/New_York&quot;) |&gt; with_tz(&quot;UTC&quot;) # Gregorian time
+
+# Example swephR functions
+    calc_jultime   &lt;- swe_utc_to_jd(year  = year(input_gregtime), 
+                                    month = month(input_gregtime), 
+                                    day   = mday(input_gregtime),
+                                    houri = hour(input_gregtime), 
+                                    min   = minute(input_gregtime), 
+                                    sec   = second(input_gregtime), 
+                                    gregflag = SE$GREG_CAL)
+            
+
+# Example Returned Values
+    output_datetime &lt;- NA</code></pre>
 </div>
 <div id="broad-topic-covered" class="section level2">
 <h2>Broad Topic Covered</h2>
@@ -1734,7 +1743,6 @@ or moon during an eclipse.<a href="#fnref1" class="footnote-back">↩︎</a></p>
 </ol>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIiINCmF1dGhvcjogIlRpbSBCZW5kZXIiDQpkYXRlOiAiU3VibWl0dGVkOiBgciBTeXMuRGF0ZSgpYCINCm91dHB1dDoNCiAgaHRtbF9kb2N1bWVudDoNCiAgICBjb2RlX2Rvd25sb2FkOiBUUlVFDQogICAgY29kZV9mb2xkaW5nOiAiaGlkZSINCiAgICB0b2M6IFRSVUUNCiAgICB0b2NfZmxvYXQ6IFRSVUUNCiAgICB0b2NfZGVwdGg6IDINCi0tLQ0KDQpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0NCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkNCmBgYA0KDQojIyBBYnN0cmFjdA0KDQpPbmUgaG9iYnlpc3QncyBhdHRlbXB0IHRvIHVzZSBSIHRvIG5ldmVyIG1pc3MgYSBzb2xhciBvciBsdW5hciBlY2xpcHNlIGFnYWluLg0KDQojIyBPdXRsaW5lDQoNCi0gICBQcm9ibGVtIC8gQmFja2dyb3VuZA0KICAgIC0gICBMaWtlIG1hbnkgcGVvcGxlIGR1cmluZyB0aGUgd2ludGVyIG9mIDIwMjMtMjAyNCBJIHdhcyBwcmVwYXJpbmcgdHJhdmVsIHBsYW5zIGZvciB0aGUgdXBjb21pbmcgW05vcnRoIEFtZXJpY2FuIHRvdGFsIHNvbGFyIGVjbGlwc2VdKGh0dHBzOi8vc2NpZW5jZS5uYXNhLmdvdi9lY2xpcHNlcy9mdXR1cmUtZWNsaXBzZXMvZWNsaXBzZS0yMDI0LykgaW4gQXByaWwgb2YgMjAyNC4gSW4gb3JkZXIgdG8gZ2V0IHRoZSBmdWxsIHNvbGFyIGVjbGlwc2UgZXhwZXJpZW5jZSB5b3UgcmVhbGx5IG5lZWQgdG8gdmlldyB3aGF0J3Mga25vdyBhcyAqKnRvdGFsaXR5KiouW14xXQ0KICAgIC0gICB7aW5zZXJ0IGltYWdlIG9mIHRvdGFsaXR5IHZzLiBub3QgdG90YWxpdHl9DQogICAgLSAgIFdoaWxlIGEgcGFydGlhbCBlY2xpcHNlIHdhcyB2aWV3YWJsZSBhY3Jvc3MgYWxtb3N0IHRoZSBlbnRpcmV0eSBvZiBOb3J0aCBBbWVyaWNhLCBvbmx5IGEgbmFycm93IHBhdGggYmV0d2VlbiBNZXhpY28gYW5kIHRoZSBVbml0ZWQgU3RhdGVzIGZyb20gdGhlIHNvdXRod2VzdCB0byB0aGUgbm9ydGhlYXN0IGFsbG93ZWQgdmlld2luZyBvZiAqKnRvdGFsaXR5LioqDQogICAgLSAgIHttYXAgb2YgcGF0aCBvZiBlY2xpcHNlfQ0KICAgIC0gICBNYW55IG9ubGluZSB0b29scyB3ZXJlIGF2YWlsYWJsZSB0byBoZWxwIHlvdSBkZXRlcm1pbmUgdGhlIHZlcnkgYmVzdCBwbGFjZSB0byB0cmF2ZWwgdG8gc2VlIHRvdGFsaXR5IGJhc2VkIG9uIGNyb3dkIHNpemUsIGFudGljaXBhdGVkIHRyYWZmaWMgamFtcywgY2xvdWQgY292ZXIgZm9yZWNhc3RzIGZvciB0aGUgZGF5IGFuZCB0aW1lIG9mIHRoZSBlY2xpcHNlIGFuZCBvdGhlciBmYWN0b3JzLiBIb3dldmVyLCBBbG1vc3QgYWxsIG9mIHRoZXNlLCB3aGlsZSB1c2VmdWwsIGZlbHQgY2x1dHRlcmVkLCBvdmVybHktY29tcGxpY2F0ZWQgYW5kIGRpZG4ndCByZWFsbHkgcHJvdmlkZSB0aGUgaW5mb3JtYXRpb24gSSB3YXMgbG9va2luZyBmb3IgYW55d2F5cy4NCi0gICBXaGF0IEZlYXR1cmVzIERpZCBJIFdhbnQgaW4gYW4gRWNsaXBzZSBUb29sPw0KICAgIC0gICAqKkluY3JlYXNlZCBnZW9ncmFwaGljIGFjY3VyYWN5Kio6IFRoZSBtYWluIHByb2JsZW0gSSBoYWQgd2FzIHF1aWNrbHkgYW5kIGVhc2lseSB2ZXJpZnlpbmcgaG93IGxvbmcgdG90YWxpdHkgd291bGQgYmUgdmlzaWJsZSBmcm9tIHNwZWNpZmljIGxvbmdpdHVkZSAvIGxhdGl0dWRlIGNvb3JkaW5hdGUgbG9jYXRpb25zLiBFY2xpcHNlIFBsYW5uaW5nIHRvb2xzIGFwcHJvYWNoZWQgc29sdmluZyB0aGlzIHByb2JsZW1zIGluIDEgb2YgMiB3YXlzOg0KICAgIC0gICAqRWFzeSB0byB1c2UgYnV0IG5vdCBhY2N1cmF0ZSo6IENvbW1vbmx5IGEgbGlzdCBvZiBtYWpvciBjaXRpZXMgd2l0aGluIHRvdGFsaXR5IHdvdWxkIGJlIFtsaXN0ZWQgd2l0aCBnZW5lcmFsIGluZm9ybWF0aW9uIGFzIHNlZW4gaGVyZV0oaHR0cHM6Ly9lY2xpcHNlMjAyNC5vcmcvc29tY293MjQuaHRtbCkuIFRoZSBwcm9ibGVtIGJlaW5nIGhvd2V2ZXIsIHRoYXQgZGVwZW5kaW5nIG9uIHRoZSBzaXplIG9mIHRoZSBjaXR5IHRoZXJlIGNvdWxkIGJlIHBsYWNlcyBwYXJ0aWFsbHkgb3V0c2lkZSBvZiB0b3RhbGl0eSwgd2l0aCBvbmx5IGEgZmV3IHNlY29uZHMgdmlldyBvZiB0b3RhbGl0eSwgYW5kL29yIDQgb3IgbW9yZSBtaW51dGVzIG9mIHZpZXcgb2YgdG90YWxpdHkgKGNsb3NlIHRvIHRoZSBtYXgpLiBBbiBleHRyZW1lIGV4YW1wbGUgaXMgRGFsbGFzLCBUWCB3aGVyZSBwYXJ0cyBvZiB0aGUgY2l0eSB3ZXJlIGJvdGggb3V0c2lkZSBvZiB0aGUgdmlldyBvZiB0b3RhbGl0eSBhbmQgYWxtb3N0IGF0IHRoZSBtYXhpbXVtIHZpZXcuDQogICAgLSAgICpBY2N1cmF0ZSBidXQgbm90IGVhc3kgdG8gdXNlKjogVGhlIG90aGVyIGFwcHJvYWNoIHdhcyBwcm92aWRpbmcgYW4gW2ludGVyYWN0aXZlIG1hcCBsaWtlIHRoaXMgb25lIGZyb20gdGhlIE5hdGlvbmFsIFNvbGFyIE9ic2VydmF0b3J5XShodHRwczovL25zby5lZHUvZm9yLXB1YmxpYy9lY2xpcHNlLW1hcC0yMDI0Lykgd2hlcmUgeW91IGNvdWxkIGNsaWNrIG9uIHlvdXIgdmlld2luZyBsb2NhdGlvbiBhbmQgYmUgcHJvdmlkZWQgd2l0aCBpbmZvcm1hdGlvbiBhYm91dCB3aGV0aGVyIGl0IHdhcyB3aXRoaW4gdGhlIHBhdGggb2YgdG90YWxpdHksIGhvdyBsb25nIHlvdSBjb3VsZCBzZWUgaXQsIGFuZCBldmVuIHdoYXQgdGltZSB0b3RhbGl0eSB3b3VsZCBiZWdpbiBhbmQgZW5kLiBIb3dldmVyLCBJIGNvdWxkIG5vdCBmaW5kIGEgdG9vbCB3aXRoIGFuIGFkZHJlc3Mgc2VhcmNoIGJveCB0aGF0IHdvdWxkIGFsbG93IGZvciBzaW1wbGUgcXVlcmllcyBvZiBsb2NhdGlvbnMgdGhhdCB3YXkuDQotICAgQnJvYWQgU29sdXRpb24NCiAgICAtICAgc29tZSB0ZXh0DQotICAgQXBwcm9hY2gNCiAgICAtICAgc29tZSB0ZXh0DQoNClteMV06IHRoZSBtb21lbnQgb3IgZHVyYXRpb24gb2YgdG90YWwgb2JzY3VyYXRpb24gb2YgdGhlIHN1biBvciBtb29uIGR1cmluZyBhbiBlY2xpcHNlLg0KDQojIyBCcm9hZCBUb3BpYyBDb3ZlcmVkDQoNCiMjIExlYXJuaW5nIEdvYWxzDQoNCi0gICBtYWluIGdvYWwNCg0KLSAgIFlvdSBkb24ndCBoYXZlIHRvIGtub3cgfn5ldmVyeXRoaW5nfn4gfn5hbnl0aGluZ35+IGFzIG11Y2ggYXMgeW91IHRoaW5rIHlvdSBkby4NCg0KLSAgIEV2b2x2aW5nIHlvdXIgc2tpbGxzIGFuZCBrbm93bGVkZ2UgdGhyb3VnaG91dCBhIHByb2plY3QgbGlmZWN5Y2xlOiBwcm9zIGFuZCBjb25zLg0KDQojIyBUaW1lem9uZSBQcmVmZXJlbmNlKHMpDQoNCiMjIER1cmF0aW9uDQoNCiMjIExhbmd1YWdlDQoNCiMjIEludGVuZGVkIEF1ZGllbmNlDQoNCi0gICBTb2xhciBhbmQgbHVuYXIgZWNsaXBzZSBzZWVrZXJzDQotICAgQmVnaW5uZXJzIGFuZCBob2JieWlzdHMgbG9va2luZyBmb3I6DQogICAgLSAgIHByb2plY3QgaWRlYSBpbnNwaXJhdGlvbiwNCiAgICAtICAgYSBiZXR0ZXIgdW5kZXJzdGFuZGluZyBvbiBob3cgdG8gYXBwcm9hY2ggdGhlIHByb2plY3QgbGlmZSBjeWNsZSwgYW5kDQogICAgLSAgIG1hbmFnaW5nIHByb2plY3QgY3JlZXANCg0KIyMgUGVkYWdvZ2ljYWwgTWV0aG9kIG9mIFRlYWNoaW5nDQoNCiMjIE1heGltdW0gTnVtYmVyIG9mIEF0dGVuZGVlcw0KDQojIyBNb3RpdmF0aW9uIHRvIFRlYWNoIHRoaXMgVHV0b3JpYWwgYXQgdXNlUiENCg0KIyMgU3VwcGxlbWVudGFsIE1hdGVyaWFsIExpbmtzDQoNCiMjIyMgVHV0b3JpYWwgbWF0ZXJpYWxzDQoNCi0gICBGdXR1cmUgU29sYXIgYW5kIEx1bmFyIEVjbGlwc2VzIFZpc2libGUgZnJvbSBZb3VyIEN1cnJlbnQgTG9jYXRpb24gKFtTaGlueSB3ZWJhcHBdKGh0dHBzOi8vdGltLWJlbmRlci5zaGlueWFwcHMuaW8vc2hpbnlfYWxsX2VjbGlwc2VzLykpDQoNCiMjIyMgV2ViIFBhZ2UgKGlmIGFwcGxpY2FibGUpDQoNCiMjIFByZXJlcXVpc2l0ZXMgLyByZXF1aXJlbWVudHMNCg0KIyMgTGljZW5zZSwgTWF0ZXJpYWwgc2hhcmluZywgcmVjb3JkaW5nIGNvbnNlbnQNCg0KIyMgQmlvZ3JhcGh5DQoNCiMjIyMgVGltIEJlbmRlciwgKHRpdGxlKQ0KDQotICAgW2hvbGQgZm9yIGJpb10NCi0gICBbTGlua2VkSW5dKGh0dHBzOi8vd3d3LmxpbmtlZGluLmNvbS9pbi90aW0tYmVuZGVyLTIzODg3MDE3MS8pDQotICAgW2dpdGh1Yl0oaHR0cHM6Ly9naXRodWIuY29tL2JlbmRhMTgpDQo=</div>
 
 
 </div>
@@ -1772,8 +1780,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("abstract_submission.Rmd");
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
