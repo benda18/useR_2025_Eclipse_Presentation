@@ -41,32 +41,35 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
         -   plot the path of a total or annular solar eclipse on a map.
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+[^1]: the moment or duration of total obscuration of the sun or moon during an eclipse.
+
+
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, prompt=TRUE }
 library(swephR)
 library(lubridate)
 
-# Example Input Variables
+## Example Input Variables
     input_lonlat   <- c(-78.9382, 36.0014) # Duke Univ
     input_gregtime <- ymd_hms("2025-08-08 01:00:00", 
                               tz = "America/New_York") |> with_tz("UTC") # Gregorian time
 
-# Example swephR functions
+## Example swephR functions
     calc_jultime   <- swe_utc_to_jd(year  = year(input_gregtime), 
                                     month = month(input_gregtime), 
                                     day   = mday(input_gregtime),
                                     houri = hour(input_gregtime), 
-                                    min   = minute(input_gregtime), 
-                                    sec   = second(input_gregtime), 
+                                    min   = minute(input_gregtime),
+                                    sec   = second(input_gregtime),
                                     gregflag = SE$GREG_CAL)
             
 
-# Example Returned Values
+## Example Returned Values
     output_datetime <- NA
 
 
 ```
-
-[^1]: the moment or duration of total obscuration of the sun or moon during an eclipse.
 
 ## Broad Topic Covered
 

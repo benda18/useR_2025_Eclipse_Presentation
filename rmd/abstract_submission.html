@@ -1639,26 +1639,26 @@ map.</p></li>
 </ul></li>
 </ul></li>
 </ul>
-<pre class="r"><code>library(swephR)
-library(lubridate)
-
-# Example Input Variables
-    input_lonlat   &lt;- c(-78.9382, 36.0014) # Duke Univ
-    input_gregtime &lt;- ymd_hms(&quot;2025-08-08 01:00:00&quot;, 
-                              tz = &quot;America/New_York&quot;) |&gt; with_tz(&quot;UTC&quot;) # Gregorian time
-
-# Example swephR functions
-    calc_jultime   &lt;- swe_utc_to_jd(year  = year(input_gregtime), 
-                                    month = month(input_gregtime), 
-                                    day   = mday(input_gregtime),
-                                    houri = hour(input_gregtime), 
-                                    min   = minute(input_gregtime), 
-                                    sec   = second(input_gregtime), 
-                                    gregflag = SE$GREG_CAL)
-            
-
-# Example Returned Values
-    output_datetime &lt;- NA</code></pre>
+<pre class="r"><code>&gt; library(swephR)
+&gt; library(lubridate)
+&gt; 
+&gt; ## Example Input Variables
+&gt;     input_lonlat   &lt;- c(-78.9382, 36.0014) # Duke Univ
+&gt;     input_gregtime &lt;- ymd_hms(&quot;2025-08-08 01:00:00&quot;, 
++                               tz = &quot;America/New_York&quot;) |&gt; with_tz(&quot;UTC&quot;) # Gregorian time
+&gt; 
+&gt; ## Example swephR functions
+&gt;     calc_jultime   &lt;- swe_utc_to_jd(year  = year(input_gregtime), 
++                                     month = month(input_gregtime), 
++                                     day   = mday(input_gregtime),
++                                     houri = hour(input_gregtime), 
++                                     min   = minute(input_gregtime),
++                                     sec   = second(input_gregtime),
++                                     gregflag = SE$GREG_CAL)
+&gt;             
+&gt; 
+&gt; ## Example Returned Values
+&gt;     output_datetime &lt;- NA</code></pre>
 </div>
 <div id="broad-topic-covered" class="section level2">
 <h2>Broad Topic Covered</h2>
