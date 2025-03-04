@@ -1,25 +1,17 @@
 ---
 title: "soome kind of doc"
 author: "Tim Bender"
-date: "Submitted: `r Sys.Date()`"
+date: "Submitted: 2025-03-04"
 output:
-  html_document: 
-    code_download: false
-    code_folding: show
-    toc: true
-    toc_float: true
+  html_document:
+    code_download: FALSE
+    code_folding: "show"
+    toc: TRUE
+    toc_float: TRUE
     toc_depth: 2
-    keep_md: true
 ---
 
-```{r setup, include=FALSE, echo = T}
-#knitr::opts_chunk$set(echo = TRUE)
 
-output_lonlat   <- "empty"
-output_gregtime <- "empty"
-var_map.f       <- 0.1
-
-```
 
 ## Abstract
 
@@ -49,7 +41,8 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
 [^1]: the moment or duration of total obscuration of the sun or moon during an eclipse.
 
-```{r Eclipse Calcs, echo=TRUE, message=FALSE, warning=FALSE, results="show"}
+
+``` r
 # SOME CODE to capture solar eclipse information 
 library(swephR)
 library(lubridate)
@@ -115,10 +108,22 @@ names(output_lonlat) <- c("lon", "lat")
 print(list("Eclipse_DateTime" = output_gregtime, 
            "Visible_Locally"  = output_visible,
            "Maximal_View.xy"  = output_lonlat))
-
 ```
 
-```{r Static Map ,message=FALSE, echo=TRUE, warning=FALSE, results="hide"}
+```
+## $Eclipse_DateTime
+## [1] "2025-09-21 19:40:51 UTC"
+## 
+## $Visible_Locally
+## [1] "Not visible from input location"
+## 
+## $Maximal_View.xy
+##       lon       lat 
+## 153.38805 -61.03134
+```
+
+
+``` r
 # SOME CODE for a static map verification of input lon/lat
 library(ggmap)
 library(dplyr)
@@ -149,7 +154,10 @@ ggmap(map.stamen) +
              color = "brown", alpha = 0.1)
 ```
 
-```{r Geocode USPS Address, echo=TRUE, message=FALSE, warning=FALSE}
+![plot of chunk Static Map](figure/Static Map-1.png)
+
+
+``` r
 ## SOME CODE to query and geocode USPS mailing addresses for lon/lat coordinates
 # install("devtools")
 # devtools::install_github("chris-prener/censusxy")
@@ -161,10 +169,15 @@ addr_output    <- addrcxy_output[c("coordinates.x",
 names(addr_output) <- c("lon", "lat")
 
 print(addr_output)
-
 ```
 
-```{r Interactive Dashboard, eval=FALSE, message=FALSE, warning=FALSE, include=T, results="hide"}
+```
+##         lon      lat
+## 1 -78.93751 36.00054
+```
+
+
+``` r
 # SOME CODE to build a shiny dashboard to deploy an interactive webapp
 library(shiny)
 
@@ -180,7 +193,8 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-```{r Dynamic map with leaflet, echo=TRUE, message=FALSE, warning=FALSE}
+
+``` r
 # SOME CODE to replace the static map with a dynamic map
 library(leaflet)
 
@@ -196,9 +210,13 @@ leaflet(padding = 0,
   addScaleBar(position = "topright") 
 ```
 
-```{r Get lon-lat automatically via ip address, eval=FALSE, message=FALSE, warning=FALSE, include=T, results="hide"}
-# SOME CODE to capture input lon-lat automatically via i.p. address with consent
+```
+## Error in loadNamespace(name): there is no package called 'webshot'
+```
 
+
+``` r
+# SOME CODE to capture input lon-lat automatically via i.p. address with consent
 ```
 
 ## Broad Topic Covered
