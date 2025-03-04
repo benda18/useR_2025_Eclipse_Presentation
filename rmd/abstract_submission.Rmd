@@ -11,8 +11,12 @@ output:
     toc_depth: 2
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE, echo = T}
+#knitr::opts_chunk$set(echo = TRUE)
+
+output_lonlat   <- "empty"
+output_gregtime <- "empty"
+
 ```
 
 ## Abstract
@@ -41,65 +45,123 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
         -   plot the path of a total or annular solar eclipse on a map.
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, prompt=TRUE}
+```{r Eclipse Calcs, echo=TRUE, message=FALSE, warning=FALSE, prompt=F, results="show"}
 # SOME CODE to capture solar eclipse information 
 library(swephR)
 library(lubridate)
 
+## Example Input Variables
+input_lonlat   <- c("lon" = -78.938, "lat" = 36.001)  # Duke Univ
+input_gregtime <- ymd_hms("2025-08-08 01:00:00",      # Start of useR! 2025
+                          tz = "America/New_York") |> 
+  with_tz("UTC") 
+
+## Example Solar Eclipse Calculation
+# convert gregorian time to julian time (ephemeral time i.e. "ET")
+var_jultime <- swe_utc_to_jd(year = year(input_gregtime), month = month(input_gregtime), day = mday(input_gregtime), houri = hour(input_gregtime), min = minute(input_gregtime), sec = second(input_gregtime), gregflag = SE$GREG_CAL)$dret[2]
+
+# calculate the next solar eclipse visible anywhere on earth
+nextGlobEcl_Jd <- swe_sol_eclipse_when_glob(jd_start  = var_jultime, 
+                                            ephe_flag = SE$FLG_MOSEPH, 
+                                            ifltype   = 0, 
+                                            backward  = F)$tret[c(1)]
+
+# convert to gregorian time
+nextEcl.temp <- swe_jdet_to_utc(jd_et    = nextGlobEcl_Jd, 
+                                gregflag = SE$GREG_CAL)
+
+Sys.sleep(1)
+output_gregtime <- paste(nextEcl.temp$year_out,"-",
+                         nextEcl.temp$month_out,"-",
+                         nextEcl.temp$day_out," ",
+                         nextEcl.temp$hour_out,":",
+                         nextEcl.temp$min_out,":",
+                         nextEcl.temp$sec_out,
+                         sep = "") |>
+  ymd_hms()
+
+# Will the eclipse be visible from our location? 
+ret_visible.loc <- swe_sol_eclipse_how(jd_ut     = nextGlobEcl_Jd, 
+                                       ephe_flag = SE$FLG_MOSEPH, 
+                                       geopos    = c(input_lonlat["lon"], 
+                                                     input_lonlat["lat"],0))
+# check result conditions 
+ret_visible.loc <- ifelse(ret_visible.loc$return == 0 |   # "no eclipse visible" 
+                            ret_visible.loc$attr[3] == 0, # % of sun blocked by moon == 0
+                          yes = F, no = T)
+
+# where will the eclipse be best visible from? 
+
+
+        
+## Example Returned Values
+print(output_gregtime) # "[date and time of the solar eclipse]"
+print(output_lonlat)   # "[lon/lat attributes - if applicable]"
 ```
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, prompt=TRUE}
+```{r Static Map, echo=TRUE, message=FALSE, warning=FALSE, prompt=F, results="show"}
 # SOME CODE for a static map verification of input lon/lat
 library(ggmap)
 library(dplyr)
 library(sf)
-library(tigris)
 library(datasets)
 
-us.states <- tigris::states(T) %>%
-  .[.$STUSPS %in% state.abb,] %>%
-  .[!.$STUSPS %in% c("HI", "AK"),]
+input_lonlat
 
-uss.bbox <- st_bbox(us.states)
-names(uss.bbox) <- c("left", "bottom", "right", "top")
+## Register Your api key for statdiamaps (see hepl docs)
+# register_stadiamaps(key = "your_api_key_here", write = FALSE)
 
-edg.stamen <- get_stadiamap(bbox = uss.bbox, 
-                            zoom = 4, 
+nc.bbox <- make_bbox(lon = c(-84.321869 ,-75.460621), 
+                     lat = c( 33.842316 , 36.588117))
+
+edg.stamen <- get_stadiamap(bbox = nc.bbox, 
+                            zoom = 6, 
                             maptype = "stamen_toner_lite",
                             crop = T, 
                             color = "color",
                             force = T,
                             size = 1)
-ggmap(edg.stamen)
+ggmap(edg.stamen) +
+  geom_label(aes(x = input_lonlat["lon"], 
+                 y = input_lonlat["lat"]), 
+             label = "Duke University", 
+             color = "blue", alpha = 0.1) 
+```
+
+```{r Geocode USPS Address, echo=TRUE, message=FALSE, warning=FALSE, prompt=F}
+## SOME CODE to query and geocode USPS mailing addresses for lon/lat coordinates
+# install("devtools")
+# devtools::install_github("chris-prener/censusxy")
+library(censusxy)
+addr_input     <- "401 Chapel Drive, Durham, NC 27708"
+addrcxy_output <- cxy_oneline(address = addr_input)
+addr_output    <- addrcxy_output[c("coordinates.x", 
+                 "coordinates.y")]
+names(addr_output) <- c("lon", "lat")
+
+print(addr_output)
 
 ```
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, prompt=TRUE}
-# SOME CODE to query and geocode USPS mailing addresses for lon/lat coordinates
-```
-
-```{r echo=TRUE, message=FALSE, warning=FALSE, prompt=TRUE}
+```{r Interactive Dashboard, eval=FALSE, message=FALSE, warning=FALSE, include=T, prompt=F, results="show"}
 # SOME CODE to build a shiny dashboard to deploy an interactive webapp
+library(shiny)
+
+ui <- fluidPage(
+  "Hello, world!"
+)
+server <- function(input, output, session) {
+}
+shinyApp(ui, server)
 ```
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, prompt=TRUE}
-# SOME CODE to replace the static map with an interactive map
+```{r Dynamic map with leaflet, echo=TRUE, message=FALSE, warning=FALSE, prompt=F}
+# SOME CODE to replace the static map with a dynamic map
+library(leaflet)
 ```
-```{r echo=TRUE, message=FALSE, warning=FALSE, prompt=TRUE }
-library(swephR)
-library(lubridate)
-
-## Example Input Variables
-    input_lonlat   <- c(-78.9382, 36.0014) # Duke Univ
-    input_gregtime <- ymd_hms("2025-08-08 01:00:00",
-                              tz = "America/New_York") |> with_tz("UTC") # Gregorian time
-
-## Example Returned Values
-    output_datetime <- "[date and time of the solar eclipse]"
-    output_location <- "[lon/lat attributes of solar eclipse - if applicable]"
 
 
-```
+
 
 ## Broad Topic Covered
 
