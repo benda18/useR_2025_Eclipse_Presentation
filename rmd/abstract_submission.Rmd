@@ -16,6 +16,7 @@ output:
 
 output_lonlat   <- "empty"
 output_gregtime <- "empty"
+var_map.f       <- 0.1
 
 ```
 
@@ -58,7 +59,13 @@ input_gregtime <- ymd_hms("2025-08-08 01:00:00",      # Start of useR! 2025
 
 ## Example Solar Eclipse Calculation
 # convert gregorian time to julian time (ephemeral time i.e. "ET")
-var_jultime <- swe_utc_to_jd(year = year(input_gregtime), month = month(input_gregtime), day = mday(input_gregtime), houri = hour(input_gregtime), min = minute(input_gregtime), sec = second(input_gregtime), gregflag = SE$GREG_CAL)$dret[2]
+var_jultime <- swe_utc_to_jd(year  = year(input_gregtime), 
+                             month = month(input_gregtime), 
+                             day   = mday(input_gregtime), 
+                             houri = hour(input_gregtime), 
+                             min   = minute(input_gregtime), 
+                             sec   = second(input_gregtime), 
+                             gregflag = SE$GREG_CAL)$dret[2]
 
 # calculate the next solar eclipse visible anywhere on earth
 nextGlobEcl_Jd <- swe_sol_eclipse_when_glob(jd_start  = var_jultime, 
@@ -70,7 +77,6 @@ nextGlobEcl_Jd <- swe_sol_eclipse_when_glob(jd_start  = var_jultime,
 nextEcl.temp <- swe_jdet_to_utc(jd_et    = nextGlobEcl_Jd, 
                                 gregflag = SE$GREG_CAL)
 
-Sys.sleep(1)
 output_gregtime <- paste(nextEcl.temp$year_out,"-",
                          nextEcl.temp$month_out,"-",
                          nextEcl.temp$day_out," ",
@@ -81,51 +87,59 @@ output_gregtime <- paste(nextEcl.temp$year_out,"-",
   ymd_hms()
 
 # Will the eclipse be visible from our location? 
-ret_visible.loc <- swe_sol_eclipse_how(jd_ut     = nextGlobEcl_Jd, 
-                                       ephe_flag = SE$FLG_MOSEPH, 
-                                       geopos    = c(input_lonlat["lon"], 
-                                                     input_lonlat["lat"],0))
-# check result conditions 
-ret_visible.loc <- ifelse(ret_visible.loc$return == 0 |   # "no eclipse visible" 
-                            ret_visible.loc$attr[3] == 0, # % of sun blocked by moon == 0
-                          yes = F, no = T)
+output_visible <- swe_sol_eclipse_how(jd_ut     = nextGlobEcl_Jd, 
+                                      ephe_flag = SE$FLG_MOSEPH, 
+                                      geopos    = c(input_lonlat["lon"], 
+                                                    input_lonlat["lat"],0))
 
-# where will the eclipse be best visible from? 
+output_visible <- ifelse(output_visible$`return` == 0 | # "no eclipse visible" 
+                           output_visible$attr[3] == 0, # % of sun blocked by moon == 0.0
+                         yes = F, no = T) |> 
+  ifelse(yes = "Visible from input location",
+         no  = "Not visible from input location")
+
+# Where is the best viewing location geometrically? 
+output_lonlat <- swe_sol_eclipse_where(jd_ut     = nextGlobEcl_Jd, 
+                                         ephe_flag = SE$FLG_MOSEPH)$pathpos[c(1,2)]
+names(output_lonlat) <- c("lon", "lat")
 
 
-        
 ## Example Returned Values
-print(output_gregtime) # "[date and time of the solar eclipse]"
-print(output_lonlat)   # "[lon/lat attributes - if applicable]"
+print(output_gregtime) # "[date and time of the solar eclipse (UTC)]"
+print(output_visible)  # "[is the eclipse visible from input_location?]"
+print(output_lonlat) # "[lon/lat attributes - maximal eclipse]"
+
 ```
 
-```{r Static Map, echo=TRUE, message=FALSE, warning=FALSE, prompt=F, results="show"}
+```{r Static Map, echo=TRUE, message=FALSE, warning=FALSE, prompt=F, results="hide"}
 # SOME CODE for a static map verification of input lon/lat
 library(ggmap)
 library(dplyr)
 library(sf)
-library(datasets)
 
-input_lonlat
-
-## Register Your api key for statdiamaps (see hepl docs)
+## Must run once per session
 # register_stadiamaps(key = "your_api_key_here", write = FALSE)
 
-nc.bbox <- make_bbox(lon = c(-84.321869 ,-75.460621), 
-                     lat = c( 33.842316 , 36.588117))
+bbox <- make_bbox(lon = c(input_lonlat["lon"], output_lonlat["lon"]), 
+                  lat = c(input_lonlat["lat"], output_lonlat["lat"]), 
+                  f   = var_map.f)
 
-edg.stamen <- get_stadiamap(bbox = nc.bbox, 
-                            zoom = 6, 
+map.stamen <- get_stadiamap(bbox = bbox, 
+                            zoom = 3, 
                             maptype = "stamen_toner_lite",
                             crop = T, 
                             color = "color",
                             force = T,
                             size = 1)
-ggmap(edg.stamen) +
+ggmap(map.stamen) +
   geom_label(aes(x = input_lonlat["lon"], 
                  y = input_lonlat["lat"]), 
              label = "Duke University", 
-             color = "blue", alpha = 0.1) 
+             color = "blue", alpha = 0.1) +
+  geom_label(aes(x = output_lonlat["lon"], 
+                 y = output_lonlat["lat"]), 
+             label = "Eclipse Maximal", 
+             color = "brown", alpha = 0.1)
 ```
 
 ```{r Geocode USPS Address, echo=TRUE, message=FALSE, warning=FALSE, prompt=F}
@@ -136,21 +150,25 @@ library(censusxy)
 addr_input     <- "401 Chapel Drive, Durham, NC 27708"
 addrcxy_output <- cxy_oneline(address = addr_input)
 addr_output    <- addrcxy_output[c("coordinates.x", 
-                 "coordinates.y")]
+                                   "coordinates.y")]
 names(addr_output) <- c("lon", "lat")
 
 print(addr_output)
 
 ```
 
-```{r Interactive Dashboard, eval=FALSE, message=FALSE, warning=FALSE, include=T, prompt=F, results="show"}
+```{r Interactive Dashboard, eval=FALSE, message=FALSE, warning=FALSE, include=T, prompt=F, results="hide"}
 # SOME CODE to build a shiny dashboard to deploy an interactive webapp
 library(shiny)
 
 ui <- fluidPage(
-  "Hello, world!"
+  # address search input
+  # eclipse calculations
+  
+  
 )
 server <- function(input, output, session) {
+  # geocode address
 }
 shinyApp(ui, server)
 ```
@@ -158,9 +176,24 @@ shinyApp(ui, server)
 ```{r Dynamic map with leaflet, echo=TRUE, message=FALSE, warning=FALSE, prompt=F}
 # SOME CODE to replace the static map with a dynamic map
 library(leaflet)
+
+leaflet(padding = 0, 
+        height = "300px", 
+        width = "auto") |> 
+  addTiles() |> 
+  addMarkers(label = c("Duke University", "Eclipse Maximal"), 
+             lng   = c(input_lonlat["lon"], output_lonlat["lon"]),
+             lat   = c(input_lonlat["lat"], output_lonlat["lat"])) |>
+  expandLimits(lng = c(input_lonlat["lon"], output_lonlat["lon"])*1.000,
+               lat = c(input_lonlat["lat"], output_lonlat["lat"])*1.000) |> 
+  addScaleBar(position = "topright") 
+
 ```
 
+```{r Get lon-lat automatically via ip address, eval=FALSE, message=FALSE, warning=FALSE, include=T, prompt=F, results="hide"}
+# SOME CODE to capture input lon-lat automatically via i.p. address with consent
 
+```
 
 
 ## Broad Topic Covered
