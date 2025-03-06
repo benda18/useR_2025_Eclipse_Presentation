@@ -12,7 +12,6 @@ output:
     keep_md: true
 ---
 
-
 ```{r setup, include=FALSE, echo = T}
 #knitr::opts_chunk$set(echo = TRUE)
 
@@ -119,7 +118,7 @@ print(list("Eclipse_DateTime" = output_gregtime,
 
 ```
 
-```{r Static Map ,message=FALSE, echo=TRUE, warning=FALSE, results="hide"}
+```{r Static Map, echo=T, message=FALSE, warning=FALSE, results="hide", eval = FALSE}
 # SOME CODE for a static map verification of input lon/lat
 library(ggmap)
 library(dplyr)
@@ -149,6 +148,8 @@ ggmap(map.stamen) +
              label = "Eclipse Maximal", 
              color = "brown", alpha = 0.1)
 ```
+
+![](figure/Static Map-1.png)
 
 ```{r Geocode USPS Address, echo=TRUE, message=FALSE, warning=FALSE}
 ## SOME CODE to query and geocode USPS mailing addresses for lon/lat coordinates
