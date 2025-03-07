@@ -21,7 +21,16 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 ## Outline
 
 -   Problem / Background
-    -   Like many people during the winter of 2023-2024 I was preparing travel plans for the upcoming [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) in April of 2024. In order to get the full solar eclipse experience you really need to view what's know as **totality**.[^1]
+    -   Eclipse: the total or partial obscuring of one celestial body by another[^1]
+        1.  Solar eclipse types: 
+            * Total 
+            * Annular
+            * Partial
+            * Hybrid
+        2.  Lunar eclipse types: 
+            * Total
+            * Partial
+    -   Like many people during the winter of 2023-2024 I was preparing travel plans for the upcoming [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) in April of 2024. In order to get the full solar eclipse experience you really need to view what's know as **totality**.[^2]
     -   {insert image of totality vs. not totality}
     -   While a partial eclipse was viewable across almost the entirety of North America, only a narrow path between Mexico and the United States from the southwest to the northeast allowed viewing of **totality.**
     -   {map of path of eclipse}
@@ -40,7 +49,9 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
         -   plot the path of a total or annular solar eclipse on a map.
 
-[^1]: the moment or duration of total obscuration of the sun or moon during an eclipse.
+[^1]: Source: [Merriam-Webster Dictionary](https://www.merriam-webster.com/dictionary/eclipse)
+
+[^2]: the moment or duration of total obscuration of the sun or moon during an eclipse.
 
 
 ``` r
@@ -155,7 +166,7 @@ ggmap(map.stamen) +
              color = "brown", alpha = 0.1)
 ```
 
-![](figure/Static Map-1.png)
+![](figure/Static%20Map-1.png)
 
 
 ``` r
@@ -212,8 +223,8 @@ leaflet(padding = 0,
 ```
 
 ```{=html}
-<div id="htmlwidget-e40daa23b0701cb2738b" style="width:auto;height:300px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e40daa23b0701cb2738b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[36.001,-61.03133879351671],[-78.938,153.3880478036793],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["Duke University","Eclipse Maximal"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"topright"}]}],"limits":{"lat":[-61.03133879351671,36.001],"lng":[-78.938,153.3880478036793]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-97ba2fd84c07c11aeae8" style="width:auto;height:300px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-97ba2fd84c07c11aeae8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[36.001,-61.03133879351671],[-78.938,153.3880478036793],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["Duke University","Eclipse Maximal"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"topright"}]}],"limits":{"lat":[-61.03133879351671,36.001],"lng":[-78.938,153.3880478036793]}},"evals":[],"jsHooks":[]}</script>
 ```
 
 

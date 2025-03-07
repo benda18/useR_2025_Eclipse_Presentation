@@ -28,7 +28,16 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 ## Outline
 
 -   Problem / Background
-    -   Like many people during the winter of 2023-2024 I was preparing travel plans for the upcoming [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) in April of 2024. In order to get the full solar eclipse experience you really need to view what's know as **totality**.[^1]
+    -   Eclipse: the total or partial obscuring of one celestial body by another[^1]
+        1.  Solar eclipse types: 
+            * Total 
+            * Annular
+            * Hybrid
+            * Partial
+        2.  Lunar eclipse types: 
+            * Total
+            * Partial
+    -   Like many people during the winter of 2023-2024 I was preparing travel plans for the upcoming [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) in April of 2024. In order to get the full solar eclipse experience you really need to view what's know as **totality**.[^2]
     -   {insert image of totality vs. not totality}
     -   While a partial eclipse was viewable across almost the entirety of North America, only a narrow path between Mexico and the United States from the southwest to the northeast allowed viewing of **totality.**
     -   {map of path of eclipse}
@@ -47,7 +56,9 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
         -   plot the path of a total or annular solar eclipse on a map.
 
-[^1]: the moment or duration of total obscuration of the sun or moon during an eclipse.
+[^1]: Source: [Merriam-Webster Dictionary](https://www.merriam-webster.com/dictionary/eclipse)
+
+[^2]: the moment or duration of total obscuration of the sun or moon during an eclipse.
 
 ```{r Eclipse Calcs, echo=TRUE, message=FALSE, warning=FALSE, results="show"}
 # SOME CODE to capture solar eclipse information 
@@ -149,7 +160,7 @@ ggmap(map.stamen) +
              color = "brown", alpha = 0.1)
 ```
 
-![](figure/Static Map-1.png)
+![](figure/Static%20Map-1.png)
 
 ```{r Geocode USPS Address, echo=TRUE, message=FALSE, warning=FALSE}
 ## SOME CODE to query and geocode USPS mailing addresses for lon/lat coordinates
