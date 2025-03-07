@@ -1,7 +1,7 @@
 ---
 title: "soome kind of doc"
 author: "Tim Bender"
-date: "Submitted: 2025-03-06"
+date: "Submitted: 2025-03-07"
 output:
   html_document: 
     code_download: false
@@ -14,32 +14,32 @@ output:
 
 
 
+
+
 ## Abstract
 
 One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
-## Outline
+#### **Background**
 
--   Problem / Background
-    -   Eclipse: the total or partial obscuring of one celestial body by another[^1]
-        1.  Solar eclipse types: 
-            * Total 
-            * Annular
-            * Partial
-            * Hybrid
-        2.  Lunar eclipse types: 
-            * Total
-            * Partial
-    -   Like many people during the winter of 2023-2024 I was preparing travel plans for the upcoming [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) in April of 2024. In order to get the full solar eclipse experience you really need to view what's know as **totality**.[^2]
-    -   {insert image of totality vs. not totality}
-    -   While a partial eclipse was viewable across almost the entirety of North America, only a narrow path between Mexico and the United States from the southwest to the northeast allowed viewing of **totality.**
-    -   {map of path of eclipse}
-    -   Many online tools were available to help you determine the very best place to travel to see totality based on crowd size, anticipated traffic jams, cloud cover forecasts for the day and time of the eclipse and other factors. However, Almost all of these, while useful, felt cluttered, overly-complicated and didn't really provide the information I was looking for anyways.
+-   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem.
+
+#### **Problem**
+
+-   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality for more than 4 minutes, and other parts that were outside the path of totality.
+
+    ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"}
+
+-   Many online tools were available to help you determine the very best place to travel to see totality based on crowd size, anticipated traffic jams, cloud cover forecasts for the day and time of the eclipse and other factors. However, Almost all of these, while useful, felt cluttered, overly-complicated and didn't really provide the information I was looking for anyways.
+
 -   What Features Did I Want in an Eclipse Tool?
+
     -   **Increased geographic accuracy**: The main problem I had was quickly and easily verifying how long totality would be visible from specific longitude / latitude coordinate locations. Eclipse Planning tools approached solving this problems in 1 of 2 ways:
         -   *Easy to use but not accurate*: Commonly a list of major cities within totality would be [listed with general information as seen here](https://eclipse2024.org/somcow24.html). The problem being however, that depending on the size of the city there could be places partially outside of totality, with only a few seconds view of totality, and/or 4 or more minutes of view of totality (close to the max). An extreme example is Dallas, TX where parts of the city were both outside of the view of totality and almost at the maximum view.
         -   *Accurate but not easy to use*: The other approach was providing an [interactive map like this one from the National Solar Observatory](https://nso.edu/for-public/eclipse-map-2024/) where you could click on your viewing location and be provided with information about whether it was within the path of totality, how long you could see it, and even what time totality would begin and end. However, I could not find a tool with an address search box that would allow for simple queries of locations that way. <!-- -   Broad Solution --> <!--     -   some text -->
+
 -   Approach
+
     -   Using the [swephR](https://cran.r-project.org/package=swephR) High Precision Swiss Ephemeris package, one may:
         -   find the next solar (or lunar) eclipse for a given geographic position,
 
@@ -49,15 +49,12 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
         -   plot the path of a total or annular solar eclipse on a map.
 
-[^1]: Source: [Merriam-Webster Dictionary](https://www.merriam-webster.com/dictionary/eclipse)
-
-[^2]: the moment or duration of total obscuration of the sun or moon during an eclipse.
-
 
 ``` r
 # SOME CODE to capture solar eclipse information 
 library(swephR)
 library(lubridate)
+library(scales)
 
 ## Example Input Variables
 input_lonlat   <- c("lon" = -78.938, "lat" = 36.001)  # Duke Univ
@@ -99,6 +96,7 @@ output_visible <- swe_sol_eclipse_how(jd_ut     = nextGlobEcl_Jd,
                                       ephe_flag = SE$FLG_MOSEPH, 
                                       geopos    = c(input_lonlat["lon"], 
                                                     input_lonlat["lat"],0))
+output_obscuration <- output_visible$attr[3]
 
 output_visible <- ifelse(output_visible$`return` == 0 | # "no eclipse visible" 
                            output_visible$attr[3] == 0, # % of sun blocked by moon == 0.0
@@ -117,9 +115,10 @@ names(output_lonlat) <- c("lon", "lat")
 # print(output_visible)  # "[is the eclipse visible from input_location?]"
 # print(output_lonlat) # "[lon/lat attributes - maximal eclipse]"
 
-print(list("Eclipse_DateTime" = output_gregtime, 
-           "Visible_Locally"  = output_visible,
-           "Maximal_View.xy"  = output_lonlat))
+print(list("Eclipse_DateTime"    = output_gregtime, 
+           "Visible_Locally"     = output_visible,
+           "Obscuration_Locally" = percent(output_obscuration, accuracy = 0.1),
+           "Maximal_View.xy"     = output_lonlat))
 ```
 
 ```
@@ -128,6 +127,9 @@ print(list("Eclipse_DateTime" = output_gregtime,
 ## 
 ## $Visible_Locally
 ## [1] "Not visible from input location"
+## 
+## $Obscuration_Locally
+## [1] "0.0%"
 ## 
 ## $Maximal_View.xy
 ##       lon       lat 
@@ -223,8 +225,8 @@ leaflet(padding = 0,
 ```
 
 ```{=html}
-<div id="htmlwidget-97ba2fd84c07c11aeae8" style="width:auto;height:300px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-97ba2fd84c07c11aeae8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[36.001,-61.03133879351671],[-78.938,153.3880478036793],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["Duke University","Eclipse Maximal"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"topright"}]}],"limits":{"lat":[-61.03133879351671,36.001],"lng":[-78.938,153.3880478036793]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-39adbbc4c088456a7231" style="width:auto;height:300px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-39adbbc4c088456a7231">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[36.001,-61.03133879351671],[-78.938,153.3880478036793],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["Duke University","Eclipse Maximal"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"topright"}]}],"limits":{"lat":[-61.03133879351671,36.001],"lng":[-78.938,153.3880478036793]}},"evals":[],"jsHooks":[]}</script>
 ```
 
 

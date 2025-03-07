@@ -12,8 +12,77 @@ output:
     keep_md: true
 ---
 
+```{r lockfile, include=FALSE}
+renv::use(
+  askpass           = "askpass@1.2.1",
+  base64enc         = "base64enc@0.1-3",
+  bslib             = "bslib@0.9.0",
+  cachem            = "cachem@1.1.0",
+  censusxy          = "chris-prener/censusxy@bdcb5141fe6a9dfc15c6b1fee6dde24376ef2bda",
+  cli               = "cli@3.6.4",
+  codetools         = "codetools@0.2-20",
+  colorspace        = "colorspace@2.1-1",
+  cpp11             = "cpp11@0.5.1",
+  crosstalk         = "crosstalk@1.2.1",
+  curl              = "curl@6.2.1",
+  digest            = "digest@0.6.37",
+  doParallel        = "doParallel@1.0.17",
+  evaluate          = "evaluate@1.0.3",
+  farver            = "farver@2.1.2",
+  fastmap           = "fastmap@1.2.0",
+  fontawesome       = "fontawesome@0.5.3",
+  foreach           = "foreach@1.5.2",
+  fs                = "fs@1.6.5",
+  generics          = "generics@0.1.3",
+  glue              = "glue@1.8.0",
+  highr             = "highr@0.11",
+  htmltools         = "htmltools@0.5.8.1",
+  htmlwidgets       = "htmlwidgets@1.6.4",
+  httr              = "httr@1.4.7",
+  iterators         = "iterators@1.0.14",
+  jquerylib         = "jquerylib@0.1.4",
+  jsonlite          = "jsonlite@1.9.0",
+  knitr             = "knitr@1.49",
+  labeling          = "labeling@0.4.3",
+  lattice           = "lattice@0.22-6",
+  lazyeval          = "lazyeval@0.2.2",
+  leaflet           = "leaflet@2.2.2",
+  leaflet.providers = "leaflet.providers@2.0.0",
+  lifecycle         = "lifecycle@1.0.4",
+  lubridate         = "lubridate@1.9.4",
+  magrittr          = "magrittr@2.0.3",
+  memoise           = "memoise@2.0.1",
+  mime              = "mime@0.12",
+  munsell           = "munsell@0.5.1",
+  openssl           = "openssl@2.3.2",
+  png               = "png@0.1-8",
+  R6                = "R6@2.6.1",
+  rappdirs          = "rappdirs@0.3.3",
+  raster            = "raster@3.6-31",
+  RColorBrewer      = "RColorBrewer@1.1-3",
+  Rcpp              = "Rcpp@1.0.14",
+  renv              = "renv@1.1.1",
+  rlang             = "rlang@1.1.5",
+  rmarkdown         = "rmarkdown@2.29",
+  sass              = "sass@0.4.9",
+  scales            = "scales@1.3.0",
+  sp                = "sp@2.2-0",
+  swephR            = "swephR@0.3.1",
+  sys               = "sys@3.4.3",
+  terra             = "terra@1.8-21",
+  timechange        = "timechange@0.3.0",
+  tinytex           = "tinytex@0.55",
+  viridisLite       = "viridisLite@0.4.2",
+  xfun              = "xfun@0.50",
+  yaml              = "yaml@2.3.10"
+)
+```
+
 ```{r setup, include=FALSE, echo = T}
 #knitr::opts_chunk$set(echo = TRUE)
+
+
+library(renv)
 
 output_lonlat   <- "empty"
 output_gregtime <- "empty"
@@ -25,28 +94,26 @@ var_map.f       <- 0.1
 
 One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
-## Outline
+#### **Background**
 
--   Problem / Background
-    -   Eclipse: the total or partial obscuring of one celestial body by another[^1]
-        1.  Solar eclipse types: 
-            * Total 
-            * Annular
-            * Hybrid
-            * Partial
-        2.  Lunar eclipse types: 
-            * Total
-            * Partial
-    -   Like many people during the winter of 2023-2024 I was preparing travel plans for the upcoming [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) in April of 2024. In order to get the full solar eclipse experience you really need to view what's know as **totality**.[^2]
-    -   {insert image of totality vs. not totality}
-    -   While a partial eclipse was viewable across almost the entirety of North America, only a narrow path between Mexico and the United States from the southwest to the northeast allowed viewing of **totality.**
-    -   {map of path of eclipse}
-    -   Many online tools were available to help you determine the very best place to travel to see totality based on crowd size, anticipated traffic jams, cloud cover forecasts for the day and time of the eclipse and other factors. However, Almost all of these, while useful, felt cluttered, overly-complicated and didn't really provide the information I was looking for anyways.
+-   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem.
+
+#### **Problem**
+
+-   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right).
+
+    ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"}
+
+-   Many online tools were available to help you determine the very best place to travel to see totality based on crowd size, anticipated traffic jams, cloud cover forecasts for the day and time of the eclipse and other factors. However, Almost all of these, while useful, felt cluttered, overly-complicated and didn't really provide the information I was looking for anyways.
+
 -   What Features Did I Want in an Eclipse Tool?
+
     -   **Increased geographic accuracy**: The main problem I had was quickly and easily verifying how long totality would be visible from specific longitude / latitude coordinate locations. Eclipse Planning tools approached solving this problems in 1 of 2 ways:
         -   *Easy to use but not accurate*: Commonly a list of major cities within totality would be [listed with general information as seen here](https://eclipse2024.org/somcow24.html). The problem being however, that depending on the size of the city there could be places partially outside of totality, with only a few seconds view of totality, and/or 4 or more minutes of view of totality (close to the max). An extreme example is Dallas, TX where parts of the city were both outside of the view of totality and almost at the maximum view.
         -   *Accurate but not easy to use*: The other approach was providing an [interactive map like this one from the National Solar Observatory](https://nso.edu/for-public/eclipse-map-2024/) where you could click on your viewing location and be provided with information about whether it was within the path of totality, how long you could see it, and even what time totality would begin and end. However, I could not find a tool with an address search box that would allow for simple queries of locations that way. <!-- -   Broad Solution --> <!--     -   some text -->
+
 -   Approach
+
     -   Using the [swephR](https://cran.r-project.org/package=swephR) High Precision Swiss Ephemeris package, one may:
         -   find the next solar (or lunar) eclipse for a given geographic position,
 
@@ -56,14 +123,11 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
         -   plot the path of a total or annular solar eclipse on a map.
 
-[^1]: Source: [Merriam-Webster Dictionary](https://www.merriam-webster.com/dictionary/eclipse)
-
-[^2]: the moment or duration of total obscuration of the sun or moon during an eclipse.
-
 ```{r Eclipse Calcs, echo=TRUE, message=FALSE, warning=FALSE, results="show"}
 # SOME CODE to capture solar eclipse information 
 library(swephR)
 library(lubridate)
+library(scales)
 
 ## Example Input Variables
 input_lonlat   <- c("lon" = -78.938, "lat" = 36.001)  # Duke Univ
@@ -105,6 +169,7 @@ output_visible <- swe_sol_eclipse_how(jd_ut     = nextGlobEcl_Jd,
                                       ephe_flag = SE$FLG_MOSEPH, 
                                       geopos    = c(input_lonlat["lon"], 
                                                     input_lonlat["lat"],0))
+output_obscuration <- output_visible$attr[3]
 
 output_visible <- ifelse(output_visible$`return` == 0 | # "no eclipse visible" 
                            output_visible$attr[3] == 0, # % of sun blocked by moon == 0.0
@@ -123,9 +188,10 @@ names(output_lonlat) <- c("lon", "lat")
 # print(output_visible)  # "[is the eclipse visible from input_location?]"
 # print(output_lonlat) # "[lon/lat attributes - maximal eclipse]"
 
-print(list("Eclipse_DateTime" = output_gregtime, 
-           "Visible_Locally"  = output_visible,
-           "Maximal_View.xy"  = output_lonlat))
+print(list("Eclipse_DateTime"    = output_gregtime, 
+           "Visible_Locally"     = output_visible,
+           "Obscuration_Locally" = percent(output_obscuration, accuracy = 0.1),
+           "Maximal_View.xy"     = output_lonlat))
 
 ```
 
