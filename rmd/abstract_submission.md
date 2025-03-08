@@ -16,38 +16,46 @@ output:
 
 
 
-## Abstract
+## ***Abstract***
 
 One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
-#### **Background**
+#### **Background - oops we missed an eclipse**
 
 -   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem.
 
-#### **Problem**
+#### **Problem - it's hard finding good information on upcoming celestial events**
 
--   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality for more than 4 minutes, and other parts that were outside the path of totality.
+-   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right).
 
     ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"}
 
--   Many online tools were available to help you determine the very best place to travel to see totality based on crowd size, anticipated traffic jams, cloud cover forecasts for the day and time of the eclipse and other factors. However, Almost all of these, while useful, felt cluttered, overly-complicated and didn't really provide the information I was looking for anyways.
+#### **Project Approach - Build a shiny app**
 
--   What Features Did I Want in an Eclipse Tool?
+-   Relying primarily on the following packages/libraries:
+    -   *swephR* ([via CRAN](https://cran.r-project.org/package=swephR)): High Precision Swiss Ephemeris package.  Used to determine when, where and how solar and lunar eclipses will occur (among other novel celestial events).
+    -   *leaflet* ([via CRAN](https://cran.r-project.org/package=leaflet)): Create Interactive Web Maps with the JavaScript 'Leaflet' Library
+    -   *shiny* ([via CRAN](https://cran.r-project.org/package=shiny)): Web Application Framework for R. 
+    -   *censusxy* ([via github](https://github.com/chris-prener/censusxy)): Designed to provide easy access to the U.S. Census Bureau Geocoding Tools
+    
+-   App I/Os:
+    -   number of years (n) to look into the future (I)
+    -   A date_time value to search from (I)
+    -   A lon/lat coordinate pair derived from the user's i.p. address (with permission) (I)
+    -   A USPS mailing address to geocode a lon/lat coordinate pair for a specific viewing location (I)
+    -   A date_time value for the every eclipse visible from the (I) viewing location for the next (n) years (O)
+    -   Eclipse type (solar/lunar) (O)
+    -   Eclipse sub type (total/partial...) (O)
+    -   Obscuration (% of sun blocked by moon as seen from viewing location - solar eclipse only) (O)
+    -   A lon/lat coordinate pair for the location of the maximal view of the eclipse on Earth (O) 
+    -   A dynamic leaflet map showing the lon/lat coordinate pairs (I & O)
+    
 
-    -   **Increased geographic accuracy**: The main problem I had was quickly and easily verifying how long totality would be visible from specific longitude / latitude coordinate locations. Eclipse Planning tools approached solving this problems in 1 of 2 ways:
-        -   *Easy to use but not accurate*: Commonly a list of major cities within totality would be [listed with general information as seen here](https://eclipse2024.org/somcow24.html). The problem being however, that depending on the size of the city there could be places partially outside of totality, with only a few seconds view of totality, and/or 4 or more minutes of view of totality (close to the max). An extreme example is Dallas, TX where parts of the city were both outside of the view of totality and almost at the maximum view.
-        -   *Accurate but not easy to use*: The other approach was providing an [interactive map like this one from the National Solar Observatory](https://nso.edu/for-public/eclipse-map-2024/) where you could click on your viewing location and be provided with information about whether it was within the path of totality, how long you could see it, and even what time totality would begin and end. However, I could not find a tool with an address search box that would allow for simple queries of locations that way. <!-- -   Broad Solution --> <!--     -   some text -->
+#### **Solution**
+-   A shiny app that will use your current location (or a specific address input by user) to identify every solar and lunar eclipse viewable from that location for the next (n) years.  
+-   Current functioning webapp: Future Solar and Lunar Eclipses Visible from Your Current Location ([Shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/)) 
 
--   Approach
 
-    -   Using the [swephR](https://cran.r-project.org/package=swephR) High Precision Swiss Ephemeris package, one may:
-        -   find the next solar (or lunar) eclipse for a given geographic position,
-
-        -   find the next solar (or lunar) eclipse globally,
-
-        -   find the attributes of a solar (or lunar) eclipse for a given geographic position and time, and/or
-
-        -   plot the path of a total or annular solar eclipse on a map.
 
 
 ``` r
@@ -225,8 +233,8 @@ leaflet(padding = 0,
 ```
 
 ```{=html}
-<div id="htmlwidget-39adbbc4c088456a7231" style="width:auto;height:300px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-39adbbc4c088456a7231">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[36.001,-61.03133879351671],[-78.938,153.3880478036793],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["Duke University","Eclipse Maximal"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"topright"}]}],"limits":{"lat":[-61.03133879351671,36.001],"lng":[-78.938,153.3880478036793]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6ae35492ac3287f60141" style="width:auto;height:300px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6ae35492ac3287f60141">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[36.001,-61.03133879351671],[-78.938,153.3880478036793],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["Duke University","Eclipse Maximal"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"topright"}]}],"limits":{"lat":[-61.03133879351671,36.001],"lng":[-78.938,153.3880478036793]}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
