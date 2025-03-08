@@ -183,9 +183,9 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 ## ***Broad Topic Covered***
 
 
-#### **You thought time was confusing on earth
+#### **You thought time was confusing on earth**
 
--   Astronomers still use the Julian Calendar to track the cosmos**
+-   Astronomers still use the Julian Calendar to track the cosmos
 
 #### **Communication & Ease-of-Use**
 
@@ -203,7 +203,7 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 -   Evolving your skills and knowledge throughout a project lifecycle: pros and cons.
 
 ## Timezone Preference(s)
--   America/New_York +/-.  
+-   I live about 15 minutes from Duke University so any presentation I would prefer in-person if possible.  Otherwise America/New_York <--> America/Los_Angeles 
 
 ## Duration
 -   Open to any of the following: 
@@ -243,12 +243,15 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 -   None
 
 ## License, Material sharing, recording consent
--   
+-   NA
 
 ## ***Biography***
 
 #### Tim Bender, (title)
 
--   [hold for bio]
+-   Bachelor of Urban Planning from the University of Cincinnati.  
+-   ~15 years local government experience as an urban planner and transit planner. Tim was part of a team that helped deploy Google Transit for his transit agency in Kentucky in 2008, being among the first 50-ish agencies worldwide to go live.  
+-   Journey with R began with a desire to log transit vehicle real-time location data from an api for analysis but I had no programming experience or knowledge of how to approach the problem.  I wouldn't successfully solve this problem for about 5 years of self-guided learning. 
+
 -   [LinkedIn](https://www.linkedin.com/in/tim-bender-238870171/)
 -   [github](https://github.com/benda18)
