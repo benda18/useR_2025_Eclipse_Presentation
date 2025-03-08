@@ -275,7 +275,19 @@ leaflet(padding = 0,
 
 ```
 
-## Broad Topic Covered
+## ***Broad Topic Covered***
+
+
+#### **You thought time was confusing on earth**
+
+-   Astronomers still use the Julian Calendar to track the cosmos
+
+#### **Communication & Ease-of-Use**
+
+-   Longitude / Latitude  
+-   User Experience
+
+#### **Knowing what to do VS Knowing how to do**
 
 ## Learning Goals
 
@@ -286,24 +298,33 @@ leaflet(padding = 0,
 -   Evolving your skills and knowledge throughout a project lifecycle: pros and cons.
 
 ## Timezone Preference(s)
+-   America/New_York +/-.  
 
 ## Duration
-
+-   Open to any of the following: 
+    -   20 minute session (in-person)
+    -   5 minute session (in-person)
+    -   poster board 
+    
 ## Language
+-   English
 
 ## Intended Audience
-
--   Solar and lunar eclipse seekers
+-   Eclipse seekers
 -   Beginners and hobbyists looking for:
--   project idea inspiration,
--   a better understanding on how to approach the project life cycle, and
--   managing project creep
+    -   project idea inspiration,
+    -   a better understanding on how to approach the project life cycle, and
+    -   managing project creep
 
 ## Pedagogical Method of Teaching
+-   For this I would approach in a lecture-style while allowing for interaction.  I'm a seasoned public speaker in front of local elected and appointed officials and in engaging public meetings.  
 
 ## Maximum Number of Attendees
+-   I would imagine the number of attendees interested would be relatively low due to the field intersections - astronomy x geospatial x public_communication.  But if you are asking how many people I would be comfortable presenting in front of, there is no lower or upper bounds.  
 
 ## Motivation to Teach this Tutorial at useR!
+-   I enjoy making things in R (mostly as a hobby right now), I made a thing that's pretty neat and would like to share my experience in the hope that there are others who could benefit from either technical or general information shared. 
+-   I became VERY MOTIVATED when I saw that useR! 2025 was at Duke University in Durham as I live only a few miles away.  It just seemed like the opportunity was right.  
 
 ## Supplemental Material Links
 
@@ -314,10 +335,12 @@ leaflet(padding = 0,
 #### Web Page (if applicable)
 
 ## Prerequisites / requirements
+-   None
 
 ## License, Material sharing, recording consent
+-   
 
-## Biography
+## ***Biography***
 
 #### Tim Bender, (title)
 
