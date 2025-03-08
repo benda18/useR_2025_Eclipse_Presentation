@@ -14,75 +14,68 @@ output:
 
 ```{r lockfile, include=FALSE}
 renv::use(
-  askpass           = "askpass@1.2.1",
-  base64enc         = "base64enc@0.1-3",
-  bslib             = "bslib@0.9.0",
-  cachem            = "cachem@1.1.0",
-  censusxy          = "chris-prener/censusxy@bdcb5141fe6a9dfc15c6b1fee6dde24376ef2bda",
-  cli               = "cli@3.6.4",
-  codetools         = "codetools@0.2-20",
-  colorspace        = "colorspace@2.1-1",
-  cpp11             = "cpp11@0.5.1",
-  crosstalk         = "crosstalk@1.2.1",
-  curl              = "curl@6.2.1",
-  digest            = "digest@0.6.37",
-  doParallel        = "doParallel@1.0.17",
-  evaluate          = "evaluate@1.0.3",
-  farver            = "farver@2.1.2",
-  fastmap           = "fastmap@1.2.0",
-  fontawesome       = "fontawesome@0.5.3",
-  foreach           = "foreach@1.5.2",
-  fs                = "fs@1.6.5",
-  generics          = "generics@0.1.3",
-  glue              = "glue@1.8.0",
-  highr             = "highr@0.11",
-  htmltools         = "htmltools@0.5.8.1",
-  htmlwidgets       = "htmlwidgets@1.6.4",
-  httr              = "httr@1.4.7",
-  iterators         = "iterators@1.0.14",
-  jquerylib         = "jquerylib@0.1.4",
-  jsonlite          = "jsonlite@1.9.0",
-  knitr             = "knitr@1.49",
-  labeling          = "labeling@0.4.3",
-  lattice           = "lattice@0.22-6",
-  lazyeval          = "lazyeval@0.2.2",
-  leaflet           = "leaflet@2.2.2",
-  leaflet.providers = "leaflet.providers@2.0.0",
-  lifecycle         = "lifecycle@1.0.4",
-  lubridate         = "lubridate@1.9.4",
-  magrittr          = "magrittr@2.0.3",
-  memoise           = "memoise@2.0.1",
-  mime              = "mime@0.12",
-  munsell           = "munsell@0.5.1",
-  openssl           = "openssl@2.3.2",
-  png               = "png@0.1-8",
-  R6                = "R6@2.6.1",
-  rappdirs          = "rappdirs@0.3.3",
-  raster            = "raster@3.6-31",
-  RColorBrewer      = "RColorBrewer@1.1-3",
-  Rcpp              = "Rcpp@1.0.14",
-  renv              = "renv@1.1.1",
-  rlang             = "rlang@1.1.5",
-  rmarkdown         = "rmarkdown@2.29",
-  sass              = "sass@0.4.9",
-  scales            = "scales@1.3.0",
-  sp                = "sp@2.2-0",
-  swephR            = "swephR@0.3.1",
-  sys               = "sys@3.4.3",
-  terra             = "terra@1.8-21",
-  timechange        = "timechange@0.3.0",
-  tinytex           = "tinytex@0.55",
-  viridisLite       = "viridisLite@0.4.2",
-  xfun              = "xfun@0.50",
-  yaml              = "yaml@2.3.10"
+  askpass      = "askpass@1.2.1",
+  base64enc    = "base64enc@0.1-3",
+  bslib        = "bslib@0.9.0",
+  cachem       = "cachem@1.1.0",
+  censusxy     = "chris-prener/censusxy@bdcb5141fe6a9dfc15c6b1fee6dde24376ef2bda",
+  cli          = "cli@3.6.4",
+  codetools    = "codetools@0.2-20",
+  colorspace   = "colorspace@2.1-1",
+  cpp11        = "cpp11@0.5.1",
+  curl         = "curl@6.2.1",
+  digest       = "digest@0.6.37",
+  doParallel   = "doParallel@1.0.17",
+  evaluate     = "evaluate@1.0.3",
+  farver       = "farver@2.1.2",
+  fastmap      = "fastmap@1.2.0",
+  fontawesome  = "fontawesome@0.5.3",
+  foreach      = "foreach@1.5.2",
+  fs           = "fs@1.6.5",
+  generics     = "generics@0.1.3",
+  glue         = "glue@1.8.0",
+  highr        = "highr@0.11",
+  htmltools    = "htmltools@0.5.8.1",
+  httr         = "httr@1.4.7",
+  iterators    = "iterators@1.0.14",
+  jquerylib    = "jquerylib@0.1.4",
+  jsonlite     = "jsonlite@1.9.0",
+  knitr        = "knitr@1.49",
+  labeling     = "labeling@0.4.3",
+  lifecycle    = "lifecycle@1.0.4",
+  lubridate    = "lubridate@1.9.4",
+  memoise      = "memoise@2.0.1",
+  mime         = "mime@0.12",
+  munsell      = "munsell@0.5.1",
+  openssl      = "openssl@2.3.2",
+  R6           = "R6@2.6.1",
+  rappdirs     = "rappdirs@0.3.3",
+  RColorBrewer = "RColorBrewer@1.1-3",
+  Rcpp         = "Rcpp@1.0.14",
+  renv         = "renv@1.1.1",
+  rlang        = "rlang@1.1.5",
+  rmarkdown    = "rmarkdown@2.29",
+  sass         = "sass@0.4.9",
+  scales       = "scales@1.3.0",
+  swephR       = "swephR@0.3.1",
+  sys          = "sys@3.4.3",
+  timechange   = "timechange@0.3.0",
+  tinytex      = "tinytex@0.55",
+  viridisLite  = "viridisLite@0.4.2",
+  xfun         = "xfun@0.50",
+  yaml         = "yaml@2.3.10"
 )
 ```
 
 ```{r setup, include=FALSE, echo = T}
 #knitr::opts_chunk$set(echo = TRUE)
 
-
+#renv::embed()
 library(renv)
+library(censusxy)
+library(swephR)
+library(lubridate)
+library(scales)
 
 output_lonlat   <- "empty"
 output_gregtime <- "empty"
@@ -102,36 +95,32 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 
 -   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right).
 
-    ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"}
+![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"}
 
-#### **Project Approach - Build a shiny app**
-
--   Relying primarily on the following packages/libraries:
-    -   *swephR* ([via CRAN](https://cran.r-project.org/package=swephR)): High Precision Swiss Ephemeris package.  Used to determine when, where and how solar and lunar eclipses will occur (among other novel celestial events).
-    -   *leaflet* ([via CRAN](https://cran.r-project.org/package=leaflet)): Create Interactive Web Maps with the JavaScript 'Leaflet' Library
-    -   *shiny* ([via CRAN](https://cran.r-project.org/package=shiny)): Web Application Framework for R. 
-    -   *censusxy* ([via github](https://github.com/chris-prener/censusxy)): Designed to provide easy access to the U.S. Census Bureau Geocoding Tools
-    
--   App I/Os:
-    -   number of years (n) to look into the future (I)
-    -   A date_time value to search from (I)
-    -   A lon/lat coordinate pair derived from the user's i.p. address (with permission) (I)
-    -   A USPS mailing address to geocode a lon/lat coordinate pair for a specific viewing location (I)
-    -   A date_time value for the every eclipse visible from the (I) viewing location for the next (n) years (O)
-    -   Eclipse type (solar/lunar) (O)
-    -   Eclipse sub type (total/partial...) (O)
-    -   Obscuration (% of sun blocked by moon as seen from viewing location - solar eclipse only) (O)
-    -   A lon/lat coordinate pair for the location of the maximal view of the eclipse on Earth (O) 
-    -   A dynamic leaflet map showing the lon/lat coordinate pairs (I & O)
-    
-
-#### **Solution**
+#### **Solution - Build a shiny app**
 -   A shiny app that will use your current location (or a specific address input by user) to identify every solar and lunar eclipse viewable from that location for the next (n) years.  
 -   Current functioning webapp: Future Solar and Lunar Eclipses Visible from Your Current Location ([Shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/)) 
+-   Relying primarily on the following packages/libraries:
+-   *swephR* ([via CRAN](https://cran.r-project.org/package=swephR)): High Precision Swiss Ephemeris package.  Used to determine when, where and how solar and lunar eclipses will occur (among other novel celestial events).
+-   *leaflet* ([via CRAN](https://cran.r-project.org/package=leaflet)): Create Interactive Web Maps with the JavaScript 'Leaflet' Library
+-   *shiny* ([via CRAN](https://cran.r-project.org/package=shiny)): Web Application Framework for R. 
+-   *censusxy* ([via github](https://github.com/chris-prener/censusxy)): Designed to provide easy access to the U.S. Census Bureau Geocoding Tools
+-   *qrcode* ([via CRAN](https://cran.r-project.org/package=qrcode)): Create static QR codes in R. Implemented so that users could share between mobile devices. 
+
+<!-- -   App I/Os: -->
+<!--     -   number of years (n) to look into the future (I) -->
+<!--     -   A date_time value to search from (I) -->
+<!--     -   A lon/lat coordinate pair derived from the user's i.p. address (with permission) (I) -->
+<!--     -   A USPS mailing address to geocode a lon/lat coordinate pair for a specific viewing location (I) -->
+<!--     -   A date_time value for the every eclipse visible from the (I) viewing location for the next (n) years (O) -->
+<!--     -   Eclipse type (solar/lunar) (O) -->
+<!--     -   Eclipse sub type (total/partial...) (O) -->
+<!--     -   Obscuration (% of sun blocked by moon as seen from viewing location - solar eclipse only) (O) -->
+<!--     -   A lon/lat coordinate pair for the location of the maximal view of the eclipse on Earth (O)  -->
+<!--     -   A dynamic leaflet map showing the lon/lat coordinate pairs (I & O) -->
 
 
-
-```{r Eclipse Calcs, echo=TRUE, message=FALSE, warning=FALSE, results="show"}
+```{r Eclipse Calcs, echo=T, eval = T, message=FALSE, warning=FALSE, results="show"}
 # SOME CODE to capture solar eclipse information 
 library(swephR)
 library(lubridate)
@@ -186,57 +175,55 @@ output_visible <- ifelse(output_visible$`return` == 0 | # "no eclipse visible"
          no  = "Not visible from input location")
 
 # Where is the best viewing location geometrically? 
-output_lonlat <- swe_sol_eclipse_where(jd_ut     = nextGlobEcl_Jd, 
-                                         ephe_flag = SE$FLG_MOSEPH)$pathpos[c(1,2)]
-names(output_lonlat) <- c("lon", "lat")
+output_xy <- swe_sol_eclipse_where(jd_ut     = nextGlobEcl_Jd, 
+                                   ephe_flag = SE$FLG_MOSEPH)$pathpos[c(1,2)]
+names(output_xy) <- c("lon", "lat")
 
 
 ## Example Returned Values
-# print(output_gregtime) # "[date and time of the solar eclipse (UTC)]"
-# print(output_visible)  # "[is the eclipse visible from input_location?]"
-# print(output_lonlat) # "[lon/lat attributes - maximal eclipse]"
-
-print(list("Eclipse_DateTime"    = output_gregtime, 
-           "Visible_Locally"     = output_visible,
-           "Obscuration_Locally" = percent(output_obscuration, accuracy = 0.1),
-           "Maximal_View.xy"     = output_lonlat))
+print(list("Eclipse_DateTime"      = output_gregtime, 
+           "Visible_Locally"       = output_visible,
+           "Obscuration_Locally"   = percent(output_obscuration,
+                                             accuracy = 0.1),
+           "Maximal_View.Globally" = output_xy))
 
 ```
 
-```{r Static Map, echo=T, message=FALSE, warning=FALSE, results="hide", eval = FALSE}
-# SOME CODE for a static map verification of input lon/lat
-library(ggmap)
-library(dplyr)
-library(sf)
 
-## Must run once per session
-# register_stadiamaps(key = "your_key_here", write = FALSE)
+<!-- ```{r Static Map, echo=T, message=FALSE, warning=FALSE, results="hide", eval = FALSE} -->
+<!-- # SOME CODE for a static map verification of input lon/lat -->
+<!-- library(ggmap) -->
+<!-- library(dplyr) -->
+<!-- library(sf) -->
 
-bbox <- make_bbox(lon = c(input_lonlat["lon"], output_lonlat["lon"]), 
-                  lat = c(input_lonlat["lat"], output_lonlat["lat"]), 
-                  f   = var_map.f)
+<!-- ## Must run once per session -->
+<!-- # register_stadiamaps(key = "your_key_here", write = FALSE) -->
 
-map.stamen <- get_stadiamap(bbox = bbox, 
-                            zoom = 3, 
-                            maptype = "stamen_toner_lite",
-                            crop = T, 
-                            color = "color",
-                            force = T,
-                            size = 1)
-ggmap(map.stamen) +
-  geom_label(aes(x = input_lonlat["lon"], 
-                 y = input_lonlat["lat"]), 
-             label = "Duke University", 
-             color = "blue", alpha = 0.1) +
-  geom_label(aes(x = output_lonlat["lon"], 
-                 y = output_lonlat["lat"]), 
-             label = "Eclipse Maximal", 
-             color = "brown", alpha = 0.1)
-```
+<!-- bbox <- make_bbox(lon = c(input_lonlat["lon"], output_lonlat["lon"]),  -->
+<!--                   lat = c(input_lonlat["lat"], output_lonlat["lat"]),  -->
+<!--                   f   = var_map.f) -->
 
-![](figure/Static%20Map-1.png)
+<!-- map.stamen <- get_stadiamap(bbox = bbox,  -->
+<!--                             zoom = 3,  -->
+<!--                             maptype = "stamen_toner_lite", -->
+<!--                             crop = T,  -->
+<!--                             color = "color", -->
+<!--                             force = T, -->
+<!--                             size = 1) -->
+<!-- ggmap(map.stamen) + -->
+<!--   geom_label(aes(x = input_lonlat["lon"],  -->
+<!--                  y = input_lonlat["lat"]),  -->
+<!--              label = "Duke University",  -->
+<!--              color = "blue", alpha = 0.1) + -->
+<!--   geom_label(aes(x = output_lonlat["lon"],  -->
+<!--                  y = output_lonlat["lat"]),  -->
+<!--              label = "Eclipse Maximal",  -->
+<!--              color = "brown", alpha = 0.1) -->
+<!-- ``` -->
 
-```{r Geocode USPS Address, echo=TRUE, message=FALSE, warning=FALSE}
+<!-- ![](figure/Static%20Map-1.png) -->
+
+```{r Geocode USPS Address, echo=F, include = F, eval = F, message=FALSE, warning=FALSE}
 ## SOME CODE to query and geocode USPS mailing addresses for lon/lat coordinates
 # install("devtools")
 # devtools::install_github("chris-prener/censusxy")
@@ -251,14 +238,14 @@ print(addr_output)
 
 ```
 
-```{r Interactive Dashboard, eval=FALSE, message=FALSE, warning=FALSE, include=T, results="hide"}
+
+```{r Interactive Dashboard, eval=FALSE, message=FALSE, warning=FALSE, include=F, results="hide"}
 # SOME CODE to build a shiny dashboard to deploy an interactive webapp
 library(shiny)
 
 ui <- fluidPage(
   # address search input
   # eclipse calculations
-  
   
 )
 server <- function(input, output, session) {
@@ -267,7 +254,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-```{r Dynamic map with leaflet, echo=TRUE, message=FALSE, warning=FALSE}
+```{r Dynamic map with leaflet, echo=TRUE, eval = F, results = "show", include = F, message=FALSE, warning=FALSE}
 # SOME CODE to replace the static map with a dynamic map
 library(leaflet)
 
@@ -283,7 +270,7 @@ leaflet(padding = 0,
   addScaleBar(position = "topright") 
 ```
 
-```{r Get lon-lat automatically via ip address, eval=FALSE, message=FALSE, warning=FALSE, include=T, results="hide"}
+```{r Get lon-lat automatically via ip address, eval=FALSE, message=FALSE, warning=FALSE, include=F, results="hide"}
 # SOME CODE to capture input lon-lat automatically via i.p. address with consent
 
 ```
@@ -308,9 +295,9 @@ leaflet(padding = 0,
 
 -   Solar and lunar eclipse seekers
 -   Beginners and hobbyists looking for:
-    -   project idea inspiration,
-    -   a better understanding on how to approach the project life cycle, and
-    -   managing project creep
+-   project idea inspiration,
+-   a better understanding on how to approach the project life cycle, and
+-   managing project creep
 
 ## Pedagogical Method of Teaching
 
