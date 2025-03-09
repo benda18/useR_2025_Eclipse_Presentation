@@ -207,9 +207,9 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 
 ## Duration
 -   Open to any of the following: 
-    -   20 minute session (in-person)
-    -   5 minute session (in-person)
-    -   poster board 
+    -   Talk (15-20 minutes) - (in-person)
+    -   Lightning Talk (5 minutes) - (in-person)
+    -   Poster / visual presentation
     
 ## Language
 -   English
