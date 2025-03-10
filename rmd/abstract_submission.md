@@ -1,7 +1,6 @@
 ---
-title: "soome kind of doc"
+title: "Every Eclipse Visible from Your Current Location for the Rest of Your Life"
 # author: "Tim Bender"
-date: "Submitted: 2025-03-10"
 output:
   html_document: 
     code_download: false
@@ -14,9 +13,11 @@ params:
   name: Timothy J. Bender
   email: bendertj@gmail.com
   phone: "+1 (513) 477-8924"
+  #subtitle: ""
+  # date: "Submitted: 2025-03-10" 
 ---
 
-Author: Timothy J. Bender <br> Email: bendertj@gmail.com <br> Phone: +1 (513) 477-8924 <br>
+<br>Submitted: 2025-03-10 <br>Author: Timothy J. Bender <br> Email: bendertj@gmail.com <br> Phone: +1 (513) 477-8924 <br> 
 
 
 

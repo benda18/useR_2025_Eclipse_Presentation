@@ -1,7 +1,6 @@
 ---
-title: "soome kind of doc"
+title: "Every Eclipse Visible from Your Current Location for the Rest of Your Life"
 # author: "Tim Bender"
-date: "Submitted: `r Sys.Date()`"
 output:
   html_document: 
     code_download: false
@@ -14,9 +13,11 @@ params:
   name: Timothy J. Bender
   email: bendertj@gmail.com
   phone: "+1 (513) 477-8924"
+  #subtitle: ""
+  # date: "Submitted: `r Sys.Date()`" 
 ---
 
-Author: `r params$name` <br> Email: `r params$email` <br> Phone: `r params$phone` <br>
+<br>Submitted: `r Sys.Date()` <br>Author: `r params$name` <br> Email: `r params$email` <br> Phone: `r params$phone` <br> 
 
 ```{r lockfile, include=FALSE}
 renv::use(
@@ -107,14 +108,12 @@ output_gregtime <- "empty"
 
 *One hobbyist's attempt to use R to never again miss a solar eclipse:* 
 
-Last winter (2023-24) I built a shiny app to use as a planning tool for the April 2024 North American Total Eclipse.  As I learned how to use the astronomical calculation tools within the swephR package I started to explore historical eclipse events. 
-
 Since 2017 there have been 3 major solar eclipse events visible in North Carolina: 
 -   a total solar eclipse on August 21, 2017 (n% obsc.), 
 -   an annular solar eclipse on October 14, 2023 (n% obsc.), and 
 -   a total solar eclipse on April 8, 2024 (n% obsc.)
 
-I didn't even know about the 2023 eclipse because as an annular eclipse[^3] (lacking a view of the sun's corona), it wasn't as hyped.
+I missed the 2023 event. Kinda. As an annular eclipse[^3] the moon is at it's farthest point from Earth and thus cannot obustruct the full disk of the sun. So you 
 
 [^3]: An annular solar eclipse happens when the Moon passes between the Sun and Earth, but when it is at or near its farthest point from Earth. Because the Moon is farther away from Earth, it appears smaller than the Sun and does not completely cover the Sun. As a result, the Moon appears as a dark disk on top of a larger, bright disk, creating what looks like a ring around the Moon. (Source: [NASA](https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse))
 
