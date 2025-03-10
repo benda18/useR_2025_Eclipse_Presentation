@@ -1,7 +1,7 @@
 ---
 title: "soome kind of doc"
-author: "Tim Bender"
-date: "Submitted: 2025-03-08"
+# author: "Tim Bender"
+date: "Submitted: 2025-03-10"
 output:
   html_document: 
     code_download: false
@@ -10,7 +10,13 @@ output:
     toc_float: true
     toc_depth: 2
     keep_md: true
+params:
+  name: Timothy J. Bender
+  email: bendertj@gmail.com
+  phone: "+1 (513) 477-8924"
 ---
+
+Author: Timothy J. Bender <br> Email: bendertj@gmail.com <br> Phone: +1 (513) 477-8924 <br>
 
 
 
@@ -18,7 +24,25 @@ output:
 
 ## ***Abstract***
 
-One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
+*One hobbyist's attempt to use R to never again miss a solar eclipse:* 
+
+Last winter (2023-24) I built a shiny app to use as a planning tool for the April 2024 North American Total Eclipse.  As I learned how to use the astronomical calculation tools within the swephR package I started to explore historical eclipse events. 
+
+Since 2017 there have been 3 major solar eclipse events visible in North Carolina: 
+-   a total solar eclipse on August 21, 2017 (n% obsc.), 
+-   an annular solar eclipse on October 14, 2023 (n% obsc.), and 
+-   a total solar eclipse on April 8, 2024 (n% obsc.)
+
+I didn't even know about the 2023 eclipse because as an annular eclipse[^3] (lacking a view of the sun's corona), it wasn't as hyped.
+
+[^3]: An annular solar eclipse happens when the Moon passes between the Sun and Earth, but when it is at or near its farthest point from Earth. Because the Moon is farther away from Earth, it appears smaller than the Sun and does not completely cover the Sun. As a result, the Moon appears as a dark disk on top of a larger, bright disk, creating what looks like a ring around the Moon. (Source: [NASA](https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse))
+
+**HOWEVER, I remembered a day in the fall of 2023 when the sky began to darken for no apparent reason** and realized a few months later as I was making this shiny app that I had experienced a solar eclipse without even realizing it.
+
+That's the moment I knew I needed a different eclipse planning tool - a way to never miss a solar (or lunar) eclipse again, no matter where I'm at on Earth.  
+
+A [shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/)[^1] that calculates all visible solar and lunar eclipses for up to the next 75 years specific to your current lon/lat coordinate location. 
+
 
 #### **Background - oops we missed an eclipse**
 
@@ -31,27 +55,37 @@ One hobbyist's attempt to use R to never miss a solar or lunar eclipse again.
 ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"}
 
 #### **Solution - Build a shiny app**
--   A shiny app that will use your current location (or a specific address input by user) to identify every solar and lunar eclipse viewable from that location for the next (n) years.  
--   Current functioning webapp: Future Solar and Lunar Eclipses Visible from Your Current Location ([Shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/)) 
+
+-   A shiny app that will use your current location (or a specific address input by user) to identify every solar and lunar eclipse viewable from that location for the next (n) years.\
+-   Current functioning webapp: Future Solar and Lunar Eclipses Visible from Your Current Location ([Shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/))
 -   Relying primarily on the following packages/libraries:
--   *swephR* ([via CRAN](https://cran.r-project.org/package=swephR)): High Precision Swiss Ephemeris package.  Used to determine when, where and how solar and lunar eclipses will occur (among other novel celestial events).
+-   *swephR* ([via CRAN](https://cran.r-project.org/package=swephR)): High Precision Swiss Ephemeris package. Used to determine when, where and how solar and lunar eclipses will occur (among other novel celestial events).
 -   *leaflet* ([via CRAN](https://cran.r-project.org/package=leaflet)): Create Interactive Web Maps with the JavaScript 'Leaflet' Library
--   *shiny* ([via CRAN](https://cran.r-project.org/package=shiny)): Web Application Framework for R. 
+-   *shiny* ([via CRAN](https://cran.r-project.org/package=shiny)): Web Application Framework for R.
 -   *censusxy* ([via github](https://github.com/chris-prener/censusxy)): Designed to provide easy access to the U.S. Census Bureau Geocoding Tools
--   *qrcode* ([via CRAN](https://cran.r-project.org/package=qrcode)): Create static QR codes in R. Implemented so that users could share between mobile devices. 
+-   *qrcode* ([via CRAN](https://cran.r-project.org/package=qrcode)): Create static QR codes in R. Implemented so that users could share between mobile devices.
 
 <!-- -   App I/Os: -->
-<!--     -   number of years (n) to look into the future (I) -->
-<!--     -   A date_time value to search from (I) -->
-<!--     -   A lon/lat coordinate pair derived from the user's i.p. address (with permission) (I) -->
-<!--     -   A USPS mailing address to geocode a lon/lat coordinate pair for a specific viewing location (I) -->
-<!--     -   A date_time value for the every eclipse visible from the (I) viewing location for the next (n) years (O) -->
-<!--     -   Eclipse type (solar/lunar) (O) -->
-<!--     -   Eclipse sub type (total/partial...) (O) -->
-<!--     -   Obscuration (% of sun blocked by moon as seen from viewing location - solar eclipse only) (O) -->
-<!--     -   A lon/lat coordinate pair for the location of the maximal view of the eclipse on Earth (O)  -->
-<!--     -   A dynamic leaflet map showing the lon/lat coordinate pairs (I & O) -->
 
+<!--     -   number of years (n) to look into the future (I) -->
+
+<!--     -   A date_time value to search from (I) -->
+
+<!--     -   A lon/lat coordinate pair derived from the user's i.p. address (with permission) (I) -->
+
+<!--     -   A USPS mailing address to geocode a lon/lat coordinate pair for a specific viewing location (I) -->
+
+<!--     -   A date_time value for the every eclipse visible from the (I) viewing location for the next (n) years (O) -->
+
+<!--     -   Eclipse type (solar/lunar) (O) -->
+
+<!--     -   Eclipse sub type (total/partial...) (O) -->
+
+<!--     -   Obscuration (% of sun blocked by moon as seen from viewing location - solar eclipse only) (O) -->
+
+<!--     -   A lon/lat coordinate pair for the location of the maximal view of the eclipse on Earth (O)  -->
+
+<!--     -   A dynamic leaflet map showing the lon/lat coordinate pairs (I & O) -->
 
 
 ``` r
@@ -137,36 +171,58 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 ## 153.38805 -61.03134
 ```
 
-
 <!-- ```{r Static Map, echo=T, message=FALSE, warning=FALSE, results="hide", eval = FALSE} -->
+
 <!-- # SOME CODE for a static map verification of input lon/lat -->
+
 <!-- library(ggmap) -->
+
 <!-- library(dplyr) -->
+
 <!-- library(sf) -->
 
 <!-- ## Must run once per session -->
+
 <!-- # register_stadiamaps(key = "your_key_here", write = FALSE) -->
 
 <!-- bbox <- make_bbox(lon = c(input_lonlat["lon"], output_lonlat["lon"]),  -->
+
 <!--                   lat = c(input_lonlat["lat"], output_lonlat["lat"]),  -->
+
 <!--                   f   = var_map.f) -->
 
 <!-- map.stamen <- get_stadiamap(bbox = bbox,  -->
+
 <!--                             zoom = 3,  -->
+
 <!--                             maptype = "stamen_toner_lite", -->
+
 <!--                             crop = T,  -->
+
 <!--                             color = "color", -->
+
 <!--                             force = T, -->
+
 <!--                             size = 1) -->
+
 <!-- ggmap(map.stamen) + -->
+
 <!--   geom_label(aes(x = input_lonlat["lon"],  -->
+
 <!--                  y = input_lonlat["lat"]),  -->
+
 <!--              label = "Duke University",  -->
+
 <!--              color = "blue", alpha = 0.1) + -->
+
 <!--   geom_label(aes(x = output_lonlat["lon"],  -->
+
 <!--                  y = output_lonlat["lat"]),  -->
+
 <!--              label = "Eclipse Maximal",  -->
+
 <!--              color = "brown", alpha = 0.1) -->
+
 <!-- ``` -->
 
 <!-- ![](figure/Static%20Map-1.png) -->
@@ -179,9 +235,7 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 
 
 
-
 ## ***Broad Topic Covered***
-
 
 #### **You thought time was confusing on earth**
 
@@ -189,7 +243,7 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 
 #### **Communication & Ease-of-Use**
 
--   Longitude / Latitude  
+-   Longitude / Latitude\
 -   User Experience
 
 #### **Knowing what to do VS Knowing how to do**
@@ -203,18 +257,22 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 -   Evolving your skills and knowledge throughout a project lifecycle: pros and cons.
 
 ## Timezone Preference(s)
--   I live about 15 minutes from Duke University so any presentation I would prefer in-person if possible.  Otherwise America/New_York <--> America/Los_Angeles 
+
+-   I live about 15 minutes from Duke University so any presentation I would prefer in-person if possible. Otherwise America/New_York \<--\> America/Los_Angeles
 
 ## Duration
--   Open to any of the following: 
+
+-   Open to any of the following:
     -   Talk (15-20 minutes) - (in-person)
     -   Lightning Talk (5 minutes) - (in-person)
     -   Poster / visual presentation
-    
+
 ## Language
+
 -   English
 
 ## Intended Audience
+
 -   Eclipse seekers
 -   Beginners and hobbyists looking for:
     -   project idea inspiration,
@@ -222,14 +280,17 @@ print(list("Eclipse_DateTime"      = output_gregtime,
     -   managing project creep
 
 ## Pedagogical Method of Teaching
--   For this I would approach in a lecture-style while allowing for interaction.  I'm a seasoned public speaker in front of local elected and appointed officials and in engaging public meetings.  
+
+-   For this I would approach in a lecture-style while allowing for interaction. I'm a seasoned public speaker in front of local elected and appointed officials and in engaging public meetings.
 
 ## Maximum Number of Attendees
--   I would imagine the number of attendees interested would be relatively low due to the field intersections - astronomy x geospatial x public_communication.  But if you are asking how many people I would be comfortable presenting in front of, there is no lower or upper bounds.  
+
+-   I would imagine the number of attendees interested would be relatively low due to the field intersections - astronomy x geospatial x public_communication. But if you are asking how many people I would be comfortable presenting in front of, there is no lower or upper bounds.
 
 ## Motivation to Teach this Tutorial at useR!
--   I enjoy making things in R (mostly as a hobby right now), I made a thing that's pretty neat and would like to share my experience in the hope that there are others who could benefit from either technical or general information shared. 
--   I became VERY MOTIVATED when I saw that useR! 2025 was at Duke University in Durham as I live only a few miles away.  It just seemed like the opportunity was right.  
+
+-   I enjoy making things in R (mostly as a hobby right now), I made a thing that's pretty neat and would like to share my experience in the hope that there are others who could benefit from either technical or general information shared.
+-   I became VERY MOTIVATED when I saw that useR! 2025 was at Duke University in Durham as I live only a few miles away. It just seemed like the opportunity was right.
 
 ## Supplemental Material Links
 
@@ -240,18 +301,23 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 #### Web Page (if applicable)
 
 ## Prerequisites / requirements
+
 -   None
 
 ## License, Material sharing, recording consent
--   NA
+
+-   Eclipse Predictions by Fred Espenak (diagrams in-app only), [www.EclipseWise.com](www.EclipseWise.com) - The use of diagrams and maps is permitted provided they are NOT altered (except for re-sizing) and the embedded credit line is NOT removed or covered.
 
 ## ***Biography***
 
 #### Tim Bender, (title)
 
--   Bachelor of Urban Planning from the University of Cincinnati.  
--   ~15 years local government experience as an urban planner and transit planner. Tim was part of a team that helped deploy Google Transit for his transit agency in Kentucky in 2008, being among the first 50-ish agencies worldwide to go live.  
--   Journey with R began with a desire to log transit vehicle real-time location data from an api for analysis but I had no programming experience or knowledge of how to approach the problem.  I wouldn't successfully solve this problem for about 5 years of self-guided learning. 
+-   Bachelor of Urban Planning from the University of Cincinnati.\
+
+-   \~15 years local government experience as an urban planner and transit planner. Tim was part of a team that helped deploy Google Transit for his transit agency in Kentucky in 2008, being among the first 50-ish agencies worldwide to go live.\
+
+-   Journey with R began with a desire to log transit vehicle real-time location data from an api for analysis but I had no programming experience or knowledge of how to approach the problem. I wouldn't successfully solve this problem for about 5 years of self-guided learning.
 
 -   [LinkedIn](https://www.linkedin.com/in/tim-bender-238870171/)
+
 -   [github](https://github.com/benda18)
