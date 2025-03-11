@@ -25,16 +25,15 @@ params:
 
 ## ***Abstract***
 
-*One hobbyist's attempt to use R to never again miss a solar eclipse:* 
+#### **One hobbyist's attempt (using R) to never again miss a solar eclipse:**
 
-Last winter (2023-24) I built a shiny app to use as a planning tool for the April 2024 North American Total Eclipse.  As I learned how to use the astronomical calculation tools within the swephR package I started to explore historical eclipse events. 
+Since 2017 there have been 3 major solar eclipse events visible in North Carolina:
 
-Since 2017 there have been 3 major solar eclipse events visible in North Carolina: 
--   a total solar eclipse on August 21, 2017 (n% obsc.), 
--   an annular solar eclipse on October 14, 2023 (n% obsc.), and 
--   a total solar eclipse on April 8, 2024 (n% obsc.)
+<pre>-   a total solar eclipse: &nbsp;&nbsp;&nbsp;&nbsp;August 21, 2017 (73% obscuration), 
+-   an annular solar eclipse: &nbsp;October 14, 2023 (23% obscuration), and 
+-   a total solar eclipse: &nbsp;&nbsp;&nbsp;&nbsp;April 8, 2024 (14% obscuration) </pre>
 
-I didn't even know about the 2023 eclipse because as an annular eclipse[^3] (lacking a view of the sun's corona), it wasn't as hyped.
+I missed the 2023 event. Kinda. As an annular eclipse[^3] the moon is at it's farthest point from Earth and thus cannot obustruct the full disk of the sun. So you 
 
 [^3]: An annular solar eclipse happens when the Moon passes between the Sun and Earth, but when it is at or near its farthest point from Earth. Because the Moon is farther away from Earth, it appears smaller than the Sun and does not completely cover the Sun. As a result, the Moon appears as a dark disk on top of a larger, bright disk, creating what looks like a ring around the Moon. (Source: [NASA](https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse))
 
@@ -45,11 +44,11 @@ That's the moment I knew I needed a different eclipse planning tool - a way to n
 A [shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/)[^1] that calculates all visible solar and lunar eclipses for up to the next 75 years specific to your current lon/lat coordinate location. 
 
 
-#### **Background - oops we missed an eclipse**
+### **Background - oops we missed an eclipse**
 
 -   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem.
 
-#### **Problem - it's hard finding good information on upcoming celestial events**
+### **Problem - it's hard finding good information on upcoming celestial events**
 
 -   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right).
 
