@@ -1577,51 +1577,46 @@ Location for the Rest of Your Life</h1>
 <div id="abstract" class="section level2">
 <h2><strong><em>Abstract</em></strong></h2>
 <div id="one-hobbyists-attempt-using-r-to-never-again-miss-a-solar-eclipse" class="section level4">
-<h4><strong>One hobbyist’s attempt (using R) to never again miss a solar
-eclipse:</strong></h4>
+<h4><em>One hobbyist’s attempt (using R) to never again miss a solar
+eclipse:</em></h4>
+</div>
+<div id="background" class="section level3">
+<h3><strong>Background</strong></h3>
 <p>Since 2017 there have been 3 major solar eclipse events visible in
-North Carolina:</p>
+North Carolina</p>
 <pre>-   a total solar eclipse:     August 21, 2017 (73% obscuration), 
 -   an annular solar eclipse:  October 14, 2023 (23% obscuration), and 
 -   a total solar eclipse:     April 8, 2024 (14% obscuration) </pre>
-<p>I missed the 2023 event. Kinda. As an annular eclipse<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> the moon is at it’s
-farthest point from Earth and thus cannot obustruct the full disk of the
-sun. So you</p>
+<p>My kids and I witnessed the 2017 total eclipse<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> from our home in
+Durham, NC, In 2024 we drove to Hudson, OH to experience around 3
+minutes of totality<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> and view the sun’s corona<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. But the 2023 eclipse
+slipped right by without us noticing<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. Maybe because the 2023 eclipse was an
+annular<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
+eclipse lacking the conditions necessary to view the sun’s corona or
+experience totality, and thus less widely shared on social media.</p>
 <p><strong>HOWEVER, I remembered a day in the fall of 2023 when the sky
-began to darken for no apparent reason</strong> and realized a few
-months later as I was making this shiny app that I had experienced a
-solar eclipse without even realizing it.</p>
-<p>That’s the moment I knew I needed a different eclipse planning tool -
-a way to never miss a solar (or lunar) eclipse again, no matter where
-I’m at on Earth.</p>
+began to darken for no apparent reason</strong> and realized later -
+while making travel plans for the 2024 eclipse - that I actually had
+experienced the 2023 solar eclipse without even realizing it. The day
+the sky darkened was in October, and the only good explanation was the
+annular eclipse that month which would’ve blocked approximately 25% of
+the sun at it’s peak.</p>
+<p>That’s the moment I knew I would build the tool I wanted - a way to
+never miss a solar (or lunar) eclipse again, no matter where I’m at on
+Earth. No more trekking across the interweb cross-checking various
+websites for generalized eclipse information. One website, any date, any
+lon/lat, every eclipse date from now until anyone alive right now can
+reasonably expect to still be alive.</p>
 <p>A <a href="https://tim-bender.shinyapps.io/shiny_all_eclipses/">shiny
-webapp</a>[^1] that calculates all visible solar and lunar eclipses for
-up to the next 75 years specific to your current lon/lat coordinate
-location.</p>
-</div>
-<div id="background---oops-we-missed-an-eclipse" class="section level3">
-<h3><strong>Background - oops we missed an eclipse</strong></h3>
-<ul>
-<li>After driving my school-age kids about 9 hours to see totality
-during the <a href="https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/">North
-American total solar eclipse</a> of April 2024, I realized that we had
-missed the annular solar eclipse just <a href="https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023">7
-months earlier</a> that was less-well publicized. Not wanting to miss
-any opportunity to see an eclipse again I began considering my
-problem.</li>
-</ul>
-</div>
-<div id="problem---its-hard-finding-good-information-on-upcoming-celestial-events" class="section level3">
-<h3><strong>Problem - it’s hard finding good information on upcoming
-celestial events</strong></h3>
-<ul>
-<li>Reliable eclipse predictions are freely available online though they
-are usually generalized to a state-level geography. In April 2024 there
-were parts of Dallas, TX that could view totality (image below, left)
-for more than 4 minutes, and other parts that were outside the path of
-totality and saw only a partial eclipse (image below, right).</li>
-</ul>
-<p><img src="data:image/jpeg;base64,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" width="254" alt="View of Totality" /><img src="data:image/jpeg;base64,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" width="250" alt="Partial View (outside path of totality)" /></p>
+webapp</a> that calculates all solar and lunar eclipses for up to the
+next 75 years visible at your current lon/lat coordinate location. 100
+miles distance is enough for 2 locations to have vastly different
+experiences.</p>
+<!-- ### **Background - oops we missed an eclipse** -->
+<!-- -   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem. -->
+<!-- ### **Problem - it's hard finding good information on upcoming celestial events** -->
+<!-- -   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right). -->
+<!-- ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"} -->
 <div id="solution---build-a-shiny-app" class="section level4">
 <h4><strong>Solution - Build a shiny app</strong></h4>
 <ul>
@@ -1632,7 +1627,8 @@ viewable from that location for the next (n) years.<br />
 <li>Current functioning webapp: Future Solar and Lunar Eclipses Visible
 from Your Current Location (<a href="https://tim-bender.shinyapps.io/shiny_all_eclipses/">Shiny
 webapp</a>)</li>
-<li>Relying primarily on the following packages/libraries:</li>
+<li>Relying primarily on the following packages/libraries:
+<ul>
 <li><em>swephR</em> (<a href="https://cran.r-project.org/package=swephR">via CRAN</a>): High
 Precision Swiss Ephemeris package. Used to determine when, where and how
 solar and lunar eclipses will occur (among other novel celestial
@@ -1647,7 +1643,14 @@ Tools</li>
 <li><em>qrcode</em> (<a href="https://cran.r-project.org/package=qrcode">via CRAN</a>): Create
 static QR codes in R. Implemented so that users could share between
 mobile devices.</li>
+</ul></li>
 </ul>
+<p>The following code demonstrates in a simple way how the swephR
+package is used to calculate the next global solar eclipse to occur on
+or after the start of our conference. You could update this code with
+different input_ variables and begin to explore what’s how outcomes
+differ based on time and geographic location. Extended documentation for
+the package is available <a href="https://www.astro.com/swisseph/swephprg.htm">here</a>.</p>
 <!-- -   App I/Os: -->
 <!--     -   number of years (n) to look into the future (I) -->
 <!--     -   A date_time value to search from (I) -->
@@ -1767,35 +1770,65 @@ print(list(&quot;Eclipse_DateTime&quot;      = output_gregtime,
 </div>
 </div>
 </div>
-<div id="broad-topic-covered" class="section level2">
-<h2><strong><em>Broad Topic Covered</em></strong></h2>
-<div id="you-thought-time-was-confusing-on-earth" class="section level4">
-<h4><strong>You thought time was confusing on earth</strong></h4>
+<div id="broad-topic-covered-learning-goals" class="section level2">
+<h2><strong><em>Broad Topic Covered / Learning Goals</em></strong></h2>
+<div id="julius-caesar-vs-pope-gregory-xiii-the-battle-for-space-time" class="section level4">
+<h4><strong>Julius Caesar vs Pope Gregory XIII: The Battle for
+Space-Time</strong></h4>
 <ul>
-<li>Astronomers still use the Julian Calendar to track the cosmos</li>
+<li>While most of the western world adopted the Gregorian calendar
+(365.2425 days long) by the 20th century for agricultural and cultural
+reasons, astronomers track time off-earth using the older Julian
+calendar (365.25 days long). We will briefly touch on why this is (it’s
+not wrong), how to convert back-and-forth between gregorian and julian
+to perform astronomical calculations, and other notable phenomenon to
+keep in mind when using R in space.</li>
 </ul>
 </div>
-<div id="communication-ease-of-use" class="section level4">
-<h4><strong>Communication &amp; Ease-of-Use</strong></h4>
+<div id="user-input-flexibility-vs-ease-of-use" class="section level4">
+<h4><strong>User Input: Flexibility vs Ease-of-Use</strong></h4>
 <ul>
-<li>Longitude / Latitude<br />
+<li>Specifically with regards to earthly longitude/latitude coordinate
+inputs (required for calculating the alignment of celestial bodies to a
+Earth-bound viewer), a decision had to be made affecting usability of
+the shiny app for the end-user based on their ability to easily enter an
+input location:
+<ul>
+<li>If required to enter lon/lat coordinates manually, that may be a
+barrier for some users that would prevent them from using the tool.
+Users may also explore other locations around the world.<br />
 </li>
-<li>User Experience</li>
+<li>If the app pulled the lon/lat coordinates automatically from the
+user’s i.p. address this would likely be the easiest use-case for most
+people but would prevent most people from exploring other locations
+around the world.<br />
+</li>
+<li>Using a forward geocoding service could be a compromise between
+these two, allowing users to enter a postal address that gets convereted
+into lon/lat coordinates. However, there are issues with geocoding
+services including both geographic coverage and cost constraints that
+make this difficult to QA, maintain and implement at the level
+desired.</li>
+</ul></li>
 </ul>
 </div>
-<div id="knowing-what-to-do-vs-knowing-how-to-do" class="section level4">
-<h4><strong>Knowing what to do VS Knowing how to do</strong></h4>
-</div>
-</div>
-<div id="learning-goals" class="section level2">
-<h2>Learning Goals</h2>
+<div id="managing-time-while-prioritizing-project-featuresoutcomes" class="section level4">
+<h4><strong>Managing Time while Prioritizing Project
+Features/Outcomes</strong></h4>
 <ul>
-<li><p>main goal</p></li>
-<li><p>You don’t have to know <del>everything</del> <del>anything</del>
-as much as you think you do.</p></li>
-<li><p>Evolving your skills and knowledge throughout a project
-lifecycle: pros and cons.</p></li>
+<li>This project evolved over a period of a few weeks from a simple
+script that I could use myself into a fully-deployed shiny app that I
+could use to share with friends and family across the country.
+Throughout the process I balanced the end-goal of the project and the
+timeline I had with my desire to learn new skills (evolving from ggmap
+to leaflet, for example) and add useful features.
+<ul>
+<li>I’d like to use this presentation time to briefly cover the packages
+I relied on, and the <strong>many</strong> celestial calculations
+available in the swephR library beyond eclipse predictions.</li>
+</ul></li>
 </ul>
+</div>
 </div>
 <div id="timezone-preferences" class="section level2">
 <h2>Timezone Preference(s)</h2>
@@ -1819,7 +1852,7 @@ America/Los_Angeles</li>
 <div id="language" class="section level2">
 <h2>Language</h2>
 <ul>
-<li>English</li>
+<li>English is the only language I speak.</li>
 </ul>
 </div>
 <div id="intended-audience" class="section level2">
@@ -1841,6 +1874,12 @@ and</li>
 <li>For this I would approach in a lecture-style while allowing for
 interaction. I’m a seasoned public speaker in front of local elected and
 appointed officials and in engaging public meetings.</li>
+<li>Rather than having a technical presentation that gets into the weeds
+with code and deployment steps I’ll approach the project evolution part
+of the presentation with the philosophy that it’s more important to know
+what to do that how to do it. Writing out an outline in plain English
+helped me conceptualize the workflow for this project quicker and more
+accurately that trying to code-on-the-go.</li>
 </ul>
 </div>
 <div id="maximum-number-of-attendees" class="section level2">
@@ -1859,7 +1898,8 @@ bounds.</li>
 <li>I enjoy making things in R (mostly as a hobby right now), I made a
 thing that’s pretty neat and would like to share my experience in the
 hope that there are others who could benefit from either technical or
-general information shared.</li>
+general information shared, or maybe just be entertained by attending a
+talk on celestial calculations.</li>
 <li>I became VERY MOTIVATED when I saw that useR! 2025 was at Duke
 University in Durham as I live only a few miles away. It just seemed
 like the opportunity was right.</li>
@@ -1867,17 +1907,21 @@ like the opportunity was right.</li>
 </div>
 <div id="supplemental-material-links" class="section level2">
 <h2>Supplemental Material Links</h2>
+<ul>
+<li><p>Shiny app: “Future Solar and Lunar Eclipses Visible from Your
+Current Location” <a href="https://tim-bender.shinyapps.io/shiny_all_eclipses/">link</a></p></li>
+<li><p>Additional shiny app I developed specifically for the April 2024
+eclipse day-of planning: “Total Eclipse of April 8, 2024 - What to
+Expect from Your Location” <a href="https://tim-bender.shinyapps.io/shiny_eclipse_planner/">link</a></p></li>
+</ul>
 <div id="tutorial-materials" class="section level4">
 <h4>Tutorial materials</h4>
-<ul>
-<li>Future Solar and Lunar Eclipses Visible from Your Current Location
-(<a href="https://tim-bender.shinyapps.io/shiny_all_eclipses/">Shiny
-webapp</a>)</li>
-</ul>
+<p>N/A</p>
 </div>
-<div id="web-page-if-applicable" class="section level4">
-<h4>Web Page (if applicable)</h4>
 </div>
+<div id="web-pages" class="section level2">
+<h2>Web Pages</h2>
+<p><a href="https://tim-bender.shinyapps.io/shiny_all_eclipses/" class="uri">https://tim-bender.shinyapps.io/shiny_all_eclipses/</a>) <a href="https://github.com/benda18/eclipse/blob/main/shiny_all_eclipsesV2/app.R" class="uri">https://github.com/benda18/eclipse/blob/main/shiny_all_eclipsesV2/app.R</a></p>
 </div>
 <div id="prerequisites-requirements" class="section level2">
 <h2>Prerequisites / requirements</h2>
@@ -1888,9 +1932,7 @@ webapp</a>)</li>
 <div id="license-material-sharing-recording-consent" class="section level2">
 <h2>License, Material sharing, recording consent</h2>
 <ul>
-<li>Eclipse Predictions by Fred Espenak (diagrams in-app only), <a href="www.EclipseWise.com">www.EclipseWise.com</a> - The use of diagrams
-and maps is permitted provided they are NOT altered (except for
-re-sizing) and the embedded credit line is NOT removed or covered.</li>
+<li>None</li>
 </ul>
 </div>
 <div id="biography" class="section level2">
@@ -1909,8 +1951,10 @@ first 50-ish agencies worldwide to go live.<br />
 <li><p>Journey with R began with a desire to log transit vehicle
 real-time location data from an api for analysis but I had no
 programming experience or knowledge of how to approach the problem. I
-wouldn’t successfully solve this problem for about 5 years of
+wouldn’t successfully solve this problem until after about 5 years of
 self-guided learning.</p></li>
+<li><p>Currently seeking employment opportunities and solid friends in
+the R community.</p></li>
 <li><p><a href="https://www.linkedin.com/in/tim-bender-238870171/">LinkedIn</a></p></li>
 <li><p><a href="https://github.com/benda18">github</a></p></li>
 </ul>
@@ -1919,12 +1963,25 @@ self-guided learning.</p></li>
 <div class="footnotes footnotes-end-of-document">
 <hr />
 <ol>
-<li id="fn1"><p>An annular solar eclipse happens when the Moon passes
+<li id="fn1"><p>A total solar eclipse happens when the Moon passes
+between the Sun and Earth, completely blocking the face of the Sun.
+Weather permitting, people in the path of a total solar eclipse can see
+the Sun’s corona, the outer atmosphere, which is otherwise usually
+obscured by the bright face of the Sun. (Source: <a href="https://science.nasa.gov/eclipses/types/#h-total-solar-eclipse">NASA</a>)<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Totality is when the Moon obscures the entire disk of
+the Sun and only the solar corona (the sun’s outer atmosphere) is
+visible (Source: <a href="https://en.wikipedia.org/wiki/Solar_eclipse#Eclipse_phases">Wikipedia</a>)<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>A stellar corona is a star’s outer atmosphere. In the
+case of our solar system’s star, the sun, the corona is only visible
+during a brief period of totality during a total solar eclipse when the
+moon completely blocks the disk of the sun (Source: <a href="https://en.wikipedia.org/wiki/Stellar_corona">Wikipedia</a>)<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>In the moment.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>An annular solar eclipse happens when the Moon passes
 between the Sun and Earth, but when it is at or near its farthest point
 from Earth. Because the Moon is farther away from Earth, it appears
 smaller than the Sun and does not completely cover the Sun. As a result,
 the Moon appears as a dark disk on top of a larger, bright disk,
-creating what looks like a ring around the Moon. (Source: <a href="https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse">NASA</a>)<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+creating what looks like a ring around the Moon. (Source: <a href="https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse">NASA</a>)<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

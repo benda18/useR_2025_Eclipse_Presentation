@@ -106,45 +106,56 @@ output_gregtime <- "empty"
 
 ## ***Abstract***
 
-#### **One hobbyist's attempt (using R) to never again miss a solar eclipse:**
+#### *One hobbyist's attempt (using R) to never again miss a solar eclipse:*
 
-Since 2017 there have been 3 major solar eclipse events visible in North Carolina:
+### **Background** 
+
+Since 2017 there have been 3 major solar eclipse events visible in North Carolina
 
 <pre>-   a total solar eclipse: &nbsp;&nbsp;&nbsp;&nbsp;August 21, 2017 (73% obscuration), 
 -   an annular solar eclipse: &nbsp;October 14, 2023 (23% obscuration), and 
 -   a total solar eclipse: &nbsp;&nbsp;&nbsp;&nbsp;April 8, 2024 (14% obscuration) </pre>
 
-I missed the 2023 event. Kinda. As an annular eclipse[^3] the moon is at it's farthest point from Earth and thus cannot obustruct the full disk of the sun. So you 
+My kids and I witnessed the 2017 total eclipse[^5] from our home in Durham, NC, In 2024 we drove to Hudson, OH to experience around 3 minutes of totality[^1] and view the sun's corona[^2].  But the 2023 eclipse slipped right by without us noticing[^4]. Maybe because the 2023 eclipse was an annular[^3] eclipse lacking the conditions necessary to view the sun's corona or experience totality, and thus less widely shared on social media.   
 
+
+[^1]: Totality is when the Moon obscures the entire disk of the Sun and only the solar corona (the sun's outer atmosphere) is visible (Source: [Wikipedia](https://en.wikipedia.org/wiki/Solar_eclipse#Eclipse_phases))
+[^2]: A stellar corona is a star's outer atmosphere. In the case of our solar system's star, the sun, the corona is only visible during a brief period of totality during a total solar eclipse when the moon completely blocks the disk of the sun (Source: [Wikipedia](https://en.wikipedia.org/wiki/Stellar_corona))
 [^3]: An annular solar eclipse happens when the Moon passes between the Sun and Earth, but when it is at or near its farthest point from Earth. Because the Moon is farther away from Earth, it appears smaller than the Sun and does not completely cover the Sun. As a result, the Moon appears as a dark disk on top of a larger, bright disk, creating what looks like a ring around the Moon. (Source: [NASA](https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse))
 
-**HOWEVER, I remembered a day in the fall of 2023 when the sky began to darken for no apparent reason** and realized a few months later as I was making this shiny app that I had experienced a solar eclipse without even realizing it.
+[^4]: In the moment.
 
-That's the moment I knew I needed a different eclipse planning tool - a way to never miss a solar (or lunar) eclipse again, no matter where I'm at on Earth.  
+[^5]: A total solar eclipse happens when the Moon passes between the Sun and Earth, completely blocking the face of the Sun. Weather permitting, people in the path of a total solar eclipse can see the Sun’s corona, the outer atmosphere, which is otherwise usually obscured by the bright face of the Sun.   (Source: [NASA](https://science.nasa.gov/eclipses/types/#h-total-solar-eclipse))
 
-A [shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/)[^1] that calculates all visible solar and lunar eclipses for up to the next 75 years specific to your current lon/lat coordinate location. 
+**HOWEVER, I remembered a day in the fall of 2023 when the sky began to darken for no apparent reason** and realized later - while making travel plans for the 2024 eclipse - that I actually had experienced the 2023 solar eclipse without even realizing it. The day the sky darkened was in October, and the only good explanation was the annular eclipse that month which would've blocked approximately 25% of the sun at it's peak.  
+
+That's the moment I knew I would build the tool I wanted - a way to never miss a solar (or lunar) eclipse again, no matter where I'm at on Earth. No more trekking across the interweb cross-checking various websites for generalized eclipse information.  One website, any date, any lon/lat, every eclipse date from now until anyone alive right now can reasonably expect to still be alive.  
+
+A [shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/) that calculates all solar and lunar eclipses for up to the next 75 years visible at your current lon/lat coordinate location. 100 miles distance is enough for 2 locations to have vastly different experiences.  
 
 
-### **Background - oops we missed an eclipse**
+<!-- ### **Background - oops we missed an eclipse** -->
 
--   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem.
+<!-- -   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem. -->
 
-### **Problem - it's hard finding good information on upcoming celestial events**
+<!-- ### **Problem - it's hard finding good information on upcoming celestial events** -->
 
--   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right).
+<!-- -   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right). -->
 
-![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"}
+<!-- ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"} -->
 
 #### **Solution - Build a shiny app**
 
 -   A shiny app that will use your current location (or a specific address input by user) to identify every solar and lunar eclipse viewable from that location for the next (n) years.\
 -   Current functioning webapp: Future Solar and Lunar Eclipses Visible from Your Current Location ([Shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/))
 -   Relying primarily on the following packages/libraries:
--   *swephR* ([via CRAN](https://cran.r-project.org/package=swephR)): High Precision Swiss Ephemeris package. Used to determine when, where and how solar and lunar eclipses will occur (among other novel celestial events).
--   *leaflet* ([via CRAN](https://cran.r-project.org/package=leaflet)): Create Interactive Web Maps with the JavaScript 'Leaflet' Library
--   *shiny* ([via CRAN](https://cran.r-project.org/package=shiny)): Web Application Framework for R.
--   *censusxy* ([via github](https://github.com/chris-prener/censusxy)): Designed to provide easy access to the U.S. Census Bureau Geocoding Tools
--   *qrcode* ([via CRAN](https://cran.r-project.org/package=qrcode)): Create static QR codes in R. Implemented so that users could share between mobile devices.
+    -   *swephR* ([via CRAN](https://cran.r-project.org/package=swephR)): High Precision Swiss Ephemeris package. Used to determine when, where and how solar and lunar eclipses will occur (among other novel celestial events).
+    -   *leaflet* ([via CRAN](https://cran.r-project.org/package=leaflet)): Create Interactive Web Maps with the JavaScript 'Leaflet' Library
+    -   *shiny* ([via CRAN](https://cran.r-project.org/package=shiny)): Web Application Framework for R.
+    -   *censusxy* ([via github](https://github.com/chris-prener/censusxy)): Designed to provide easy access to the U.S. Census Bureau Geocoding Tools
+    -   *qrcode* ([via CRAN](https://cran.r-project.org/package=qrcode)): Create static QR codes in R. Implemented so that users could share between mobile devices.
+
+The following code demonstrates in a simple way how the swephR package is used to calculate the next global solar eclipse to occur on or after the start of our conference.  You could update this code with different input_ variables and begin to explore what's how outcomes differ based on time and geographic location. Extended documentation for the package is available [here](https://www.astro.com/swisseph/swephprg.htm).
 
 <!-- -   App I/Os: -->
 
@@ -344,26 +355,22 @@ leaflet(padding = 0,
 
 ```
 
-## ***Broad Topic Covered***
+## ***Broad Topic Covered / Learning Goals***
 
-#### **You thought time was confusing on earth**
+#### **Julius Caesar vs Pope Gregory XIII: The Battle for Space-Time**
 
--   Astronomers still use the Julian Calendar to track the cosmos
+-   While most of the western world adopted the Gregorian calendar (365.2425 days long) by the 20th century for agricultural and cultural reasons, astronomers track time off-earth using the older Julian calendar (365.25 days long).  We will briefly touch on why this is (it's not wrong), how to convert back-and-forth between gregorian and julian to perform astronomical calculations, and other notable phenomenon to keep in mind when using R in space.
 
-#### **Communication & Ease-of-Use**
+#### **User Input: Flexibility vs Ease-of-Use**
 
--   Longitude / Latitude\
--   User Experience
+-   Specifically with regards to earthly longitude/latitude coordinate inputs (required for calculating the alignment of celestial bodies to a Earth-bound viewer), a decision had to be made affecting usability of the shiny app for the end-user based on their ability to easily enter an input location: 
+    -   If required to enter lon/lat coordinates manually, that may be a barrier for some users that would prevent them from using the tool.  Users may also explore other locations around the world.  
+    -   If the app pulled the lon/lat coordinates automatically from the user's i.p. address this would likely be the easiest use-case for most people but would prevent most people from exploring other locations around the world.  
+    -   Using a forward geocoding service could be a compromise between these two, allowing users to enter a postal address that gets convereted into lon/lat coordinates.  However, there are issues with geocoding services including both geographic coverage and cost constraints that make this difficult to QA, maintain and implement at the level desired.  
 
-#### **Knowing what to do VS Knowing how to do**
-
-## Learning Goals
-
--   main goal
-
--   You don't have to know ~~everything~~ ~~anything~~ as much as you think you do.
-
--   Evolving your skills and knowledge throughout a project lifecycle: pros and cons.
+#### **Managing Time while Prioritizing Project Features/Outcomes**
+-   This project evolved over a period of a few weeks from a simple script that I could use myself into a fully-deployed shiny app that I could use to share with friends and family across the country.  Throughout the process I balanced the end-goal of the project and the timeline I had with my desire to learn new skills (evolving from ggmap to leaflet, for example) and add useful features.  
+    -   I'd like to use this presentation time to briefly cover the packages I relied on, and the **many** celestial calculations available in the swephR library beyond eclipse predictions. 
 
 ## Timezone Preference(s)
 
@@ -378,7 +385,7 @@ leaflet(padding = 0,
 
 ## Language
 
--   English
+-   English is the only language I speak.
 
 ## Intended Audience
 
@@ -391,6 +398,7 @@ leaflet(padding = 0,
 ## Pedagogical Method of Teaching
 
 -   For this I would approach in a lecture-style while allowing for interaction. I'm a seasoned public speaker in front of local elected and appointed officials and in engaging public meetings.
+ -   Rather than having a technical presentation that gets into the weeds with code and deployment steps I'll approach the project evolution part of the presentation with the philosophy that it's more important to know what to do that how to do it.  Writing out an outline in plain English helped me conceptualize the workflow for this project quicker and more accurately that trying to code-on-the-go.
 
 ## Maximum Number of Attendees
 
@@ -398,16 +406,22 @@ leaflet(padding = 0,
 
 ## Motivation to Teach this Tutorial at useR!
 
--   I enjoy making things in R (mostly as a hobby right now), I made a thing that's pretty neat and would like to share my experience in the hope that there are others who could benefit from either technical or general information shared.
+-   I enjoy making things in R (mostly as a hobby right now), I made a thing that's pretty neat and would like to share my experience in the hope that there are others who could benefit from either technical or general information shared, or maybe just be entertained by attending a talk on celestial calculations.
 -   I became VERY MOTIVATED when I saw that useR! 2025 was at Duke University in Durham as I live only a few miles away. It just seemed like the opportunity was right.
 
 ## Supplemental Material Links
+- Shiny app: "Future Solar and Lunar Eclipses Visible from Your Current Location" [link](https://tim-bender.shinyapps.io/shiny_all_eclipses/)
+
+- Additional shiny app I developed specifically for the April 2024 eclipse day-of planning: "Total Eclipse of April 8, 2024 - What to Expect from Your Location" [link](https://tim-bender.shinyapps.io/shiny_eclipse_planner/) 
 
 #### Tutorial materials
 
--   Future Solar and Lunar Eclipses Visible from Your Current Location ([Shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/))
+N/A
 
-#### Web Page (if applicable)
+## Web Pages
+
+https://tim-bender.shinyapps.io/shiny_all_eclipses/)
+https://github.com/benda18/eclipse/blob/main/shiny_all_eclipsesV2/app.R
 
 ## Prerequisites / requirements
 
@@ -415,7 +429,7 @@ leaflet(padding = 0,
 
 ## License, Material sharing, recording consent
 
--   Eclipse Predictions by Fred Espenak (diagrams in-app only), [www.EclipseWise.com](www.EclipseWise.com) - The use of diagrams and maps is permitted provided they are NOT altered (except for re-sizing) and the embedded credit line is NOT removed or covered.
+- None 
 
 ## ***Biography***
 
@@ -425,7 +439,9 @@ leaflet(padding = 0,
 
 -   \~15 years local government experience as an urban planner and transit planner. Tim was part of a team that helped deploy Google Transit for his transit agency in Kentucky in 2008, being among the first 50-ish agencies worldwide to go live.\
 
--   Journey with R began with a desire to log transit vehicle real-time location data from an api for analysis but I had no programming experience or knowledge of how to approach the problem. I wouldn't successfully solve this problem for about 5 years of self-guided learning.
+-   Journey with R began with a desire to log transit vehicle real-time location data from an api for analysis but I had no programming experience or knowledge of how to approach the problem. I wouldn't successfully solve this problem until after about 5 years of self-guided learning.
+
+-   Currently seeking employment opportunities and solid friends in the R community.  
 
 -   [LinkedIn](https://www.linkedin.com/in/tim-bender-238870171/)
 
