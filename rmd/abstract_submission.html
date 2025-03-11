@@ -1571,9 +1571,18 @@ Location for the Rest of Your Life</h1>
 </div>
 
 
-<p><br>Submitted: 2025-03-10 <br>Author: Timothy J. Bender <br> Email:
-<a href="mailto:bendertj@gmail.com" class="email">bendertj@gmail.com</a>
-<br> Phone: +1 (513) 477-8924 <br></p>
+<p><br><br>Submitted: 2025-03-10 <br><br>Author: Timothy J. Bender
+<br><br> Email: <a href="mailto:bendertj@gmail.com" class="email">bendertj@gmail.com</a> <br><br> Phone: +1 (513) 477-8924
+<br><br></p>
+<div id="submission-information" class="section level2">
+<h2><strong><em>Submission Information</em></strong></h2>
+<ul>
+<li>Author: Timothy J. Bender</li>
+<li>Submitted on: March 10, 2025</li>
+<li>email: <a href="mailto:bendertj@gmail.com" class="email">bendertj@gmail.com</a></li>
+<li>phone: +1 (513) 477-8924</li>
+</ul>
+</div>
 <div id="abstract" class="section level2">
 <h2><strong><em>Abstract</em></strong></h2>
 <div id="one-hobbyists-attempt-using-r-to-never-again-miss-a-solar-eclipse" class="section level4">
@@ -1584,17 +1593,20 @@ eclipse:</em></h4>
 <h3><strong>Background</strong></h3>
 <p>Since 2017 there have been 3 major solar eclipse events visible in
 North Carolina</p>
-<pre>-   a total solar eclipse:     August 21, 2017 (73% obscuration), 
--   an annular solar eclipse:  October 14, 2023 (23% obscuration), and 
--   a total solar eclipse:     April 8, 2024 (14% obscuration) </pre>
+<ul>
+<li>a total solar eclipse:     August 21, 2017 (73% obscuration),</li>
+<li>an annular solar eclipse:  October 14, 2023 (23% obscuration),
+and</li>
+<li>a total solar eclipse:     April 8, 2024 (14% obscuration)</li>
+</ul>
 <p>My kids and I witnessed the 2017 total eclipse<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> from our home in
 Durham, NC, In 2024 we drove to Hudson, OH to experience around 3
 minutes of totality<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> and view the sun’s corona<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. But the 2023 eclipse
-slipped right by without us noticing<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. Maybe because the 2023 eclipse was an
-annular<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>
-eclipse lacking the conditions necessary to view the sun’s corona or
-experience totality, and thus less widely shared on social media.</p>
-<p><strong>HOWEVER, I remembered a day in the fall of 2023 when the sky
+slipped right by without us noticing. Maybe because the 2023 eclipse was
+an annular<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> eclipse lacking the conditions necessary to
+view the sun’s corona or experience totality, and thus less widely
+shared on social media.</p>
+<p><strong>However, I remembered a day in the fall of 2023 when the sky
 began to darken for no apparent reason</strong> and realized later -
 while making travel plans for the 2024 eclipse - that I actually had
 experienced the 2023 solar eclipse without even realizing it. The day
@@ -1612,11 +1624,6 @@ webapp</a> that calculates all solar and lunar eclipses for up to the
 next 75 years visible at your current lon/lat coordinate location. 100
 miles distance is enough for 2 locations to have vastly different
 experiences.</p>
-<!-- ### **Background - oops we missed an eclipse** -->
-<!-- -   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem. -->
-<!-- ### **Problem - it's hard finding good information on upcoming celestial events** -->
-<!-- -   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right). -->
-<!-- ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"} -->
 <div id="solution---build-a-shiny-app" class="section level4">
 <h4><strong>Solution - Build a shiny app</strong></h4>
 <ul>
@@ -1648,20 +1655,9 @@ mobile devices.</li>
 <p>The following code demonstrates in a simple way how the swephR
 package is used to calculate the next global solar eclipse to occur on
 or after the start of our conference. You could update this code with
-different input_ variables and begin to explore what’s how outcomes
-differ based on time and geographic location. Extended documentation for
-the package is available <a href="https://www.astro.com/swisseph/swephprg.htm">here</a>.</p>
-<!-- -   App I/Os: -->
-<!--     -   number of years (n) to look into the future (I) -->
-<!--     -   A date_time value to search from (I) -->
-<!--     -   A lon/lat coordinate pair derived from the user's i.p. address (with permission) (I) -->
-<!--     -   A USPS mailing address to geocode a lon/lat coordinate pair for a specific viewing location (I) -->
-<!--     -   A date_time value for the every eclipse visible from the (I) viewing location for the next (n) years (O) -->
-<!--     -   Eclipse type (solar/lunar) (O) -->
-<!--     -   Eclipse sub type (total/partial...) (O) -->
-<!--     -   Obscuration (% of sun blocked by moon as seen from viewing location - solar eclipse only) (O) -->
-<!--     -   A lon/lat coordinate pair for the location of the maximal view of the eclipse on Earth (O)  -->
-<!--     -   A dynamic leaflet map showing the lon/lat coordinate pairs (I & O) -->
+different input_ variables and begin to explore how outcomes differ
+based on time and geographic location. Extended documentation for the
+package is available <a href="https://www.astro.com/swisseph/swephprg.htm">here</a>.</p>
 <pre class="r"><code># SOME CODE to capture solar eclipse information 
 library(swephR)
 library(lubridate)
@@ -1739,34 +1735,6 @@ print(list(&quot;Eclipse_DateTime&quot;      = output_gregtime,
 ## $Maximal_View.Globally
 ##       lon       lat 
 ## 153.38805 -61.03134</code></pre>
-<!-- ```{r Static Map, echo=T, message=FALSE, warning=FALSE, results="hide", eval = FALSE} -->
-<!-- # SOME CODE for a static map verification of input lon/lat -->
-<!-- library(ggmap) -->
-<!-- library(dplyr) -->
-<!-- library(sf) -->
-<!-- ## Must run once per session -->
-<!-- # register_stadiamaps(key = "your_key_here", write = FALSE) -->
-<!-- bbox <- make_bbox(lon = c(input_lonlat["lon"], output_lonlat["lon"]),  -->
-<!--                   lat = c(input_lonlat["lat"], output_lonlat["lat"]),  -->
-<!--                   f   = var_map.f) -->
-<!-- map.stamen <- get_stadiamap(bbox = bbox,  -->
-<!--                             zoom = 3,  -->
-<!--                             maptype = "stamen_toner_lite", -->
-<!--                             crop = T,  -->
-<!--                             color = "color", -->
-<!--                             force = T, -->
-<!--                             size = 1) -->
-<!-- ggmap(map.stamen) + -->
-<!--   geom_label(aes(x = input_lonlat["lon"],  -->
-<!--                  y = input_lonlat["lat"]),  -->
-<!--              label = "Duke University",  -->
-<!--              color = "blue", alpha = 0.1) + -->
-<!--   geom_label(aes(x = output_lonlat["lon"],  -->
-<!--                  y = output_lonlat["lat"]),  -->
-<!--              label = "Eclipse Maximal",  -->
-<!--              color = "brown", alpha = 0.1) -->
-<!-- ``` -->
-<!-- ![](figure/Static%20Map-1.png) -->
 </div>
 </div>
 </div>
@@ -1780,7 +1748,7 @@ Space-Time</strong></h4>
 (365.2425 days long) by the 20th century for agricultural and cultural
 reasons, astronomers track time off-earth using the older Julian
 calendar (365.25 days long). We will briefly touch on why this is (it’s
-not wrong), how to convert back-and-forth between gregorian and julian
+not wrong), how to convert back-and-forth between Gregorian and Julian
 to perform astronomical calculations, and other notable phenomenon to
 keep in mind when using R in space.</li>
 </ul>
@@ -1804,7 +1772,7 @@ people but would prevent most people from exploring other locations
 around the world.<br />
 </li>
 <li>Using a forward geocoding service could be a compromise between
-these two, allowing users to enter a postal address that gets convereted
+these two, allowing users to enter a postal address that gets converted
 into lon/lat coordinates. However, there are issues with geocoding
 services including both geographic coverage and cost constraints that
 make this difficult to QA, maintain and implement at the level
@@ -1953,8 +1921,6 @@ real-time location data from an api for analysis but I had no
 programming experience or knowledge of how to approach the problem. I
 wouldn’t successfully solve this problem until after about 5 years of
 self-guided learning.</p></li>
-<li><p>Currently seeking employment opportunities and solid friends in
-the R community.</p></li>
 <li><p><a href="https://www.linkedin.com/in/tim-bender-238870171/">LinkedIn</a></p></li>
 <li><p><a href="https://github.com/benda18">github</a></p></li>
 </ul>
@@ -1975,13 +1941,12 @@ visible (Source: <a href="https://en.wikipedia.org/wiki/Solar_eclipse#Eclipse_ph
 case of our solar system’s star, the sun, the corona is only visible
 during a brief period of totality during a total solar eclipse when the
 moon completely blocks the disk of the sun (Source: <a href="https://en.wikipedia.org/wiki/Stellar_corona">Wikipedia</a>)<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>In the moment.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>An annular solar eclipse happens when the Moon passes
+<li id="fn4"><p>An annular solar eclipse happens when the Moon passes
 between the Sun and Earth, but when it is at or near its farthest point
 from Earth. Because the Moon is farther away from Earth, it appears
 smaller than the Sun and does not completely cover the Sun. As a result,
 the Moon appears as a dark disk on top of a larger, bright disk,
-creating what looks like a ring around the Moon. (Source: <a href="https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse">NASA</a>)<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+creating what looks like a ring around the Moon. (Source: <a href="https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse">NASA</a>)<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

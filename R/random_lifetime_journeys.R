@@ -66,6 +66,10 @@ x.bounds <- c(-180,180)
 y.bounds <- c(-90, 90)
 avg.days <- 28000
 
+cur.xy <- c(x = 0, y = 0)
+
+
+# calcs----
 avg.yrs  <- avg.days / 365.25
 life_multiplier <- 1.1
 
@@ -95,3 +99,14 @@ set.seed(1234)
 x <- replicate(n = 15, calc_lifespan())
 fivenum(x)
 hist(x)
+
+
+for(i in x){
+ print( i)
+}
+
+out.df <- NULL
+for(i in 1:length(x)){
+  out.df <- rbind(out.df, 
+                  data.frame())
+}

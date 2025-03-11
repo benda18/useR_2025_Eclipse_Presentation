@@ -9,6 +9,9 @@ output:
     toc_float: true
     toc_depth: 2
     keep_md: true
+  pdf_document: 
+    toc: true
+    toc_depth: 2
 params:
   name: Timothy J. Bender
   email: bendertj@gmail.com
@@ -17,11 +20,21 @@ params:
   # date: "Submitted: 2025-03-10" 
 ---
 
-<br>Submitted: 2025-03-10 <br>Author: Timothy J. Bender <br> Email: bendertj@gmail.com <br> Phone: +1 (513) 477-8924 <br> 
+<br><br>Submitted: 2025-03-10 
+<br><br>Author: Timothy J. Bender 
+<br><br> Email: bendertj@gmail.com 
+<br><br> Phone: +1 (513) 477-8924 
+<br><br> 
 
 
 
 
+
+## ***Submission Information***
+-   Author: Timothy J. Bender
+-   Submitted on: March 10, 2025
+-   email: bendertj@gmail.com
+-   phone: +1 (513) 477-8924
 
 ## ***Abstract***
 
@@ -31,37 +44,23 @@ params:
 
 Since 2017 there have been 3 major solar eclipse events visible in North Carolina
 
-<pre>-   a total solar eclipse: &nbsp;&nbsp;&nbsp;&nbsp;August 21, 2017 (73% obscuration), 
+-   a total solar eclipse: &nbsp;&nbsp;&nbsp;&nbsp;August 21, 2017 (73% obscuration), 
 -   an annular solar eclipse: &nbsp;October 14, 2023 (23% obscuration), and 
--   a total solar eclipse: &nbsp;&nbsp;&nbsp;&nbsp;April 8, 2024 (14% obscuration) </pre>
+-   a total solar eclipse: &nbsp;&nbsp;&nbsp;&nbsp;April 8, 2024 (14% obscuration)
 
-My kids and I witnessed the 2017 total eclipse[^5] from our home in Durham, NC, In 2024 we drove to Hudson, OH to experience around 3 minutes of totality[^1] and view the sun's corona[^2].  But the 2023 eclipse slipped right by without us noticing[^4]. Maybe because the 2023 eclipse was an annular[^3] eclipse lacking the conditions necessary to view the sun's corona or experience totality, and thus less widely shared on social media.   
-
+My kids and I witnessed the 2017 total eclipse[^5] from our home in Durham, NC, In 2024 we drove to Hudson, OH to experience around 3 minutes of totality[^1] and view the sun's corona[^2].  But the 2023 eclipse slipped right by without us noticing. Maybe because the 2023 eclipse was an annular[^3] eclipse lacking the conditions necessary to view the sun's corona or experience totality, and thus less widely shared on social media.   
 
 [^1]: Totality is when the Moon obscures the entire disk of the Sun and only the solar corona (the sun's outer atmosphere) is visible (Source: [Wikipedia](https://en.wikipedia.org/wiki/Solar_eclipse#Eclipse_phases))
 [^2]: A stellar corona is a star's outer atmosphere. In the case of our solar system's star, the sun, the corona is only visible during a brief period of totality during a total solar eclipse when the moon completely blocks the disk of the sun (Source: [Wikipedia](https://en.wikipedia.org/wiki/Stellar_corona))
 [^3]: An annular solar eclipse happens when the Moon passes between the Sun and Earth, but when it is at or near its farthest point from Earth. Because the Moon is farther away from Earth, it appears smaller than the Sun and does not completely cover the Sun. As a result, the Moon appears as a dark disk on top of a larger, bright disk, creating what looks like a ring around the Moon. (Source: [NASA](https://science.nasa.gov/eclipses/types/#h-annular-solar-eclipse))
 
-[^4]: In the moment.
-
 [^5]: A total solar eclipse happens when the Moon passes between the Sun and Earth, completely blocking the face of the Sun. Weather permitting, people in the path of a total solar eclipse can see the Sun’s corona, the outer atmosphere, which is otherwise usually obscured by the bright face of the Sun.   (Source: [NASA](https://science.nasa.gov/eclipses/types/#h-total-solar-eclipse))
 
-**HOWEVER, I remembered a day in the fall of 2023 when the sky began to darken for no apparent reason** and realized later - while making travel plans for the 2024 eclipse - that I actually had experienced the 2023 solar eclipse without even realizing it. The day the sky darkened was in October, and the only good explanation was the annular eclipse that month which would've blocked approximately 25% of the sun at it's peak.  
+**However, I remembered a day in the fall of 2023 when the sky began to darken for no apparent reason** and realized later - while making travel plans for the 2024 eclipse - that I actually had experienced the 2023 solar eclipse without even realizing it. The day the sky darkened was in October, and the only good explanation was the annular eclipse that month which would've blocked approximately 25% of the sun at it's peak.  
 
 That's the moment I knew I would build the tool I wanted - a way to never miss a solar (or lunar) eclipse again, no matter where I'm at on Earth. No more trekking across the interweb cross-checking various websites for generalized eclipse information.  One website, any date, any lon/lat, every eclipse date from now until anyone alive right now can reasonably expect to still be alive.  
 
 A [shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/) that calculates all solar and lunar eclipses for up to the next 75 years visible at your current lon/lat coordinate location. 100 miles distance is enough for 2 locations to have vastly different experiences.  
-
-
-<!-- ### **Background - oops we missed an eclipse** -->
-
-<!-- -   After driving my school-age kids about 9 hours to see totality during the [North American total solar eclipse](https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/) of April 2024, I realized that we had missed the annular solar eclipse just [7 months earlier](https://en.wikipedia.org/wiki/Solar_eclipse_of_October_14,_2023) that was less-well publicized. Not wanting to miss any opportunity to see an eclipse again I began considering my problem. -->
-
-<!-- ### **Problem - it's hard finding good information on upcoming celestial events** -->
-
-<!-- -   Reliable eclipse predictions are freely available online though they are usually generalized to a state-level geography. In April 2024 there were parts of Dallas, TX that could view totality (image below, left) for more than 4 minutes, and other parts that were outside the path of totality and saw only a partial eclipse (image below, right). -->
-
-<!-- ![View of Totality](images/totality.jpg){width="254"}![Partial View (outside path of totality)](images/partialEcl.jpg){width="250"} -->
 
 #### **Solution - Build a shiny app**
 
@@ -74,29 +73,7 @@ A [shiny webapp](https://tim-bender.shinyapps.io/shiny_all_eclipses/) that calcu
     -   *censusxy* ([via github](https://github.com/chris-prener/censusxy)): Designed to provide easy access to the U.S. Census Bureau Geocoding Tools
     -   *qrcode* ([via CRAN](https://cran.r-project.org/package=qrcode)): Create static QR codes in R. Implemented so that users could share between mobile devices.
 
-The following code demonstrates in a simple way how the swephR package is used to calculate the next global solar eclipse to occur on or after the start of our conference.  You could update this code with different input_ variables and begin to explore what's how outcomes differ based on time and geographic location. Extended documentation for the package is available [here](https://www.astro.com/swisseph/swephprg.htm).
-
-<!-- -   App I/Os: -->
-
-<!--     -   number of years (n) to look into the future (I) -->
-
-<!--     -   A date_time value to search from (I) -->
-
-<!--     -   A lon/lat coordinate pair derived from the user's i.p. address (with permission) (I) -->
-
-<!--     -   A USPS mailing address to geocode a lon/lat coordinate pair for a specific viewing location (I) -->
-
-<!--     -   A date_time value for the every eclipse visible from the (I) viewing location for the next (n) years (O) -->
-
-<!--     -   Eclipse type (solar/lunar) (O) -->
-
-<!--     -   Eclipse sub type (total/partial...) (O) -->
-
-<!--     -   Obscuration (% of sun blocked by moon as seen from viewing location - solar eclipse only) (O) -->
-
-<!--     -   A lon/lat coordinate pair for the location of the maximal view of the eclipse on Earth (O)  -->
-
-<!--     -   A dynamic leaflet map showing the lon/lat coordinate pairs (I & O) -->
+The following code demonstrates in a simple way how the swephR package is used to calculate the next global solar eclipse to occur on or after the start of our conference.  You could update this code with different input_ variables and begin to explore how outcomes differ based on time and geographic location. Extended documentation for the package is available [here](https://www.astro.com/swisseph/swephprg.htm).  
 
 
 ``` r
@@ -182,61 +159,6 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 ## 153.38805 -61.03134
 ```
 
-<!-- ```{r Static Map, echo=T, message=FALSE, warning=FALSE, results="hide", eval = FALSE} -->
-
-<!-- # SOME CODE for a static map verification of input lon/lat -->
-
-<!-- library(ggmap) -->
-
-<!-- library(dplyr) -->
-
-<!-- library(sf) -->
-
-<!-- ## Must run once per session -->
-
-<!-- # register_stadiamaps(key = "your_key_here", write = FALSE) -->
-
-<!-- bbox <- make_bbox(lon = c(input_lonlat["lon"], output_lonlat["lon"]),  -->
-
-<!--                   lat = c(input_lonlat["lat"], output_lonlat["lat"]),  -->
-
-<!--                   f   = var_map.f) -->
-
-<!-- map.stamen <- get_stadiamap(bbox = bbox,  -->
-
-<!--                             zoom = 3,  -->
-
-<!--                             maptype = "stamen_toner_lite", -->
-
-<!--                             crop = T,  -->
-
-<!--                             color = "color", -->
-
-<!--                             force = T, -->
-
-<!--                             size = 1) -->
-
-<!-- ggmap(map.stamen) + -->
-
-<!--   geom_label(aes(x = input_lonlat["lon"],  -->
-
-<!--                  y = input_lonlat["lat"]),  -->
-
-<!--              label = "Duke University",  -->
-
-<!--              color = "blue", alpha = 0.1) + -->
-
-<!--   geom_label(aes(x = output_lonlat["lon"],  -->
-
-<!--                  y = output_lonlat["lat"]),  -->
-
-<!--              label = "Eclipse Maximal",  -->
-
-<!--              color = "brown", alpha = 0.1) -->
-
-<!-- ``` -->
-
-<!-- ![](figure/Static%20Map-1.png) -->
 
 
 
@@ -250,14 +172,14 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 
 #### **Julius Caesar vs Pope Gregory XIII: The Battle for Space-Time**
 
--   While most of the western world adopted the Gregorian calendar (365.2425 days long) by the 20th century for agricultural and cultural reasons, astronomers track time off-earth using the older Julian calendar (365.25 days long).  We will briefly touch on why this is (it's not wrong), how to convert back-and-forth between gregorian and julian to perform astronomical calculations, and other notable phenomenon to keep in mind when using R in space.
+-   While most of the western world adopted the Gregorian calendar (365.2425 days long) by the 20th century for agricultural and cultural reasons, astronomers track time off-earth using the older Julian calendar (365.25 days long).  We will briefly touch on why this is (it's not wrong), how to convert back-and-forth between Gregorian and Julian to perform astronomical calculations, and other notable phenomenon to keep in mind when using R in space.
 
 #### **User Input: Flexibility vs Ease-of-Use**
 
 -   Specifically with regards to earthly longitude/latitude coordinate inputs (required for calculating the alignment of celestial bodies to a Earth-bound viewer), a decision had to be made affecting usability of the shiny app for the end-user based on their ability to easily enter an input location: 
     -   If required to enter lon/lat coordinates manually, that may be a barrier for some users that would prevent them from using the tool.  Users may also explore other locations around the world.  
     -   If the app pulled the lon/lat coordinates automatically from the user's i.p. address this would likely be the easiest use-case for most people but would prevent most people from exploring other locations around the world.  
-    -   Using a forward geocoding service could be a compromise between these two, allowing users to enter a postal address that gets convereted into lon/lat coordinates.  However, there are issues with geocoding services including both geographic coverage and cost constraints that make this difficult to QA, maintain and implement at the level desired.  
+    -   Using a forward geocoding service could be a compromise between these two, allowing users to enter a postal address that gets converted into lon/lat coordinates.  However, there are issues with geocoding services including both geographic coverage and cost constraints that make this difficult to QA, maintain and implement at the level desired.  
 
 #### **Managing Time while Prioritizing Project Features/Outcomes**
 -   This project evolved over a period of a few weeks from a simple script that I could use myself into a fully-deployed shiny app that I could use to share with friends and family across the country.  Throughout the process I balanced the end-goal of the project and the timeline I had with my desire to learn new skills (evolving from ggmap to leaflet, for example) and add useful features.  
@@ -331,8 +253,6 @@ https://github.com/benda18/eclipse/blob/main/shiny_all_eclipsesV2/app.R
 -   \~15 years local government experience as an urban planner and transit planner. Tim was part of a team that helped deploy Google Transit for his transit agency in Kentucky in 2008, being among the first 50-ish agencies worldwide to go live.\
 
 -   Journey with R began with a desire to log transit vehicle real-time location data from an api for analysis but I had no programming experience or knowledge of how to approach the problem. I wouldn't successfully solve this problem until after about 5 years of self-guided learning.
-
--   Currently seeking employment opportunities and solid friends in the R community.  
 
 -   [LinkedIn](https://www.linkedin.com/in/tim-bender-238870171/)
 
