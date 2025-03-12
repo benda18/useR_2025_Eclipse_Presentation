@@ -1,66 +1,47 @@
 
 
 renv::use(
-  base64enc         = "base64enc@0.1-3",
-  bslib             = "bslib@0.9.0",
-  cachem            = "cachem@1.1.0",
-  cli               = "cli@3.6.4",
-  colorspace        = "colorspace@2.1-1",
-  cpp11             = "cpp11@0.5.1",
-  crosstalk         = "crosstalk@1.2.1",
-  digest            = "digest@0.6.37",
-  dplyr             = "dplyr@1.1.4",
-  evaluate          = "evaluate@1.0.3",
-  fansi             = "fansi@1.0.6",
-  farver            = "farver@2.1.2",
-  fastmap           = "fastmap@1.2.0",
-  fontawesome       = "fontawesome@0.5.3",
-  fs                = "fs@1.6.5",
-  generics          = "generics@0.1.3",
-  glue              = "glue@1.8.0",
-  highr             = "highr@0.11",
-  htmltools         = "htmltools@0.5.8.1",
-  htmlwidgets       = "htmlwidgets@1.6.4",
-  jquerylib         = "jquerylib@0.1.4",
-  jsonlite          = "jsonlite@1.9.0",
-  knitr             = "knitr@1.49",
-  labeling          = "labeling@0.4.3",
-  lattice           = "lattice@0.22-6",
-  lazyeval          = "lazyeval@0.2.2",
-  leaflet           = "leaflet@2.2.2",
-  leaflet.providers = "leaflet.providers@2.0.0",
-  lifecycle         = "lifecycle@1.0.4",
-  lubridate         = "lubridate@1.9.4",
-  magrittr          = "magrittr@2.0.3",
-  memoise           = "memoise@2.0.1",
-  mime              = "mime@0.12",
-  munsell           = "munsell@0.5.1",
-  pillar            = "pillar@1.10.1",
-  pkgconfig         = "pkgconfig@2.0.3",
-  png               = "png@0.1-8",
-  R6                = "R6@2.6.1",
-  rappdirs          = "rappdirs@0.3.3",
-  raster            = "raster@3.6-31",
-  RColorBrewer      = "RColorBrewer@1.1-3",
-  Rcpp              = "Rcpp@1.0.14",
-  renv              = "renv@1.1.1",
-  rlang             = "rlang@1.1.5",
-  rmarkdown         = "rmarkdown@2.29",
-  sass              = "sass@0.4.9",
-  scales            = "scales@1.3.0",
-  sp                = "sp@2.2-0",
-  swephR            = "swephR@0.3.1",
-  terra             = "terra@1.8-21",
-  tibble            = "tibble@3.2.1",
-  tidyselect        = "tidyselect@1.2.1",
-  timechange        = "timechange@0.3.0",
-  tinytex           = "tinytex@0.55",
-  utf8              = "utf8@1.2.4",
-  vctrs             = "vctrs@0.6.5",
-  viridisLite       = "viridisLite@0.4.2",
-  withr             = "withr@3.0.2",
-  xfun              = "xfun@0.50",
-  yaml              = "yaml@2.3.10"
+  askpass      = "askpass@1.2.1",
+  cli          = "cli@3.6.4",
+  colorspace   = "colorspace@2.1-1",
+  cpp11        = "cpp11@0.5.1",
+  data.table   = "data.table@1.16.4",
+  dplyr        = "dplyr@1.1.4",
+  fansi        = "fansi@1.0.6",
+  farver       = "farver@2.1.2",
+  generics     = "generics@0.1.3",
+  ggplot2      = "ggplot2@3.5.1",
+  glue         = "glue@1.8.0",
+  gtable       = "gtable@0.3.6",
+  isoband      = "isoband@0.2.7",
+  labeling     = "labeling@0.4.3",
+  lattice      = "lattice@0.22-6",
+  lifecycle    = "lifecycle@1.0.4",
+  lubridate    = "lubridate@1.9.4",
+  magrittr     = "magrittr@2.0.3",
+  MASS         = "MASS@7.3-61",
+  Matrix       = "Matrix@1.7-1",
+  mgcv         = "mgcv@1.9-1",
+  munsell      = "munsell@0.5.1",
+  nlme         = "nlme@3.1-166",
+  openssl      = "openssl@2.3.2",
+  pillar       = "pillar@1.10.1",
+  pkgconfig    = "pkgconfig@2.0.3",
+  R6           = "R6@2.6.1",
+  RColorBrewer = "RColorBrewer@1.1-3",
+  Rcpp         = "Rcpp@1.0.14",
+  renv         = "renv@1.1.1",
+  rlang        = "rlang@1.1.5",
+  scales       = "scales@1.3.0",
+  swephR       = "swephR@0.3.1",
+  sys          = "sys@3.4.3",
+  tibble       = "tibble@3.2.1",
+  tidyselect   = "tidyselect@1.2.1",
+  timechange   = "timechange@0.3.0",
+  utf8         = "utf8@1.2.4",
+  vctrs        = "vctrs@0.6.5",
+  viridisLite  = "viridisLite@0.4.2",
+  withr        = "withr@3.0.2"
 )
 
 
@@ -68,8 +49,8 @@ renv::embed()
 
 library(renv)
 library(swephR)
-library(leaflet)
-#library(ggplot2)
+#library(leaflet)
+library(ggplot2)
 # library(devtools)
 # devtools::install_github("chris-prener/censusxy")
 #library(censusxy)
@@ -77,6 +58,8 @@ library(lubridate)
 #library(scales)
 library(tibble)
 library(dplyr)
+library(data.table)
+library(openssl)
 
 rm(list=ls());cat('\f')
 
@@ -218,16 +201,48 @@ fun_get.e <- function(x=-78.938,
 }
 
 
-df <- fun_get.e(yrs_fwd = 10) |> as_tibble()
+#df <- fun_get.e(yrs_fwd = 10) |> as_tibble()
+
+yf = 75
+n_locs <- 15
+
+df <- NULL
+for(i in 1:n_locs){
+  df <- rbind(df, 
+              fun_get.e(x = runif(1, min = -180, max=180), 
+                        y = runif(1, min = -90, max=90), 
+                        yrs_fwd = yf))
+}
 
 
-df %>%
-  group_by(eclipse_type, 
-           obsc.mag_gte1 = obsc.mag_percent >= 1, 
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng = df$lon, 
+             lat = df$lat)
+
+dfsum <- df %>%
+  group_by(lon,lat,
+           eclipse_type, 
+           #obsc.mag_gte1 = obsc.mag_percent >= 1, 
            start_yr = min(year(eclipse_greg)),
            end_yr   = max(year(eclipse_greg))) %>%
   summarise(n = n(), 
-            max_obsc.mag = max(obsc.mag_percent))
+            max_obsc.mag = max(obsc.mag_percent)) %>% 
+  mutate(., 
+         locid = as.character(md5(paste(lon,lat,sep = "")))) %>%
+  as.data.table() %>%
+  dcast(., 
+        formula = lon + lat + locid ~ eclipse_type, 
+        value.var = "n")
+
+
+dfsum$lunar %>% hist()
+dfsum$solar %>%  hist()
+
+ggplot(data = dfsum, 
+       aes(y = solar, x = lunar)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = F)
 
 
 # # get this week's lunar eclipse info----
