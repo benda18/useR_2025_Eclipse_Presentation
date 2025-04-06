@@ -30,7 +30,7 @@ renv::use(
   isoband           = "isoband@0.2.7",
   iterators         = "iterators@1.0.14",
   jquerylib         = "jquerylib@0.1.4",
-  jsonlite          = "jsonlite@1.9.0",
+  jsonlite          = "jsonlite@1.9.1",
   knitr             = "knitr@1.49",
   labeling          = "labeling@0.4.3",
   lattice           = "lattice@0.22-6",
