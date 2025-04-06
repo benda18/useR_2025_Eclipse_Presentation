@@ -60,8 +60,57 @@ library(tibble)
 library(dplyr)
 library(data.table)
 library(openssl)
+library(glue)
 
-rm(list=ls());cat('\f')
+
+rm(list=ls()[!"df" %in% ls()]);cat('\f')
+
+# eclipsewise website functions
+eclipsewise_url <- function(ecl_date,
+                            ecltype = c("Total Eclipse", 
+                                        "Annular", 
+                                        "Partial", 
+                                        "Hybrid")){
+  require(glue)
+  require(lubridate)
+  w.year  <- year(ecl_date)
+  w.month <- as.character(lubridate::month(ecl_date, label = F))
+  w.month <- ifelse(nchar(w.month) == 1,
+                    paste("0", w.month, sep = "", collapse = ""),
+                    w.month)
+  w.mday  <- mday(ecl_date)
+  w.mday  <- ifelse(nchar(w.mday) == 1,
+                    paste("0", w.mday, sep = "", collapse = ""),
+                    w.mday)
+  w.cenA  <- floor(w.year/100)*100+1
+  w.cenB  <- w.cenA + 99
+  
+  et <- toupper(substr(ecltype,1,1))
+  
+  return(glue("https://eclipsewise.com/solar/SEping/{w.cenA}-{w.cenB}/SE{w.year}-{w.month}-{w.mday}{et}.gif"))
+}
+
+ewlun_url <- function(ecl_date, 
+                      ecltype){
+  require(glue)
+  require(lubridate)
+  w.year  <- year(ecl_date)
+  w.month <- lubridate::month(ecl_date,label=T,abbr=T)
+  w.mday  <- mday(ecl_date)
+  w.mday  <- ifelse(nchar(w.mday) == 1,
+                    paste("0", w.mday, sep = "", collapse = ""),
+                    w.mday)
+  w.cenA  <- floor(w.year/100)*100+1
+  w.cenB  <- w.cenA + 99
+  
+  ecltype <- ifelse(ecltype %in% c("Penumbral", 
+                                   "penumbral"), "NPenumbral", ecltype)
+  et <- toupper(substr(ecltype,1,1))
+  glue("https://eclipsewise.com/lunar/LEprime/{w.cenA}-{w.cenB}/LE{w.year}{w.month}{w.mday}{et}prime.html")
+  #glue("https://eclipsewise.com/oh/ec{year(ecl_date)}.html#LE{year(ecl_date)}{lubridate::month(ecl_date,abbr=T,label=T)}{mday(ecl_date)}{et}")
+  
+}
+
 
 
 fun_get.e <- function(x=-78.938,
@@ -84,7 +133,7 @@ fun_get.e <- function(x=-78.938,
   end_gregtime     <- input_gregtime %m+% years(look_forward_yrs)
   cur_gregtime     <- input_gregtime
   
-  
+  # loop
   error.chk <- 0
   df.out <- NULL
   while(cur_gregtime < end_gregtime){
@@ -113,6 +162,17 @@ fun_get.e <- function(x=-78.938,
     s.nextLocalEcl_Jd <- temp.sol$tret[c(1)]
     names(s.nextLocalEcl_Jd) <- "time_of_max_eclipse"
     
+    s.subtype <- swe_sol_eclipse_when_glob(jd_start  = var_jultime, 
+                                           ephe_flag = SE$FLG_MOSEPH, 
+                                           ifltype   = 0, 
+                                           backward  = F)$return
+    
+    s.subtype.temp <- data.frame(number  = c(5,9,18,33),
+                            subtype = c("Total Eclipse", "Annular", 
+                                        "Partial", "Hybrid")) 
+    s.subtype <- s.subtype.temp[s.subtype.temp$number == s.subtype,]$subtype
+    rm(s.subtype.temp)
+    
     # calculate next lunar eclipse visible to input_location----
     temp.lun <- swe_lun_eclipse_when_loc(jd_start  = var_jultime, 
                                          ephe_flag = SE$FLG_MOSEPH, 
@@ -123,7 +183,10 @@ fun_get.e <- function(x=-78.938,
     names(l.nextLocalEcl_Jd) <- c("time_of_max_eclipse", 
                                   "time_of_partial_phase_start", 
                                   "time_of_total_phase_start")
-    
+    l.subtype <- swe_lun_eclipse_when(jd_start  = var_jultime, 
+                                      ephe_flag = SE$FLG_MOSEPH, 
+                                      ifltype   = 0, 
+                                      backward  = F)
     
     # which was was first? solar or lunar? 
     next_is_solar <- ifelse(test = s.nextLocalEcl_Jd["time_of_max_eclipse"] < 
@@ -152,10 +215,11 @@ fun_get.e <- function(x=-78.938,
       rm(s.nextEcl.temp)
       
       df.out <- rbind(df.out, 
-                      data.frame(eclipse_type    = ecl_type,
-                                 eclipse_subtype = NA,
-                                 eclipse_greg    = ecl_gregtime, 
-                                 obsc.mag_percent = obscuration))
+                      data.frame(eclipse_type     = ecl_type,
+                                 eclipse_subtype  = NA,
+                                 eclipse_greg     = ecl_gregtime, 
+                                 obsc.mag_percent = obscuration,
+                                 url              = NA))
       
     }else{
       
@@ -172,16 +236,19 @@ fun_get.e <- function(x=-78.938,
         ymd_hms()
       
       ecl_type     <- "lunar"
-      ecl_subtype  <- NA
+      ecl_subtype  <- l.subtype
       umbral.mag  <- temp.lun$attr[c(0)+1]
       
       rm(l.nextEcl.temp)
       
+      ewlun_url(ecl_gregtime, ecltype = ecl_subtype)
+      
       df.out <- rbind(df.out, 
-                      data.frame(eclipse_type    = ecl_type, 
-                                 eclipse_subtype = NA,
-                                 eclipse_greg    = ecl_gregtime, 
-                                 obsc.mag_percent = umbral.mag))
+                      data.frame(eclipse_type     = ecl_type, 
+                                 eclipse_subtype  = NA,
+                                 eclipse_greg     = ecl_gregtime, 
+                                 obsc.mag_percent = umbral.mag,
+                                 url              = NA))
     }
     
     
@@ -206,7 +273,10 @@ fun_get.e <- function(x=-78.938,
 yf = 75
 n_locs <- 15
 
-df <- NULL
+if(!any("df" %in% ls())){
+  df <- NULL
+}
+
 for(i in 1:n_locs){
   df <- rbind(df, 
               fun_get.e(x = runif(1, min = -180, max=180), 
