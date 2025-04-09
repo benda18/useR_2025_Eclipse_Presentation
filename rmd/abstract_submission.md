@@ -165,8 +165,26 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 
 
 
+``` r
+# SOME CODE to replace the static map with a dynamic map
+library(leaflet)
+
+leaflet(padding = 0, 
+        height = "300px", 
+        width = "auto") |> 
+  addTiles() |> 
+  addMarkers(label = c("Duke University", "Eclipse Maximal"), 
+             lng   = c(input_lonlat["lon"], output_xy["lon"]),
+             lat   = c(input_lonlat["lat"], output_xy["lat"])) |>
+  expandLimits(lng = c(input_lonlat["lon"], output_xy["lon"])*1.000,
+               lat = c(input_lonlat["lat"], output_xy["lat"])*1.000) |> 
+  addScaleBar(position = "topright") 
+```
 
 
+``` r
+# SOME CODE to capture input lon-lat automatically via i.p. address with consent
+```
 
 ## ***Broad Topic Covered / Learning Goals***
 

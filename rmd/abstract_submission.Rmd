@@ -226,7 +226,7 @@ print(list("Eclipse_DateTime"      = output_gregtime,
 ```
 
 
-```{r Geocode USPS Address, echo=F, include = F, eval = F, message=FALSE, warning=FALSE}
+```{r Geocode USPS Address, echo=F, include = T, eval = F, message=FALSE, warning=FALSE}
 ## SOME CODE to query and geocode USPS mailing addresses for lon/lat coordinates
 # install("devtools")
 # devtools::install_github("chris-prener/censusxy")
@@ -256,7 +256,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-```{r Dynamic map with leaflet, echo=TRUE, eval = F, results = "show", include = F, message=FALSE, warning=FALSE}
+```{r Dynamic map with leaflet, echo=TRUE, eval = F, results = "show", include = T, message=FALSE, warning=FALSE}
 # SOME CODE to replace the static map with a dynamic map
 library(leaflet)
 
@@ -265,14 +265,14 @@ leaflet(padding = 0,
         width = "auto") |> 
   addTiles() |> 
   addMarkers(label = c("Duke University", "Eclipse Maximal"), 
-             lng   = c(input_lonlat["lon"], output_lonlat["lon"]),
-             lat   = c(input_lonlat["lat"], output_lonlat["lat"])) |>
-  expandLimits(lng = c(input_lonlat["lon"], output_lonlat["lon"])*1.000,
-               lat = c(input_lonlat["lat"], output_lonlat["lat"])*1.000) |> 
+             lng   = c(input_lonlat["lon"], output_xy["lon"]),
+             lat   = c(input_lonlat["lat"], output_xy["lat"])) |>
+  expandLimits(lng = c(input_lonlat["lon"], output_xy["lon"])*1.000,
+               lat = c(input_lonlat["lat"], output_xy["lat"])*1.000) |> 
   addScaleBar(position = "topright") 
 ```
 
-```{r Get lon-lat automatically via ip address, eval=FALSE, message=FALSE, warning=FALSE, include=F, results="hide"}
+```{r Get lon-lat automatically via ip address, eval=FALSE, message=FALSE, warning=FALSE, include=T, results="hide"}
 # SOME CODE to capture input lon-lat automatically via i.p. address with consent
 
 ```

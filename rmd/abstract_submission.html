@@ -1735,6 +1735,20 @@ print(list(&quot;Eclipse_DateTime&quot;      = output_gregtime,
 ## $Maximal_View.Globally
 ##       lon       lat 
 ## 153.38805 -61.03134</code></pre>
+<pre class="r"><code># SOME CODE to replace the static map with a dynamic map
+library(leaflet)
+
+leaflet(padding = 0, 
+        height = &quot;300px&quot;, 
+        width = &quot;auto&quot;) |&gt; 
+  addTiles() |&gt; 
+  addMarkers(label = c(&quot;Duke University&quot;, &quot;Eclipse Maximal&quot;), 
+             lng   = c(input_lonlat[&quot;lon&quot;], output_xy[&quot;lon&quot;]),
+             lat   = c(input_lonlat[&quot;lat&quot;], output_xy[&quot;lat&quot;])) |&gt;
+  expandLimits(lng = c(input_lonlat[&quot;lon&quot;], output_xy[&quot;lon&quot;])*1.000,
+               lat = c(input_lonlat[&quot;lat&quot;], output_xy[&quot;lat&quot;])*1.000) |&gt; 
+  addScaleBar(position = &quot;topright&quot;) </code></pre>
+<pre class="r"><code># SOME CODE to capture input lon-lat automatically via i.p. address with consent</code></pre>
 </div>
 </div>
 </div>
