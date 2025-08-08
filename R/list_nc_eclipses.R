@@ -223,7 +223,7 @@ df_pop <- data.frame(year = factor(c(2017, 2023, 2024)),
 df_ppl <- data.frame(year = factor(c(2017, 2023, 2024)), 
                      popN  = c(12,6.6,31.6)*1000000)
 
-data(package = "swephR")
+data(package = "swephRdata")
 
 ggplot() + 
   geom_col(data = mutate(left_join(df_pop, df_ppl),

@@ -111,6 +111,8 @@ output_gregtime <- "empty"
 
 ```
 
+<!-- https://events.digital-research.academy/event/52/abstracts/189/ -->
+
 ## ***Submission Information***
 -   Author: Timothy J. Bender
 -   Submitted on: March 10, 2025
