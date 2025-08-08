@@ -1,32 +1,57 @@
 renv::use(
-  cli        = "cli@3.6.4",
-  cpp11      = "cpp11@0.5.1",
-  dplyr      = "dplyr@1.1.4",
-  fansi      = "fansi@1.0.6",
-  generics   = "generics@0.1.3",
-  glue       = "glue@1.8.0",
-  lifecycle  = "lifecycle@1.0.4",
-  lubridate  = "lubridate@1.9.4",
-  magrittr   = "magrittr@2.0.3",
-  pillar     = "pillar@1.10.1",
-  pkgconfig  = "pkgconfig@2.0.3",
-  R6         = "R6@2.6.1",
-  renv       = "renv@1.1.1",
-  rlang      = "rlang@1.1.5",
-  tibble     = "tibble@3.2.1",
-  tidyselect = "tidyselect@1.2.1",
-  timechange = "timechange@0.3.0",
-  utf8       = "utf8@1.2.4",
-  vctrs      = "vctrs@0.6.5",
-  withr      = "withr@3.0.2"
+  cli          = "cli@3.6.4",
+  colorspace   = "colorspace@2.1-1",
+  cpp11        = "cpp11@0.5.1",
+  dplyr        = "dplyr@1.1.4",
+  fansi        = "fansi@1.0.6",
+  farver       = "farver@2.1.2",
+  generics     = "generics@0.1.3",
+  ggplot2      = "ggplot2@3.5.1",
+  glue         = "glue@1.8.0",
+  gtable       = "gtable@0.3.6",
+  isoband      = "isoband@0.2.7",
+  labeling     = "labeling@0.4.3",
+  lattice      = "lattice@0.22-6",
+  lifecycle    = "lifecycle@1.0.4",
+  lubridate    = "lubridate@1.9.4",
+  magrittr     = "magrittr@2.0.3",
+  MASS         = "MASS@7.3-61",
+  Matrix       = "Matrix@1.7-1",
+  mgcv         = "mgcv@1.9-1",
+  munsell      = "munsell@0.5.1",
+  nlme         = "nlme@3.1-166",
+  pillar       = "pillar@1.10.1",
+  pkgconfig    = "pkgconfig@2.0.3",
+  R6           = "R6@2.6.1",
+  RColorBrewer = "RColorBrewer@1.1-3",
+  Rcpp         = "Rcpp@1.0.14",
+  renv         = "renv@1.1.1",
+  rlang        = "rlang@1.1.5",
+  scales       = "scales@1.3.0",
+  swephR       = "swephR@0.3.1",
+  swephRdata   = "swephRdata@0.0.1",
+  tibble       = "tibble@3.2.1",
+  tidyselect   = "tidyselect@1.2.1",
+  timechange   = "timechange@0.3.0",
+  utf8         = "utf8@1.2.4",
+  vctrs        = "vctrs@0.6.5",
+  viridisLite  = "viridisLite@0.4.2",
+  withr        = "withr@3.0.2"
 )
 
 library(renv)
 library(lubridate)
 library(dplyr)
+library(ggplot2)
+library(swephR)
+library(swephRdata)
+
+# install.packages("swephRdata", repos = "https://rstub.r-universe.dev", type = "source")
 
 renv::embed()
 renv::snapshot()
+
+rm(list=ls());cat('\f')
 
 dates_txt <- "August 30, 1905 (P)
     January 3, 1908 (P) †
@@ -131,8 +156,6 @@ dates_v <- dates_txt %>%
   trimws() %>%
   .[! . %in% ""]
 
-
-
 suffix_cross_v <- NULL
 
 
@@ -160,3 +183,52 @@ eclipse_date_v <- dates_v %>%
 
 eclipse_type_v <- dates_v %>%
   gsub("^.*\\(|\\).*$", "", .)
+
+
+df_ecl <- data.frame(ecl_date = eclipse_date_v, 
+           ecl_type = eclipse_type_v, 
+           sufx     = suffix_cross_v)
+
+df_ecl <- df_ecl[order(df_ecl$ecl_date),]
+
+
+df_ecl$ecl_type[df_ecl$ecl_type == "P"] <- "partial"
+df_ecl$ecl_type[df_ecl$ecl_type == "T"] <- "total"
+df_ecl$ecl_type[df_ecl$ecl_type == "A"] <- "annular" 
+
+as_tibble(df_ecl)
+
+
+ggplot() + 
+  geom_point(data = df_ecl[!df_ecl$ecl_date %in% 
+                             ymd(c("20240408", "20231014", "20170821")),], 
+             aes(x = ecl_date, y = ecl_type)) +
+  geom_point(data = df_ecl[df_ecl$ecl_date %in% 
+                             ymd(c("20240408", "20231014", "20170821")),], 
+             aes(x = ecl_date, y = ecl_type), 
+             color = "red") 
+
+df_ecl$days_bw <- as.numeric(c(NA,diff(df_ecl$ecl_date)))
+
+
+df_ecl[df_ecl$ecl_date >= (Sys.Date() %m-% years(50)) & 
+         df_ecl$ecl_date <= (Sys.Date() %m+% years(100)),] %>%
+  ggplot(data = ., 
+         aes(x = ecl_date, y = ecl_type))+
+  geom_point() 
+
+
+df_pop <- data.frame(year = factor(c(2017, 2023, 2024)), 
+                     pop  = c(325.1, 334.9, 340.1)*1000000)
+df_ppl <- data.frame(year = factor(c(2017, 2023, 2024)), 
+                     popN  = c(12,6.6,31.6)*1000000)
+
+data(package = "swephR")
+
+ggplot() + 
+  geom_col(data = mutate(left_join(df_pop, df_ppl),
+                         pct_n = popN/pop), 
+           aes(x = year, y = pct_n)) +
+  scale_y_continuous(labels = scales::percent, 
+                     limits =c(0,NA), 
+                     breaks = seq(0,1,by = 0.01))

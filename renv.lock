@@ -2973,6 +2973,22 @@
       "Maintainer": "Ralf Stubner <ralf.stubner@gmail.com>",
       "Repository": "CRAN"
     },
+    "swephRdata": {
+      "Package": "swephRdata",
+      "Version": "0.0.1",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Data files for the 'swephR' package",
+      "Author": "Ralf Stubner",
+      "Maintainer": "Ralf Stubner <ralf.stubner@gmail.com>",
+      "Description": "Data files to provide the full Swiss Ephemeris for usage with the 'swephR' package.",
+      "License": "GPL (>= 2)",
+      "Repository": "https://rstub.r-universe.dev",
+      "RemoteUrl": "https://github.com/rstub/swephRdata",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "c6bef3af9048dcd608ef28a564d842c950c1221e",
+      "NeedsCompilation": "no"
+    },
     "sys": {
       "Package": "sys",
       "Version": "3.4.3",
