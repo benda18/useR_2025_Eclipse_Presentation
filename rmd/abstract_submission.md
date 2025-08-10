@@ -17,10 +17,10 @@ params:
   email: bendertj@gmail.com
   phone: "+1 (513) 477-8924"
   #subtitle: ""
-  # date: "Submitted: 2025-08-08" 
+  # date: "Submitted: 2025-08-09" 
 ---
 
-<br><br>Submitted: 2025-08-08 
+<br><br>Submitted: 2025-08-09 
 <br><br>Author: Timothy J. Bender 
 <br><br> Email: bendertj@gmail.com 
 <br><br> Phone: +1 (513) 477-8924 
@@ -29,6 +29,8 @@ params:
 
 
 
+
+<!-- https://events.digital-research.academy/event/52/abstracts/189/ -->
 
 ## ***Submission Information***
 -   Author: Timothy J. Bender

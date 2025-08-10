@@ -66,6 +66,7 @@ library(lubridate)
 library(leaflet)
 library(data.table)
 library(tibble)
+library(censusxy)
 
 # setup----
 rm(list=ls());cat('\f')
@@ -81,8 +82,7 @@ se_annular <- ymd_hms("2023-10-14 12:30:00 AM", tz = "America/New_York")
 
 var.nowutc <- Sys.time() |> with_tz("UTC")
 
-var.nowutc <- se_total |> 
-  with_tz("UTC")
+var.nowutc <- se_total |> with_tz("UTC")
 
 
 
@@ -93,7 +93,7 @@ stopifnot(tz(var.nowutc) == "UTC")
 var_lon <- -78.921
 var_lat <-  36.048
 
-# convert clock time to TT 
+# convert clock time to ET (Ephemeris Time) 
 var.nowjul  <- swe_utc_to_jd(year     = year(var.nowutc), 
                              month    = month(var.nowutc), 
                              day      = mday(var.nowutc), 
@@ -207,3 +207,5 @@ out.df$datetime_utc <- out.df$datetime_utc |> as_datetime()
 
 
 out.df
+
+
